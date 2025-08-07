@@ -7,15 +7,15 @@ title: Welcome
 `RIM-Tool` is an open-source command-line tool that can be used for a variety of tasks related to the authorship and
 testing of Reference Integrity Manifests[^1] (RIMs), including creation, printing, verification, and signing.
 
-[^1]: Defined in the Trusted Computing Group [specification :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/).
+[^1]: Defined in the Trusted Computing Group [specification :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-reference-integrity-manifest-rim-information-model/).
 
 Please see the [Getting Started](getting-started.md) page for setup and installation details, or the [Commands](commands/index.md) page 
 for the list of available commands.
 
 !!! note
 
-    In addition to RIMs, the tool supports Software Identification (SWID) tags, Concise SWID (CoSWID) tags, and Concise
-    Reference Integrity Manifests (CoRIMs). See the [Supported RIM Types](./RIMs/index.md) page for details.
+    In addition to TCG PC Client RIMs, the tool supports TCG Component RIMs, Concise Software Identification (CoSWID) tags,
+    and Concise Reference Integrity Manifests (CoRIMs). See the [Supported RIM Types](./RIMs/index.md) page for details.
 
 ## Compatibility
 
