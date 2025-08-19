@@ -1,0 +1,18 @@
+# Gradle specific #
+.gradle
+
+# Class Files #
+*.class
+
+# IDEA specific #
+*.iml
+.idea
+
+# Build
+build/
+
+# MAC OSX Finder Files #
+.DS_Store
+
+# Log Files #
+*.log
