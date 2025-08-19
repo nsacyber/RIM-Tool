@@ -1,0 +1,3 @@
+[submodule "hirs"]
+	path = hirs
+	url = https://github.com/nsacyber/hirs
