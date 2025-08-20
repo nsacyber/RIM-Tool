@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.register('updateGitSubmodules', Exec) {
+    commandLine 'git', 'submodule', 'update', '--init', '--recursive'
+    description = 'Updates (and initializes) git submodules'
+}
+
+tasks.named('build') {
+    dependsOn(updateGitSubmodules)
+}
