@@ -6,6 +6,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation 'org.hirs:HIRS_Utils'
+}
+
 tasks.register('updateGitSubmodules', Exec) {
     commandLine 'git', 'submodule', 'update', '--init', '--recursive'
     description = 'Updates (and initializes) git submodules'
