@@ -1,0 +1,39 @@
+{
+	"SoftwareIdentity": {
+		"name": "TCG RIM example",
+		"version": "0.1",
+		"tagId": "ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c",
+		"tagVersion": "1",
+		"patch": false
+	},
+	"Entity": {
+		"name": "HIRS",
+		"role": "softwareCreator,tagCreator",
+		"regid": "www.example.com",
+		"thumbprint": ""
+	},
+	"Link": {
+		"href": "https://Example.com/support/ProductA/firmware/installfiles",
+		"rel": "installationmedia"
+	},
+	"Meta": {
+		"colloquialVersion": "",
+		"edition": "",
+		"product": "",
+		"revision": "",
+		"platformManufacturerStr": "Example.com",
+		"platformManufacturerId": "00201234",
+		"platformModel": "ProductA",
+		"bindingSpec": "IOT RIM",
+		"bindingSpecVersion": "1.2"
+	},
+	"Payload": {
+		"Directory": {
+                	"supportRimFormat": "TCG_EventLog_Assertion",
+			"name": "iotBase",
+			"File": {
+				"name": "TpmLog.bin"
+			}
+		}
+	}
+}

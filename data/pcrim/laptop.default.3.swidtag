@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
+  <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
+  <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
+  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA" rim:rimLinkHash="88f21d8e44d4271149297404df91caf207130bfa116582408abd04ede6db7f51"/>
+  <ns2:Payload>
+    <ns2:Directory xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="iotBase" rim:supportRIMFormat="TCG_EventLog_Assertion" xsi:type="ns2:Directory">
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="TpmLog.bin" size="20113" xsi:type="ns2:File"/>
+    </ns2:Directory>
+  </ns2:Payload>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <DigestValue>ebRiYCe/i/5ZZR3Fo85EHxgbYt7xwb69wo4zYJk6uY0=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>M8aw7bMbkekZoZVBgxza1FZTkQaQKf2WIqD3CNcTcQei9LSbwz6QuMaGuTdKbNKRo/lXqtkITA1Q&#13;
+Kl0vJlA1FzwJ6JWNY56Rw7b/S1itvedLzD3EaQ8uAwtY/sPC9hxJ6zXOYpQz44DzA3dlcfmjjQXH&#13;
+/cCO/Rx604nSAxMTJmfU3bANQsJ0onBRDe48nJqOPwZVwqwrPw7ZsBEGnoUnTqOw2rLLEfNSpDpE&#13;
+y3THvww4rB42L+s4I2ULVTaCfxEZRlv0hbs7geKrJF70TkuYhWsequ9gPTvDx91imvJJVfgB2AHt&#13;
+Q9F6vDNqZ7ashEcOoMiUXVazZTBuue/JBtDgyQ==</SignatureValue>
+    <KeyInfo>
+      <KeyValue>
+        <RSAKeyValue>
+          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
+xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9&#13;
+dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q&#13;
+otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW&#13;
+jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus>
+          <Exponent>AQAB</Exponent>
+        </RSAKeyValue>
+      </KeyValue>
+      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
+    </KeyInfo>
+  </Signature>
+</ns2:SoftwareIdentity>

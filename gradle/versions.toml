@@ -1,0 +1,13 @@
+[versions]
+bouncyCastleVersion = "1.79"
+jcommanderVersion = "2.0"
+lombokVersion = "1.18.36"
+springBootVersion = "3.4.1"
+
+[libraries]
+bouncycastle = { module = "org.bouncycastle:bcmail-jdk18on", version.ref = "bouncyCastleVersion" }
+jcommander = { module = "org.jcommander:jcommander", version.ref = "jcommanderVersion" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombokVersion" }
+
+# test dependencies
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBootVersion" }

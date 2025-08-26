@@ -7,6 +7,17 @@ repositories {
 }
 
 dependencies {
+    implementation libs.bouncycastle
+    implementation libs.jcommander
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+
+    testImplementation libs.spring.boot.starter.test
+
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
     implementation 'org.hirs:HIRS_Utils'
 }
 
@@ -17,4 +28,28 @@ tasks.register('updateGitSubmodules', Exec) {
 
 tasks.named('build') {
     dependsOn(updateGitSubmodules)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    // Keep jar clean:
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                "Main-Class": "rimtool.Main",
+                'Class-Path':configurations.runtimeClasspath.files.collect { it.getName() }.join(' ')
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    into('lib') {
+
+        from 'libs'
+
+    }
 }

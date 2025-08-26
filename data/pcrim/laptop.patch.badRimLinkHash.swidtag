@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="true" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="2" version="0.2" xml:lang="en">
+  <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
+  <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
+  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA" rim:rimLinkHash="0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd5badbad"/>
+  <ns2:Payload>
+    <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Test" xsi:type="ns2:Directory">
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="data/PcRim/TpmLog.bin" size="7459" xsi:type="ns2:File"/>
+    </ns2:Directory>
+  </ns2:Payload>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <DigestValue>ktDTkDDXksIiSCUSY/TdFlhCVyo8H6gOh2syBJT5dhg=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>Y/zfYafufZJAjoEzOhECn/HF9KyamoafY8pRtNhfjMEch8uqn3TsaHGXf7AKwKK5L1LVRi6T/07F&#13;
+5WO7+yl2iMovbJTx1XZ0JXV1LLIq/AY5+xQomhDX5nrqCwusMgOPBYIHtQvpPNecYb6QUikvksEK&#13;
+VqNXqOnPfVX2/aswYf1i7/HysFg58iTFm199mRjbqf6Sx38kMmcgq/Yqk1OMPM3L+NcNYxVkxmiB&#13;
+n8RkLhF1CKh0HVjV5B3UGEaPm8ZVVOX99QuzKXyRMudWDFGFduIAe1qRpUyL/85t1cmlzDt//wZ+&#13;
+fCZriI9zSo9wFWKml/HFrOD+LuAEbvSLbZIvbg==</SignatureValue>
+    <KeyInfo>
+      <KeyValue>
+        <RSAKeyValue>
+          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
+xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9&#13;
+dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q&#13;
+otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW&#13;
+jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus>
+          <Exponent>AQAB</Exponent>
+        </RSAKeyValue>
+      </KeyValue>
+      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
+    </KeyInfo>
+  </Signature>
+</ns2:SoftwareIdentity>
