@@ -3,6 +3,7 @@ package rimtool.commands;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import hirs.utils.rim.unsignedRim.GenericRim;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class CommandSign {
     @Parameter(names = {CommandDefinitions.ARG_TIMESTAMP},
             variableArity = true,
             description = CommandDefinitions.PARAM_DESCR_TIMESTAMP)
+    @Getter(AccessLevel.NONE)
     private List<String> timestamp = new ArrayList<String>(2);
     @Parameter(names = {CommandDefinitions.ARG_IGNOREVALIDATORS},
             description = CommandDefinitions.PARAM_DESCR_IGNOREVALIDATORS)
@@ -76,5 +78,14 @@ public class CommandSign {
             required = true,
             description = CommandDefinitions.PARAM_DESCR_OUT)
     private String outFile;
+
+    /**
+     * Returns a defensive copy of the timestamp.
+     *
+     * @return a new list containing timestamp
+     */
+    public List<String> getTimestamp() {
+        return new ArrayList<>(timestamp);
+    }
 }
 

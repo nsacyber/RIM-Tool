@@ -20,7 +20,7 @@ public class ValidatorArgKid implements IParameterValidator {
     @Override
     public void validate(final String name, final String value) throws ParameterException {
         try {
-            byte[] test = HexUtils.hexStringToByteArray(value);
+            HexUtils.hexStringToByteArray(value);
         } catch (NumberFormatException e) {
             throw new ParameterException("Error with the " + name
                     + " parameter: Invalid characters supplied: " + value

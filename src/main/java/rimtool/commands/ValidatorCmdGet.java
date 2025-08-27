@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public class ValidatorCmdGet implements IParametersValidator {
 
-    /**
-     * True if creating a signed RIM, false if user specifies an unsigned RIM; default is signed.
-     */
-    private boolean signed = true;
+//    /**
+//     * True if creating a signed RIM, false if user specifies an unsigned RIM; default is signed.
+//     */
+//    private boolean signed = true;
 
     /**
      * This method validates the input parameter map.

@@ -3,7 +3,6 @@ package rimtool.commands;
 /**
  * This class includes definitions for the Command package.
  */
-@SuppressWarnings("JavadocVariable")
 public class CommandDefinitions {
 
     // command line input commands - definitions
@@ -56,8 +55,8 @@ public class CommandDefinitions {
             + "to populate the base RIM with. An example file can be found in /opt/rimtool/data.";
     public static final String PARAM_DESCR_DETACHED = "Use a detached signature file.";
     public static final String PARAM_DESCR_EMBEDCERT =
-            "For DSIG: the provided certificate is embedded into the signed swidtag; "
-                    + "for COSE: the provided certificate and the thumbprint are embedded into protected header.";
+            "For DSIG: the provided certificate is embedded into the signed swidtag; for COSE: the "
+                    + "provided certificate and the thumbprint are embedded into protected header.";
     public static final String PARAM_DESCR_HELP = "Print this help text.";
     public static final String PARAM_DESCR_IGNOREVALIDATORS =
             "Ignores the validator checks for testing purposes.";

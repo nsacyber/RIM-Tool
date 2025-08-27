@@ -2,6 +2,7 @@ package rimtool.commands;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -101,7 +102,14 @@ public class CommandMain {
 
     // parameters that can be used for any command
     @Parameter(description = "This parameter catches all unrecognized arguments.")
+    @Getter(AccessLevel.NONE)
     private List<String> unknownOptions = new ArrayList<>();
+    /**
+     * -- GETTER --
+     *  Method to return whether user selected help.
+     *
+     * @return true if user selected help
+     */
     @Parameter(names = {CommandDefinitions.ARG_HELP_SHORT, CommandDefinitions.ARG_HELP},
             help = true,
             description = CommandDefinitions.PARAM_DESCR_HELP)
@@ -136,11 +144,11 @@ public class CommandMain {
     }
 
     /**
-     * Method to return whether user selected help.
+     * Returns a defensive copy of the list of unknown options.
      *
-     * @return true if user selected help
+     * @return a new list containing all unknown options
      */
-    public boolean isHelp() {
-        return help;
+    public List<String> getUnknownOptions() {
+        return new ArrayList<>(unknownOptions);
     }
 }

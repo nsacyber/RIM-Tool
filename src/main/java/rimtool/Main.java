@@ -4,11 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.regex.Matcher;
@@ -43,7 +45,6 @@ import hirs.utils.HexUtils;
  * Command-line application for processing TCG Event Logs.
  * Input arg: path to *.tcglp file
  */
-@SuppressWarnings("HideUtilityClassConstructor")
 final class Main {
     /**
      * Main Constructor for the RIM Tool command line application.
@@ -227,11 +228,11 @@ final class Main {
                     print += new CoseParser(data).toString("pretty"); break;
                 //RIM types
                 case GenericRim.RIMTYPE_PCRIM:
-                    print = new String(data); break;
+                    print = new String(data, StandardCharsets.UTF_8); break;
                 case GenericRim.RIMTYPE_COSWID:
                     print += new CoswidParser(data).toString("pretty"); break;
                 case GenericRim.RIMTYPE_COMP_SWID:
-                    print +=  new String(data); break;
+                    print +=  new String(data, StandardCharsets.UTF_8); break;
                 case GenericRim.RIMTYPE_COMP_COSWID:
                     print += new TcgCompRimCoswidParser(data).toString("pretty"); break;
                 case GenericRim.RIMTYPE_CORIM_COMID:
@@ -412,10 +413,10 @@ final class Main {
         DefaultCrypto cryptoSigner = new DefaultCrypto();
         try {
             if (!certPath.isEmpty()) {
-                // Get Cert used for cert verification (need cert ID for signature encoding)
-                FileInputStream is = new FileInputStream(certPath);
-                CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-                cert = (X509Certificate) certFactory.generateCertificate(is);
+                try (FileInputStream is = new FileInputStream(certPath)) {
+                    CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+                    cert = (X509Certificate) certFactory.generateCertificate(is);
+                }
             }
 
             //byte[] payloadData = Files.readAllBytes(payloadFile.toPath());
@@ -432,7 +433,7 @@ final class Main {
                 useUnprotectdKid = true;
                 kid = HexUtils.hexStringToByteArray(unProtectedKid);
             } else {
-                kid = cryptoSigner.getKid().getBytes();
+                kid = cryptoSigner.getKid().getBytes(StandardCharsets.UTF_8);
             }
 
             byte[] toBeSigned = coseSign.createToBeSigned(alg, kid,
@@ -481,7 +482,6 @@ final class Main {
                                final String publicKeyFile, final String certPath, final String trustPath,
                                final String detachedFile, final boolean embedded) {
         // Get Cert used for cert verification (need cert ID for signature encoding)
-        FileInputStream is = null;
         X509Certificate cert = null;
         boolean verified = false;
         PublicKey pk = null;
@@ -510,10 +510,11 @@ final class Main {
                 // Set up the crypto device used for signing
                 CryptoEngine cryptoSigner = new DefaultCrypto();
                 if (!certPath.isEmpty()) {
-                    is = new FileInputStream(certPath);
-                    CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-                    cert = (X509Certificate) certFactory.generateCertificate(is);
-                    pk = cert.getPublicKey();
+                    try (FileInputStream is = new FileInputStream(certPath)) {
+                        CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+                        cert = (X509Certificate) certFactory.generateCertificate(is);
+                        pk = cert.getPublicKey();
+                    }
                 }
                 if (!publicKeyFile.isEmpty()) {
                     cryptoSigner.loadPrivateKey(publicKeyFile, cert, "");
@@ -550,10 +551,12 @@ final class Main {
             } else {
                 System.out.println("Error: Verify for RIM Type of " + rimType + " is not supported.");
             }
-        } catch (Exception e) {
+        } catch (IOException | CertificateException | RuntimeException e) {
             System.out.println("Error processing Cose Signature on " + inFile + ": ");
             System.out.println(e.getMessage());
             System.exit(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         if (verified) {
             System.out.println("Signature verified :-)");
@@ -562,6 +565,7 @@ final class Main {
             System.exit(1);
         }
     }
+
     /**
      * This method parses the version number from the jar filename in the absence of
      * the VERSION file expected with an rpm installation.

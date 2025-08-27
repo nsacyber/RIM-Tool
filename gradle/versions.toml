@@ -2,6 +2,8 @@
 bouncyCastleVersion = "1.79"
 jcommanderVersion = "2.0"
 lombokVersion = "1.18.36"
+
+#test dependencies versions
 springBootVersion = "3.4.1"
 
 [libraries]

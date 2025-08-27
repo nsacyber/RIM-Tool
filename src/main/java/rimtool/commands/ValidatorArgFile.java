@@ -20,6 +20,11 @@ public class ValidatorArgFile implements IParameterValidator {
      * @throws ParameterException if there is any error in validating the input file
      */
     public void validate(final String name, final String value) throws ParameterException {
+        if (value == null) {
+            throw new ParameterException("Error with " + name
+                    + " parameter: File path cannot be null.");
+        }
+
         try {
             File file = new File(value);
             if (!file.isFile()) {
@@ -30,9 +35,6 @@ public class ValidatorArgFile implements IParameterValidator {
                 throw new ParameterException("Error with " + name
                         + " parameter: File " + value + " is empty.");
             }
-        } catch (NullPointerException e) {
-            throw new ParameterException("Error with " + name
-                    + " parameter: File path cannot be null: " + e.getMessage());
         } catch (SecurityException e) {
             throw new ParameterException("Error with " + name
                     + " parameter: Read access denied for " + value + ", please verify permissions.");
