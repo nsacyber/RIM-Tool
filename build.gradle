@@ -1,5 +1,66 @@
+import com.github.spotbugs.snom.SpotBugsTask
+
 plugins {
     id 'java'
+    id 'checkstyle'
+    id 'com.github.spotbugs' version '6.0.13'
+}
+
+subprojects {
+
+    apply plugin: "checkstyle"
+    apply plugin: "com.github.spotbugs"
+
+    checkstyle {
+        toolVersion = '10.20.0'
+        configFile file("${rootDir}/config/checkstyle/checkstyle.xml")
+    }
+
+    checkstyleMain {
+        source = 'src/main/java'
+    }
+    checkstyleTest {
+        source = 'src/test/java'
+    }
+
+    tasks.withType(Checkstyle).configureEach {
+        reports {
+            xml.required = false
+            html.required = true
+        }
+    }
+
+    spotbugs {
+        toolVersion = '4.8.3'
+        effort = 'max'
+        reportLevel = 'low'
+    }
+
+    tasks.withType(SpotBugsTask).configureEach {
+        reports {
+            xml.required = false
+            html.required = true
+        }
+    }
+
+    tasks.register("spotbugsMain", SpotBugsTask) {
+        classes.setFrom(files(layout.buildDirectory.dir("classes/java/main")))
+        source.setFrom(files("src/main/java"))
+        classpath.setFrom(files(layout.buildDirectory.dir("classes/java/main")))
+        reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/main.html"))
+    }
+
+    tasks.register("spotbugsTest", SpotBugsTask) {
+        classes.setFrom(files(layout.buildDirectory.dir("classes/java/test")))
+        source.setFrom(files("src/test/java"))
+        classpath.setFrom(files(
+                layout.buildDirectory.dir("classes/java/test"),
+                configurations.testRuntimeClasspath
+        ))
+        reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/test.html"))
+    }
+
+    check.dependsOn("spotbugsMain", "spotbugsTest")
 }
 
 repositories {
@@ -7,6 +68,17 @@ repositories {
 }
 
 dependencies {
+    implementation libs.bouncycastle
+    implementation libs.jcommander
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+
+    testImplementation libs.spring.boot.starter.test
+
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
     implementation 'org.hirs:HIRS_Utils'
 }
 
@@ -15,6 +87,57 @@ tasks.register('updateGitSubmodules', Exec) {
     description = 'Updates (and initializes) git submodules'
 }
 
+tasks.register('checkstyleSingle', Checkstyle) {
+    description = 'Runs Checkstyle on a single file'
+    def error = ""
+    println description
+    if (project.hasProperty('filename')) {
+        File name = file(project.getProperty('filename'))
+        if (name.exists()) {
+            println "Processing file: $name"
+            classpath = files()
+            configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+            source = file(project.getProperty('filename'))
+            include '**/*.java'
+            reports {
+                xml.required = false
+                html.required = true
+            }
+        } else {
+            error= "Error processing file, does path/file exist?"
+            throw new GradleException(error)
+        }
+    } else {
+        error = "Error: No filename provided. Use -Pfilename=<path/to/file>"
+        throw new GradleException(error)
+    }
+}
+
+
 tasks.named('build') {
     dependsOn(updateGitSubmodules)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    // Keep jar clean:
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                "Main-Class": "rimtool.Main",
+                'Class-Path':configurations.runtimeClasspath.files.collect { it.getName() }.join(' ')
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    into('lib') {
+
+        from 'libs'
+
+    }
 }

@@ -5,3 +5,11 @@ includeBuild('hirs') {
         substitute(module('org.hirs:HIRS_Utils')).using(project(':HIRS_Utils'))
     }
 }
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("gradle/versions.toml"))
+        }
+    }
+}
