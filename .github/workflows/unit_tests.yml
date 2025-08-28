@@ -38,4 +38,8 @@ jobs:
     - name: Run Gradle Check
       run: ./gradlew check
 
+    - name: Run System Tests
+      run: ./src/test/scripts/run_all_tests.sh
+
+
           
