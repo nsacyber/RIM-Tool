@@ -35,11 +35,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Run Gradle Check
-      run: ./gradlew check
+    - name: Run Gradle Build
+      run: ./gradlew build
 
     - name: Run System Tests
-      run: ./src/test/scripts/run_all_tests.sh
+      run: |
+        ./src/test/scripts/run_all_tests.sh
 
 
           
