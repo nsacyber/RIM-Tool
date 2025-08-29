@@ -1,46 +1,45 @@
-# RIM Tool
-A Reference Integrity Manifest (RIM) contains structures that a Verifier uses to validate expected values (Assertions) against actual values (Evidence).  The RIM Tool provides a capability to Create, Print, and Verify RIM files that target integrity of firmware.  Functionality provided by this tool includes:
+# RIM Tool 
+A Reference Integrity Manifest (RIM) contains structures that a Verifier uses to validate expected values (Assertions) against actual values (Evidence).  The RIM Tool provides a capability to Create, Print, and Verify RIM files that target integrity of firmware. 
+
+Functionality provided by this tool includes the following:
 * Creates, formats, and digitally signs [TCG PC Client Base RIMs](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/) 
 * Creates, formats, and digitally signs [TCG Component RIMs](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-RC-2_16April25.pdf) (both SWID and CoSWID variants) 
 * Creates, formats, and digitally signs [IETF CoRIMs](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/) 
 * Validates the digital signature of RIMs using X.509 public key certificates 
-* Prints human readable contents of RIMs 
+* Prints human readable contents of RIMs
 
-There are various standards that describe different formats of RIMs that may be geared toward a particular technology or market. RIMs produced by this tool are compatible with the Host Integrity at Runtime and Startup (HIRS) project. Currently, HIRS only processes TCG-defined PC Client RIMs, but future versions should be able to process all RIMs produced by this tool. 
+Please see the [documentation](https://nsacyber.github.io/RIM-Tool/) for detailed installation and usage.
 
-Supported RIMs: 
-* TCG PC Client RIM (pcrim) 
-* TCG Component RIM SWID Option  (comp_swid) 
-* TCG Component RIM CoSWID Option (comp_coswid) 
-* Concise Reference Integrity Manifest (CoRIM) CoMID option (corim_comid) 
-* Concise Reference Integrity Manifest (CoRIM) CoSWID option (corim_coswid) 
+## Building
 
-# Building 
+In order to build from source, please first clone the project using `git clone --recursive`. This will properly initialize any submodules.
 
-## Linux 
-To build this tool navigate to the rim_tool directory and use the following command: 
+### Linux 
+To build this tool, navigate to the `RIM-Tool` directory cloned earlier and use the following command: 
 ```
 ./gradlew clean build
 ```
 The rim_tool-X.X.jar file should have been placed in the build/libs/tools/ (Linux) folder. 
-## Windows
-Several options exist for building on Windows 11: 
+### Windows
+Several options exist for building on Windows 11.
+
 Windows command shell (CMD.exe): 
-Navigate to the rim_tool folder and run the windows gradle wrapper: 
+Navigate to the `RIM-Tool` folder and run the Windows Gradle wrapper: 
 ~~~
 gradlew.bat clean build 
 ~~~
 Windows PowerShell with Windows Subsystem for Linux (WSL) enabled: 
-Navigate to the rim_tool folder and run the Linux gradle wrapper: 
+Navigate to the `RIM-Tool` folder and run the Linux gradle wrapper: 
 ~~~
 ./gradlew clean build 
 ~~~
-In both cases the rim_tool-X.X.jar file should have been placed in the build\libs\tools\  folder.  
+
+In both cases, the `rim_tool-X.X.jar` file should have been placed in the `build\libs\tools\` folder.  
 
 ## Packaging 
 
 Packages for this tool can be found on the [releases page](https://github.com/nsacyber/RIM-Tool/releases).
-Currently only a packaging for Linux is supported. 
+Currently, only packaging for Linux is supported. 
 
 To create an RPM package on a RHEL or Rocky Linux device, use the following command in the same directory: 
 ~~~
@@ -63,29 +62,30 @@ or for a Debian or Ubuntu Linux distro:
 sudo apt-get install build/distributions/rim_tool*.deb 
 ~~~
 ## Usage 
-The rim_tool rpm will create a rim command line shortcut. This can be invoked from a command line: 
+The RIM Tool RPM will create a `rim` command line shortcut. This can be invoked from a command line: 
 ~~~
 rim -h 
 ~~~
-The rim_tool also can be invoked using java from the tcg_eventlog_tool directory: 
+The RIM Tool also can be invoked using Java from a build directory (if following the Building section earlier):
 ~~~
-java -jar build/libs/tools/tcg_rim_tool-1.0.jar -h 
+java -jar build/libs/tools/rim_tool-X.X.jar -h 
 ~~~
-Current options for the tool can be found using the -h option. 
+Current options for the tool can be found using the `-h` option. 
 
 ### Commands
-rim <command> <options> 
-The RIM Tool provides the following commands and options. Note Clustering of options is not currently supported: 
+`rim <command> <options>`
+
+The RIM Tool provides the following commands and options. *Note that clustering of options is not currently supported.*
 
 * **create**: Creates a RIM based upon provided options  
 * **verify**: Verifies the signature of a RIM. 
 * **sign**: Signs a file using specific format option 
 * **print**: Provide a human readable representation of a supported RIM object 
-* **get**: Retrieves the payload from a signed object and saves it to a file 
+* **get**: Retrieves the payload from a signed object and saves it to a file
 
-For Details on the rim-tool commands please refer to the commands wiki page.
+For details on RIM Tool commands, please refer to the [documentation](https://nsacyber.github.io/RIM-Tool/commands/).
 
-# Quick Links 
+## Quick Links 
 
 * [Host Integrity at Runtime and Startup (HIRS)](https://github.com/nsacyber/HIRS) uses RIMs for firmware validation. Compatible with PC Client RIMs created by this tool. 
 * [Trusted Computing Group PC Client RIM specification](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/)
