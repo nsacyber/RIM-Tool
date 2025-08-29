@@ -19,22 +19,20 @@ To build this tool, navigate to the `RIM-Tool` directory cloned earlier and use 
 ```
 ./gradlew clean build
 ```
-The rim_tool-X.X.jar file should have been placed in the build/libs/tools/ (Linux) folder. 
+The `rim_tool-X.X.jar` file should have been placed in the `/build/libs/tools/` (Linux) folder. 
 ### Windows
 Several options exist for building on Windows 11.
 
-Windows command shell (CMD.exe): 
-Navigate to the `RIM-Tool` folder and run the Windows Gradle wrapper: 
+*Windows Command Prompt (CMD.exe):* Navigate to the `RIM-Tool` folder and run the Windows Gradle wrapper: 
 ~~~
 gradlew.bat clean build 
 ~~~
-Windows PowerShell with Windows Subsystem for Linux (WSL) enabled: 
-Navigate to the `RIM-Tool` folder and run the Linux gradle wrapper: 
+*Windows PowerShell with Windows Subsystem for Linux (WSL) enabled:* Navigate to the `RIM-Tool` folder and run the Linux Gradle wrapper: 
 ~~~
 ./gradlew clean build 
 ~~~
 
-In both cases, the `rim_tool-X.X.jar` file should have been placed in the `build\libs\tools\` folder.  
+In both cases, the `rim_tool-X.X.jar` file should have been placed in the `\build\libs\tools\` folder.  
 
 ## Packaging 
 
@@ -49,11 +47,11 @@ or for a Debian or Ubuntu Linux distro:
 ~~~
 ./gradlew buildDeb 
 ~~~
-The RIM Tool package can be found under the build/distributions/ folder.
+The RIM Tool package can be found under the `/build/distributions/` folder.
 
 ## Installing
 Currently, only install packages for Linux are supported. 
-To install this tool on a RHEL or Rocky Linux distro use the following command from the same directory: 
+To install this tool on a RHEL or Rocky Linux distro, use the following command from the same directory: 
 ~~~
 sudo dnf install build/distributions/rim_tool*.rpm 
 ~~~
@@ -66,7 +64,7 @@ The RIM Tool RPM will create a `rim` command line shortcut. This can be invoked 
 ~~~
 rim -h 
 ~~~
-The RIM Tool also can be invoked using Java from a build directory (if following the Building section earlier):
+The RIM Tool also can be invoked using Java from a build directory (if following the [Building](#building) section earlier):
 ~~~
 java -jar build/libs/tools/rim_tool-X.X.jar -h 
 ~~~
