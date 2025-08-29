@@ -51,6 +51,7 @@ The RIM Tool package can be found under the `/build/distributions/` folder.
 
 ## Installing
 Currently, only install packages for Linux are supported. 
+
 To install this tool on a RHEL or Rocky Linux distro, use the following command from the same directory: 
 ~~~
 sudo dnf install build/distributions/rim_tool*.rpm 
