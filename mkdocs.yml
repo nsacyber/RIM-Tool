@@ -22,7 +22,10 @@ nav:
       - Appendix:
           - configuration-files.md
   - Background:
-      - background/background.md
+      - background/index.md
+      - background/pc-rim.md
+      - background/component-rim.md
+      - background/composite-rim.md
 theme:
   name: material
   icon:
