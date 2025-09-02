@@ -576,7 +576,7 @@ final class Main {
                 .getCodeSource()
                 .getLocation()
                 .getPath()).getName();
-        Pattern pattern = Pattern.compile("(?<=tcg_rim_tool-)[0-9]\\.[0-9]\\.[0-9]");
+        Pattern pattern = Pattern.compile("(?<=rim-tool-)[0-9]\\.[0-9]\\.[0-9]");
         Matcher matcher = pattern.matcher(filename);
         if (matcher.find()) {
             System.out.println("TCG rimtool version: " + matcher.group());

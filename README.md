@@ -19,7 +19,7 @@ To build this tool, navigate to the `RIM-Tool` directory cloned earlier and use 
 ```
 ./gradlew clean build
 ```
-The `rim_tool-X.X.jar` file should have been placed in the `/build/libs/tools/` (Linux) folder. 
+The `rim-tool-X.X.jar` file should have been placed in the `/build/libs/tools/` (Linux) folder. 
 ### Windows
 Several options exist for building on Windows 11.
 
@@ -32,7 +32,7 @@ gradlew.bat clean build
 ./gradlew clean build 
 ~~~
 
-In both cases, the `rim_tool-X.X.jar` file should have been placed in the `\build\libs\tools\` folder.  
+In both cases, the `rim-tool-X.X.jar` file should have been placed in the `\build\libs\tools\` folder.  
 
 ## Packaging 
 
@@ -54,11 +54,11 @@ Currently, only install packages for Linux are supported.
 
 To install this tool on a RHEL or Rocky Linux distro, use the following command from the same directory: 
 ~~~
-sudo dnf install build/distributions/rim_tool*.rpm 
+sudo dnf install build/distributions/rim-tool*.rpm 
 ~~~
 or for a Debian or Ubuntu Linux distro: 
 ~~~
-sudo apt-get install build/distributions/rim_tool*.deb 
+sudo apt-get install build/distributions/rim-tool*.deb 
 ~~~
 ## Usage 
 The RIM Tool RPM will create a `rim` command line shortcut. This can be invoked from a command line: 
@@ -67,7 +67,7 @@ rim -h
 ~~~
 The RIM Tool also can be invoked using Java from a build directory (if following the [Building](#building) section earlier):
 ~~~
-java -jar build/libs/tools/rim_tool-X.X.jar -h 
+java -jar build/libs/tools/rim-tool-X.X.jar -h 
 ~~~
 Current options for the tool can be found using the `-h` option. 
 
