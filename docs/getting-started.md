@@ -12,7 +12,7 @@ To get started using the `RIM-Tool`, please follow the below instructions. The t
 
     Currently, installation from a package is only supported on Linux.
 
-Packages for this tool can be found on the [GitHub release page :fontawesome-solid-external-link:](https://github.com/nsacyber/rim_tool/release). 
+Packages for this tool can be found on the [GitHub release page :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool/releases). 
 
 Only `.rpm` (Red Hat Enterpise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) packages are currently supported.
 
@@ -22,11 +22,11 @@ To install from a package, download from the above link, then run the following 
 
 === "RHEL 9/Rocky 9"
     ``` shell
-    sudo dnf install rim_tool*.rpm
+    sudo dnf install rim-tool*.rpm
     ```
 === "Debian/Ubuntu"
     ``` shell
-    sudo apt-get install rim_tool*.deb 
+    sudo apt-get install rim-tool*.deb 
     ```
 
 After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See [Commands](commands/index.md) for further details.
@@ -36,10 +36,13 @@ The `RIM-Tool` is written using Java, and requires JDK 17 to be installed.
 
 The following sections also assume the `RIM-Tool` [source code :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool) has been cloned (using Git) to a local directory.
 
-Upon successful build, a `rim_tool-X.X.jar` file will be placed in either the `/build/libs/tools/` (Linux) or `\build\libs\tools\` (Windows) folders. This can 
+!!! note
+    Please clone using `git clone --recursive` to initialize any submodules.
+
+Upon successful build, a `rim-tool-X.X.jar` file will be placed in either the `/build/libs/tools/` (Linux) or `\build\libs\tools\` (Windows) folders. This can 
 then be run using:
 ``` shell
-java -jar <build directory>/rim_tool-X.X.jar
+java -jar <build directory>/rim-tool-X.X.jar
 ```
 
 ### Linux

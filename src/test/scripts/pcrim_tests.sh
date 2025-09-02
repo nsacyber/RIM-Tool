@@ -5,7 +5,7 @@
 ## relative path to data stored for the project
 #dataDir=$scriptDir/../../../data
 ## Temporary invocation for java call for the project
-#rim="java -jar $scriptDir/../../../build/libs/rim-tool.jar"
+#rim="java -jar $scriptDir/../../../build/libs/rim-tool*.jar"
 #
 ## go to the script directory so everything runs smoothly ...
 #pushd $scriptDir > /dev/null

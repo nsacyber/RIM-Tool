@@ -1,9 +1,11 @@
 import com.github.spotbugs.snom.SpotBugsTask
+import java.util.concurrent.TimeUnit
 
 plugins {
     id 'java'
     id 'checkstyle'
     id 'com.github.spotbugs' version '6.0.13'
+    id 'com.netflix.nebula.ospackage' version '11.10.0'
 }
 
 subprojects {
@@ -122,7 +124,28 @@ test {
     useJUnitPlatform()
 }
 
+
+def buildTime = { ->
+    Date latestdate = new Date()
+    def time = latestdate.getTime()
+    long seconds = TimeUnit.MILLISECONDS.toSeconds(time)
+    return seconds
+}
+
+def gitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+def projectVersion = rootProject.file('VERSION').text.trim()
+def packageVersion= "${projectVersion}.${buildTime}.${gitHash}.el9"
+
 jar {
+    archiveVersion = projectVersion
     // Keep jar clean:
     exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -136,8 +159,58 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
     into('lib') {
-
         from 'libs'
-
     }
+}
+
+ospackage {
+    packageName = 'rim-tool'
+    os = LINUX
+    arch = NOARCH
+    version = "$packageVersion"
+    release = '1'
+
+    user 'root'
+    fileMode = 0755
+
+    into('/opt/rimtool/lib') {
+        from jar.outputs.files
+        from configurations.runtimeClasspath
+        from 'libs'
+    }
+
+    into('/opt/rimtool/scripts') {
+        from('scripts') {
+            exclude {
+                FileTreeElement details ->
+                    details.file.name.endsWith('.bat')
+            }
+        }
+    }
+    into('/opt/rimtool/docs') {
+        from('./') {
+            include {
+                FileTreeElement details ->
+                    details.file.name.endsWith('.md')
+            }
+        }
+    }
+    into('/opt/rimtool/data') {
+        from('src/test/resources/') {
+        }
+    }
+    link("/usr/local/bin/rim", "/opt/rimtool/scripts/rimtool.sh", 0x755)
+
+    // Post Install
+    postInstall "echo ${projectVersion} > /opt/rimtool/VERSION"
+    // Post Uninstall
+    postUninstall 'rm -rf /opt/rimtool'
+}
+
+buildRpm {
+    arch = X86_64
+}
+
+buildDeb {
+    arch = 'amd64'
 }

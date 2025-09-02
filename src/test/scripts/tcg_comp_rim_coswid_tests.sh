@@ -5,7 +5,7 @@ scriptDir=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")
 # relative path to data stored for the project
 dataDir=$scriptDir/../../../data
 # Temporary invocation for java call for the project
-rim="java -jar $scriptDir/../../../build/libs/rim-tool.jar"
+rim="java -jar $scriptDir/../../../build/libs/rim-tool*.jar"
 rimType="tcg_component-rim-coswid"
 # go to the script directory so everything runs smoothly ...
 pushd $scriptDir > /dev/null
