@@ -5,7 +5,7 @@ title: Validation of Component
 # Firmware Validation for a PC Component
 
 For a PC component, the RIM is created as a Concise Binary Object Representation (CBOR)-encoded file. 
-The RIM-Tool supports the [CoSWID Tag](../RIMs/coswid.md), the [TCG Component RIM](../RIMs/tcg-component-rim.md), and the [CoRIM](../RIMs/corim.md).
+The `RIM-Tool` supports the [CoSWID Tag](../RIMs/coswid.md), the [TCG Component RIM](../RIMs/tcg-component-rim.md), and the [CoRIM](../RIMs/corim.md).
 
 ## CoSWID
 
@@ -50,7 +50,7 @@ which promotes specifications that support attestation.
 
 As shown in the 
 [corim.txt :fontawesome-solid-external-link:](https://github.com/ietf-rats-wg/draft-ietf-rats-corim/blob/main/pics/corim.txt) 
-diagram, the CoRIM can contain a CoSWID, CoMID, or a Concise Tag List (CoTL). For the RIM Tool’s 
+diagram, the CoRIM can contain a CoSWID, CoMID, or a Concise Tag List (CoTL). For the `RIM-Tool`’s 
 create command, the use of rim-type parameter is used to denote which option is uses. Note 
 that currently only the CoSWID (corim_cosid) and CoMID (corim_comid) options are supported.
 

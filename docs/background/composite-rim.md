@@ -29,5 +29,5 @@ PC_BaseRIM
 &emsp;Done
 
 
-Note that the rim_tool processes one Base RIM at a time. Each PC Base RIM or Component RIM must be 
+Note that the `RIM-Tool` processes one Base RIM at a time. Each PC Base RIM or Component RIM must be 
 created or verified one at a time. 

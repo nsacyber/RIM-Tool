@@ -6,7 +6,7 @@ title: Validation of PC
 
 For a PC, the RIM is created as a Software Identification (SWID) tag that adheres to the
 [PC Client RIM specification :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/). 
-The RIM-Tool supports the [TCG PC Client RIM](../RIMs/tcg-pc-client-rim.md).
+The `RIM-Tool` supports the [TCG PC Client RIM](../RIMs/tcg-pc-client-rim.md).
 
 ## UEFI Boot
 
@@ -144,7 +144,7 @@ be encoded using a number of methods.
 
 ### RFC3339 Timestamps
 
-The tgc_rim_tool will support the creation of a RFC3339 based timestamp. The format of the time 
+The `RIM-Tool` will support the creation of a RFC3339 based timestamp. The format of the time 
 is:  
 
 ```shell
@@ -153,7 +153,7 @@ yyyy-MM-ddThh:mm:ssZ
 
 ### RFC3852 Timestamps
 
-The RFC3852 includes support for a countersignature. The tgc_rim_tool does not directly support 
+The RFC3852 includes support for a countersignature. The `RIM-Tool` does not directly support 
 the creation of a countersignature but will accept a countersignature file created by a third-party 
 application and insert it into a timestamp field within the Base RIM.
 
@@ -166,7 +166,7 @@ RIM. The initial Base RIM uses the enveloped signature provided by the tagCreato
 signature will be a sibling element of the BaseRIMs SoftwareIdentity element. The secondary signature 
 uses the Base RIM’s tagId as the SignedInfo Reference.
 
-The rim_tool does not directly support the creation of a secondary signature but will accept a secondary 
+The `RIM-Tool` does not directly support the creation of a secondary signature but will accept a secondary 
 signature file created by a third-party application and insert it into a timestamp field within the Base RIM.
 
 ## Reference Integrity Manifest Specifications for a PC
