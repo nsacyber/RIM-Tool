@@ -52,7 +52,7 @@ As shown in the
 [corim.txt :fontawesome-solid-external-link:](https://github.com/ietf-rats-wg/draft-ietf-rats-corim/blob/main/pics/corim.txt) 
 diagram, the CoRIM can contain a CoSWID, CoMID, or a Concise Tag List (CoTL). For the `RIM-Tool`’s 
 create command, the use of rim-type parameter is used to denote which option is uses. Note 
-that currently only the CoSWID (corim_cosid) and CoMID (corim_comid) options are supported.
+that currently only the CoSWID and CoMID options are supported.
 
 CoRIMs are digitally signed using 
 [COSE :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/rfc9052/) 
