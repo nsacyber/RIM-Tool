@@ -32,18 +32,11 @@ UEFI also records measurement hashes, along with information about these hashes,
 Log. The TPM Event Log is an audit log that can be used for verification later, after the system boots.  
 
 Linux has support for reading the TPM Event Log and writing it to the security fs partition for TPM. 
-You will need a Linux kernel of 4.18 or higher to see the log in the following path:  
-
-```shell
-/sys/kernel/security/tpm0/binary_bios_measurements 
-```
+You will need a Linux kernel of 4.18 or higher to see the log at 
+`/sys/kernel/security/tpm0/binary_bios_measurements`.
 
 Windows 10 will possibly store (depending upon specific version and group policy) the binary form 
-of the TPM Event Log with a numeric name and a .log extension at the following path:
-
-```shell
-C:\ Windows\ Logs\ MeasuredBoot\
-```
+of the TPM Event Log with a numeric name and a .log extension at `C:\Windows\Logs\MeasuredBoot\`.
 
 ## PC RIM Bundles
 A Verifier will take these UEFI measurements and compare them to a set of expected values in the RIM. 

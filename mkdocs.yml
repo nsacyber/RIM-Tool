@@ -3,23 +3,29 @@ site_url: https://nsacyber.github.io/rim-tool
 repo_url: https://github.com/nsacyber/rim-tool
 repo_name: nsacyber/rim-tool
 nav:
-  - index.md
-  - getting-started.md
-  - Commands:
-      - commands/index.md
-      - Create: commands/create.md
-      - Verify: commands/verify.md
-      - Print: commands/print.md
-      - Sign: commands/sign.md
-      - Get: commands/get.md
-  - RIM Types:
-      - RIMs/index.md
-      - TCG PC Client RIM: RIMs/tcg-pc-client-rim.md
-      - TCG Component RIM: RIMs/tcg-component-rim.md
-      - CoSWID Tag: RIMs/coswid.md
-      - CoRIM: RIMs/corim.md
-  - Appendix:
-      - configuration-files.md
+  - Home:
+      - index.md
+      - getting-started.md
+      - Commands:
+          - commands/index.md
+          - Create: commands/create.md
+          - Verify: commands/verify.md
+          - Print: commands/print.md
+          - Sign: commands/sign.md
+          - Get: commands/get.md
+      - RIM Types:
+          - RIMs/index.md
+          - TCG PC Client RIM: RIMs/tcg-pc-client-rim.md
+          - TCG Component RIM: RIMs/tcg-component-rim.md
+          - CoSWID Tag: RIMs/coswid.md
+          - CoRIM: RIMs/corim.md
+      - Appendix:
+          - configuration-files.md
+  - Background:
+      - background/index.md
+      - background/pc-rim.md
+      - background/component-rim.md
+      - background/composite-rim.md
 theme:
   name: material
   icon:
@@ -47,6 +53,7 @@ theme:
     - navigation.indexes
     - navigation.expand
     - navigation.sections
+    - navigation.tabs
 extra:
   social:
     - icon: fontawesome/brands/github
