@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 #List of files in the scripts directory to ignore.
-exclude=("run_all_tests.sh"  "rim_functions.sh" "pcrim_tests.sh")
+exclude=("run_all_tests.sh"  "rim_functions.sh")
 
 #loop through the test/rim/scripts directory
 for script in *.sh; do
