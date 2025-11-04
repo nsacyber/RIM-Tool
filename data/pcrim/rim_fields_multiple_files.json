@@ -35,19 +35,19 @@
 				     {
 			          "supportRimFormat": "TCG_EventLog_Assertion",
 			          "payloadType": "Indirect",
-			 		  "name": "data/pcrim/TpmLog.bin",
+			 		  "name": "pcrim/TpmLog.bin",
 				      "hash": "4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848"
 			         },
 			        {
 			         "supportRimFormat": "TCG_EventLog_Assertion",
 			         "payloadType": "Indirect",
-				     "name": "data/pcrim/laptop.default.1.rimel",
+				     "name": "pcrim/laptop.default.1.rimel",
 				     "hash": "bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932"
 			        },
 			        {
 			        "supportRimFormat": "TCG_EventLog_Assertion",
 			        "payloadType": "Indirect",
-				    "name": "data/pcrim/laptop_varOsInstall_oem.1.rimel",
+				    "name": "pcrim/laptop_varOsInstall_oem.1.rimel",
 				    "hash": "a1704e9cd5727c5429d16bc2829e2890aa358c59b4f3d2e191c3eaa751520ce8"
 			        }
 				]
