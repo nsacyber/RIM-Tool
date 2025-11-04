@@ -60,23 +60,7 @@ echo "PC Client RIM TEST 11: Verify PC Client signed Supplemental RIM"
 eval $rim verify -r pcrim --in tmp/laptop.supplemental.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  #>>/dev/null
 rim_expected_pass_status $? "PC RIM TEST 11: PC Supplemental RIM Verify"
 
-#echo "PC Client RIM TEST 12: Create signed Patch RIM with RimLinkHash"
-#eval $rim create -r pcrim -a pcrim/rim_fields_patch_RimLinkHash.json -p pcrim/RimSignCert.pem  -k pcrim/rimKey.pem --out tmp/laptop.patch.RimLinkHash.1.swidtag  >>/dev/null
-#rim_expected_pass_status $? "PC Client RIM TEST 10: Create Rim with Bad RimLinkHash"
-
-#echo "PC Client RIM TEST 13: Verify PC Client will fail Patch RIM with bad rimLinkHash"
-#eval $rim verify -r pcrim --in tmp/laptop.patch.badRimLinkHash.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  #>>/dev/null
-#rim_expected_fail_status $? "PC RIM TEST 11: PC Patch RIM bad rimLinkHash"
-
-#echo "PC Client RIM TEST 14: Verify PC Client will fail with Patch RIM with no rimLinkHash"
-#eval $rim verify -r pcrim --in pcrim/rim_fields_patch_noRimLinkHash.json -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  #>>/dev/null
-#rim_expected_fail_status $? "PC RIM TEST 11: PC Patch RIM with no rimLinkHash"
-
-# Add Detached Signature Create
-# Add Detached Signature Verify
-# Add Timestamp Test (tool does not verify)
-
-#rm -rf tmp
+rm -rf tmp
 
 if  [ $failCount -eq 0 ]; then
   echo "All PC RIM tests passed."
