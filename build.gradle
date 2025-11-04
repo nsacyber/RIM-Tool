@@ -173,6 +173,9 @@ ospackage {
     user 'root'
     fileMode = 0755
 
+    // Incompatible with older version
+    conflicts('tcg-rim-tool')
+
     into('/opt/rimtool/lib') {
         from jar.outputs.files
         from configurations.runtimeClasspath
@@ -196,7 +199,7 @@ ospackage {
         }
     }
     into('/opt/rimtool/data') {
-        from('src/test/resources/') {
+        from('data') {
         }
     }
     link("/usr/local/bin/rim", "/opt/rimtool/scripts/rimtool.sh", 0x755)
