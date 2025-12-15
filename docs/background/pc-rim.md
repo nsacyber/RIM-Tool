@@ -62,7 +62,7 @@ onto the device or optionally provides a Uniform Resource Identifier (URI) to ac
 ### The Support RIM
 
 A Support RIM contains assertions about the state or configuration of the platform to which 
-the RIM applies. There are two types of support RIMs, but the only one that HIRS currently 
+the RIM applies. There are two types of Support RIMs, but the only one that HIRS currently 
 uses is the TCG Event Log Assertion Support RIM.
 
 ### TCG Event Log Assertion Support RIM 
@@ -129,7 +129,7 @@ necessary to cover the changes provided by the firmware update.
 
 ### Supplemental Base RIM
 
-Supplemental Base RIM: Supplemental RIMs are intended to support RIMs created by organizations 
+Supplemental Base RIM: Supplemental RIMs are intended to Support RIMs created by organizations 
 other than the OEM (e.g. System Integrators or Value-Added Resellers (VARs)). The signature on the 
 Base RIM is expected to be signed by the organization that created the Supplemental Base RIM. The 
 Supplemental uses the Href element to point to the Primary or Patch RIM for which the Supplemental 
