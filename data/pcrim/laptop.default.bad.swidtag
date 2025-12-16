@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<SoftwareIdentity xmlns="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="Dell5580" patch="false" supplemental="false" tagId="hirs.swid.SwidTags.dell5580" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
-  <Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
-  <Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
-  <Meta xmlns:n8060="http://csrc.nist.gov/ns/swid/2015-extensions/1.0" xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" n8060:colloquialVersion="0.1" n8060:edition="0.1" n8060:product="Dell 5580" n8060:revision="0.1" rim:BindingSpec="PC Client RIM" rim:BindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Dell Inc." rim:platformModel="Latitude 5580" rim:rimLinkHash="88f21d8e44d4271149297404df91caf207130bfa116582408abd04ede6db7f51"/>
-  <Payload>
-    <Directory name="/boot/tcg/rim/support">
-      <File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="dell.5580.1.rimel" size="20113"/>
-    </Directory>
-  </Payload>
+<ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
+  <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
+  <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
+  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="BadProduct"/>
+  <ns2:Payload>
+    <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Test" xsi:type="ns2:Directory">
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="pcrim/TpmLog.bin" size="7459" xsi:type="ns2:File"/>
+    </ns2:Directory>
+  </ns2:Payload>
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
     <SignedInfo>
       <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
@@ -17,26 +17,26 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <DigestValue>JVPYXmpDVzZn+mHPqcPR0NaL0oSJ/24WP5Wsq+/22B8=</DigestValue>
+        <DigestValue>cL7IclUTIBhOQXwWj+EByACi1/eJDaHgfWCtDPm3fyA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>A1x+c+zbVwvdrmG9/r0LwOLXA0KjxxIgElrfStSX8Uv33vzaG9/S8YIsKlE/6O4dIBlkaKUvqamf
-53YOXtfkD2gzYPhNqIMlPbKXdLMhIrBRRkDzoYHbMRcIcJdGOFEeM/UNS2cxvK5vojPu8ODVde44
-TdyzS/TlTJXvkm7sx/50Xs3O0ZdrHA4mihYRrRCUaR5QCDmTGyzMIYY1aujF0NOYVm3+YssFsMkH
-4K5fEv/IomR5kmK68VEmC71krknIfhSw6K7y0rooWUuPMoiLOpjYT+SvykjBzJPsxPzKMULb1bad
-qe7XS9lxgt89U5wiIyNhsu6q4YqVebbO5aLpsQ==</SignatureValue>
+    <SignatureValue>JmYFqIugMlsLFT7peKBKdlZeGkac2d5sU74IIZ4oNwDrgRYlUIS4vQ2MFzIYpQKx3BLN6KN88kjF&#13;
+uKlZOdH6zg7LhClobnqDWIGjg6CQPDLv4HGDVXDexDaTdYiBKJrSZr0kDFDCGH6to/mQPYKDiwi3&#13;
+UsUP+EM/QFIQVWV+6Rs+1Z1us+fMLbd1KTVjjz7talUaaopzkbYHJpA/7x7tv7lC6bq2BbUYbIKC&#13;
+RdHFSKJePUi8QF0PRzkDCYa6obpLdgtivtVtTW2I6sbacBme1aypheHek9HQTIHD9aGPnbiLl2Pg&#13;
+t0GZPQuRor8KDnNJfgUjLHxS+4uZSJh2T8Ti5Q==</SignatureValue>
     <KeyInfo>
-      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
       <KeyValue>
         <RSAKeyValue>
-          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx
-xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9
-dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q
-otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW
+          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
+xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9&#13;
+dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q&#13;
+otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW&#13;
 jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus>
           <Exponent>AQAB</Exponent>
         </RSAKeyValue>
       </KeyValue>
+      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
     </KeyInfo>
   </Signature>
-</SoftwareIdentity>
+</ns2:SoftwareIdentity>

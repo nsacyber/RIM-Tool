@@ -2,10 +2,12 @@
 <ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
   <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
   <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
-  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA" rim:rimLinkHash="88f21d8e44d4271149297404df91caf207130bfa116582408abd04ede6db7f51"/>
+  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA"/>
   <ns2:Payload>
-    <ns2:Directory xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="iotBase" rim:supportRIMFormat="TCG_EventLog_Assertion" xsi:type="ns2:Directory">
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="TpmLog.bin" size="20113" xsi:type="ns2:File"/>
+    <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="" xsi:type="ns2:Directory">
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="pcrim/TpmLog.bin" size="0" xsi:type="ns2:File"/>
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="pcrim/laptop.default.1.rimel" size="0" xsi:type="ns2:File"/>
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="a1704e9cd5727c5429d16bc2829e2890aa358c59b4f3d2e191c3eaa751520ce8" name="pcrim/laptop_varOsInstall_oem.1.rimel" size="0" xsi:type="ns2:File"/>
     </ns2:Directory>
   </ns2:Payload>
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
@@ -17,14 +19,14 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <DigestValue>ebRiYCe/i/5ZZR3Fo85EHxgbYt7xwb69wo4zYJk6uY0=</DigestValue>
+        <DigestValue>0J/p2s4Uz/iOPMYYMi3PtzP211b+sSN6fwhbyrFXaiU=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>M8aw7bMbkekZoZVBgxza1FZTkQaQKf2WIqD3CNcTcQei9LSbwz6QuMaGuTdKbNKRo/lXqtkITA1Q&#13;
-Kl0vJlA1FzwJ6JWNY56Rw7b/S1itvedLzD3EaQ8uAwtY/sPC9hxJ6zXOYpQz44DzA3dlcfmjjQXH&#13;
-/cCO/Rx604nSAxMTJmfU3bANQsJ0onBRDe48nJqOPwZVwqwrPw7ZsBEGnoUnTqOw2rLLEfNSpDpE&#13;
-y3THvww4rB42L+s4I2ULVTaCfxEZRlv0hbs7geKrJF70TkuYhWsequ9gPTvDx91imvJJVfgB2AHt&#13;
-Q9F6vDNqZ7ashEcOoMiUXVazZTBuue/JBtDgyQ==</SignatureValue>
+    <SignatureValue>D1j79SHCi+rR8WPqrSW5nXkB0cQcRJEBK6dTJ4bI1QABDnAUtzF3YGV5Jsak0S6YRfyDwHMs0c2g&#13;
+V7RWTMUVzKwPMRMffHWrI/THQfZvkmzISwAOxoPdk/z36Dkf0RYeLHfDl1wOBEVOSHAZSaJ3eUa9&#13;
+crAn/penV0MLJdv5o7WEWAuFuLh83788YPmLIZt+Ujc9fZhA12p0JjlQ2s6uiz3qMspt2wKGIk3g&#13;
+nCiRrio829CADlenDNOp3x8QbE0/OwWSBS3OyfLSFpbrbAy8y9dnt4LrQDs+uyMFpOicc82SzOoh&#13;
+icGeizQbd3+oqExLzkZCQSDJy2K5loZ0TW6pdQ==</SignatureValue>
     <KeyInfo>
       <KeyValue>
         <RSAKeyValue>
