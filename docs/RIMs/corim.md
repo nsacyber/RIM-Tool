@@ -10,11 +10,11 @@ IETF sponsors the Remote ATtestation ProcedureS (RATS) Working Group[^1] which s
 
 A CoRIM comprises metadata that establishes information about the CoRIM itself and various attributes (including creator, signer, etc.), in addition to a list of tags.
 
-As shown in a diagram[^3] of a CoRIM produced by the RATS WG, a CoRIM tag list can contain one or more CoSWID, Concise Module Identifier (CoMID), or Concise Tag List (CoTL) tags. For the RIM tool's [`create`](../commands/create.md) command, the use of the `--rim-type` parameter is used to denote which CoRIM tag option is used.
+As shown in a diagram[^3] of a CoRIM produced by the RATS WG, a CoRIM tag list can contain one or more CoSWID, Concise Module Identifier (CoMID), or Concise Tag List (CoTL) tags. For the RIM Tool's [`create`](../commands/create.md) command, the use of the `--rim-type` parameter is used to denote which CoRIM tag option is used.
 
 !!! Note
 
-    Currently, the RIM tool only supports CoSWID (`corim_coswid`) and CoMID (`corim_comid`) options for CoRIMs.
+    Currently, the RIM Tool only supports CoSWID (`corim_coswid`) and CoMID (`corim_comid`) options for CoRIMs.
 
 ### Signing
 
