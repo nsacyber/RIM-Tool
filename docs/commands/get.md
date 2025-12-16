@@ -37,12 +37,12 @@ Retrieve a payload from a signed [CoRIM](../RIMs/corim.md):
 
 === "Linux"
     ```shell
-    rim get -r corim_comid --in corim/corim_1.signed.corim.cose --out ~/corim_1.corim.cose
+    rim get -r corim_comid --in corim/corim_1.signed.corim.cose --out /tmp/corim_1.corim.cose
     ```
 
 Retrieve a payload from a signed [CoSWID tag](../RIMs/coswid.md):
 
 === "Linux"
     ```shell
-    rim get -r coswid --in coswid/coswid_rim_1.signed.coswid.cose --out ~/coswid_rim_1.coswid
+    rim get -r coswid --in coswid/coswid_rim_1.signed.coswid.cose --out /tmp/coswid_rim_1.coswid
     ```

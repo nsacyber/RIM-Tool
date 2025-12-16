@@ -51,11 +51,11 @@ rim sign -r <string> -i <file> -k <file> -p <file> -o <file> [-l <file>] [-al <s
 Sign an unsigned [CoSWID tag](../RIMs/coswid.md):
 === "Linux"
     ```shell
-    rim sign -r coswid --in coswid/coswid_rim_1.coswid -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/coswid_rim_1.signed.coswid.cose
+    rim sign -r coswid --in coswid/coswid_rim_1.coswid -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out /tmp/coswid_rim_1.signed.coswid.cose
     ```
 
 Sign an unsigned [CoRIM](../RIMs/corim.md):
 === "Linux"
     ```shell
-    rim sign -r corim_comid --in corim/corim_1.corim.cose -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/corim_1.signed.corim.cose
+    rim sign -r corim_comid --in corim/corim_1.corim.cose -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out /tmp/corim_1.signed.corim.cose
     ```

@@ -62,19 +62,19 @@ Create a signed [TCG PC Client Base RIM](../RIMs/tcg-pc-client-rim.md):
 
 === "Linux"
     ```shell
-    rim create -r pcrim -c pcrim/rim_fields.json -l pcrim/laptop.default.1.rimel -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem --out ~/laptop.default.1.swidtag 
+    rim create -r pcrim -c pcrim/rim_fields.json -l pcrim/laptop.default.1.rimel -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem --out /tmp/laptop.default.1.swidtag 
     ```
 
 Create an unsigned [CoSWID tag](../RIMs/coswid.md):
 
 === "Linux"
     ```shell
-    rim create -r coswid -u -c coswid/coswid_rim_1.json --out ~/coswid_rim_1.coswid.cose
+    rim create -r coswid -u -c coswid/coswid_rim_1.json --out /tmp/coswid_rim_1.coswid.cose
     ```
 
 Create a [CoRIM](../RIMs/corim.md) using CoMID:
 
 === "Linux"
     ```shell
-    rim create -r corim_comid -c corim/corim_1.json -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/corim_1.corim.cose
+    rim create -r corim_comid -c corim/corim_1.json -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out /tmp/corim_1.corim.cose
     ```
