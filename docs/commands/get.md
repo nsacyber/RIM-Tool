@@ -27,22 +27,22 @@ rim get -r <string> -i <file> -o <file>
 ## Examples
 
 !!! example "Before Starting"
-Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
-=== "Linux"
-```shell
-cd /opt/rimtool/data
-```
+    Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
+    === "Linux"
+        ```shell
+        cd /opt/rimtool/data
+        ```
 
 Retrieve a payload from a signed [CoRIM](../RIMs/corim.md):
 
 === "Linux"
-```shell
-rim get -r corim_comid --in corim/corim_1.signed.corim.cose --out ~/corim_1.corim.cose
-```
+    ```shell
+    rim get -r corim_comid --in corim/corim_1.signed.corim.cose --out ~/corim_1.corim.cose
+    ```
 
 Retrieve a payload from a signed [CoSWID tag](../RIMs/coswid.md):
 
 === "Linux"
-```shell
-rim get -r coswid --in coswid/coswid_rim_1.signed.coswid.cose --out ~/coswid_rim_1.coswid
-```
+    ```shell
+    rim get -r coswid --in coswid/coswid_rim_1.signed.coswid.cose --out ~/coswid_rim_1.coswid
+    ```

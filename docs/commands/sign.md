@@ -42,20 +42,20 @@ rim sign -r <string> -i <file> -k <file> -p <file> -o <file> [-l <file>] [-al <s
 ## Examples
 
 !!! example "Before Starting"
-Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
-=== "Linux"
-```shell
-cd /opt/rimtool/data
-```
+    Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
+    === "Linux"
+        ```shell
+        cd /opt/rimtool/data
+        ```
 
 Sign an unsigned [CoSWID tag](../RIMs/coswid.md):
 === "Linux"
-```shell
-rim sign -r coswid --in coswid/coswid_rim_1.coswid -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/coswid_rim_1.signed.coswid.cose
-```
+    ```shell
+    rim sign -r coswid --in coswid/coswid_rim_1.coswid -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/coswid_rim_1.signed.coswid.cose
+    ```
 
 Sign an unsigned [CoRIM](../RIMs/corim.md):
 === "Linux"
-```shell
-rim sign -r corim_comid --in corim/corim_1.corim.cose -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/corim_1.signed.corim.cose
-```
+    ```shell
+    rim sign -r corim_comid --in corim/corim_1.corim.cose -k keys/COMP_OEM1_rim_signer_ecc_512_sha384.key -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem --out ~/corim_1.signed.corim.cose
+    ```

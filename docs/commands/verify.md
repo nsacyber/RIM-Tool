@@ -40,29 +40,29 @@ If no option is present, no Support RIM validation will be performed. See below 
 ## Examples
 
 !!! example "Before Starting"
-Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
-=== "Linux"
-```shell
-cd /opt/rimtool/data
-```
+    Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
+    === "Linux"
+        ```shell
+        cd /opt/rimtool/data
+        ```
 
 Verify a [TCG PC Client Base RIM](../RIMs/tcg-pc-client-rim.md), alongside Support RIM:
 
 === "Linux"
-```shell
-rim verify -r pcrim --in pcrim/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem -l "/opt/rimtool/data/"
-```
+    ```shell
+    rim verify -r pcrim --in pcrim/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem -l "/opt/rimtool/data/"
+    ```
 
 Verify a signed [CoSWID tag](../RIMs/coswid.md):
 
 === "Linux"
-```shell
-rim verify -r coswid --in coswid/coswid_rim_1.signed.coswid.cose -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem
-```
+    ```shell
+    rim verify -r coswid --in coswid/coswid_rim_1.signed.coswid.cose -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem
+    ```
 
 Verify a signed [CoRIM](../RIMs/corim.md):
 
 === "Linux"
-```shell
-rim verify -r corim_comid --in corim/corim_1.signed.corim.cose -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem
-```
+    ```shell
+    rim verify -r corim_comid --in corim/corim_1.signed.corim.cose -p certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem
+    ```

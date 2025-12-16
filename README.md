@@ -94,4 +94,4 @@ For details on RIM Tool commands, please refer to the [documentation](https://ns
 * [COSE Working Group test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)
 * [Gluecose test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)
 * [Microsoft's COSE Tool](https://github.com/microsoft/CoseSignTool/blob/main/docs/CoseSignTool.md) (useful for testing detached signatures and embedded certificates) 
-* [EDK2’s Trusted Boot Chain Overview](https://tianocore-docs.github.io/edk2-TrustedBootChain/release-1.00/2_Overview.html)
+* [EDK2's Trusted Boot Chain Overview](https://tianocore-docs.github.io/edk2-TrustedBootChain/release-1.00/2_Overview.html)
