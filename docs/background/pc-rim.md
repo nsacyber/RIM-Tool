@@ -129,7 +129,7 @@ necessary to cover the changes provided by the firmware update.
 
 ### Supplemental Base RIM
 
-Supplemental Base RIM: Supplemental RIMs are intended to Support RIMs created by organizations 
+Supplemental Base RIM: Supplemental RIMs are intended to support RIMs created by organizations 
 other than the OEM (e.g. System Integrators or Value-Added Resellers (VARs)). The signature on the 
 Base RIM is expected to be signed by the organization that created the Supplemental Base RIM. The 
 Supplemental uses the Href element to point to the Primary or Patch RIM for which the Supplemental 
