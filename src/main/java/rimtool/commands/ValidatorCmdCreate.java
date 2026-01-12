@@ -3,7 +3,18 @@ package rimtool.commands;
 import com.beust.jcommander.IParametersValidator;
 import com.beust.jcommander.ParameterException;
 import hirs.utils.rim.unsignedRim.GenericRim;
+import hirs.utils.swid.SwidTagConstants;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,6 +64,7 @@ public class ValidatorCmdCreate implements IParametersValidator {
         switch (rimType) {
             case GenericRim.RIMTYPE_PCRIM:
                 validatePcrim(parameters);
+                checkSupportRimNamesForSeparators(parameters);
                 break;
             default:
                 break;
@@ -80,6 +92,41 @@ public class ValidatorCmdCreate implements IParametersValidator {
             if (!publicCertProvided && !keyFileIncludesCert) {
                 errorMessage +=
                         "Error: No certificate was provided, nor does the key file contain a certificate.";
+            }
+        }
+    }
+
+    /**
+     * This method checks the values of File.name fields in the json config file
+     * for file separator characters ('/', '\').
+     *
+     * @param parameters map containing the config file
+     */
+    private void checkSupportRimNamesForSeparators(final Map<String, Object> parameters) {
+        String configFile = (String) parameters.get(CommandDefinitions.ARG_CONFIG);
+        JsonObject configFileContents = null;
+        try {
+            InputStream is = new FileInputStream(configFile);
+            JsonReader reader = Json.createReader(is);
+            configFileContents = reader.readObject();
+            reader.close();
+        } catch (FileNotFoundException e) {
+            errorMessage += String.format("Error reading %s to check for file separators", configFile);
+        }
+
+        if (configFileContents != null) {
+            List<JsonObject> supportRims = configFileContents.getJsonObject(SwidTagConstants.PAYLOAD)
+                    .getJsonObject(SwidTagConstants.DIRECTORY)
+                    .getJsonArray(SwidTagConstants.FILE)
+                    .getValuesAs(JsonObject.class);
+            Iterator itr = supportRims.iterator();
+            while (itr.hasNext()) {
+                JsonObject supportRim = (JsonObject) itr.next();
+                String supportRimName = supportRim.getString(SwidTagConstants.NAME);
+                if (supportRimName.contains(File.separator)) {
+                    errorMessage += String.format("Support RIM %s has file separator "
+                            + "characters in its name, please remove and retry", supportRimName);
+                }
             }
         }
     }
