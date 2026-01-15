@@ -7,7 +7,6 @@ import hirs.utils.swid.SwidTagConstants;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 import java.io.File;
 import java.io.FileInputStream;
