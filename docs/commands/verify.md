@@ -26,16 +26,30 @@ rim verify -r <string> -i <file> -p <file> [-l <path>] [-t <file>] [-d <file>] [
 
 [^1]: A Support RIM file is only used for a [TCG PC Client RIM :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-PC-Client-Reference-Integrity-Manifest-Specification-Version-1.1-Revision-11_pub.pdf). See `-l` option [documentation](#-l-option-pc-client-rim-only).
 [^2]: Required if type is set to [TCG PC Client RIM :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-PC-Client-Reference-Integrity-Manifest-Specification-Version-1.1-Revision-11_pub.pdf).
-[^3]: If specified, embedded certificate supersedes `-p` option. For [XML-DSig :fontawesome-solid-external-link:](https://www.w3.org/TR/xmldsig-core/): a certificate may be embedded into the signed SWID tag. For [COSE :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc8152): a certificate and its thumbprint may be embedded into the protected header.
+[^3]:
+    If specified, embedded certificate supersedes `-p` option.
+
+    For [XML-DSig :fontawesome-solid-external-link:](https://www.w3.org/TR/xmldsig-core/): a certificate may be embedded into the signed SWID tag.
+    
+    For [COSE :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc8152): a certificate and its thumbprint may be embedded into the protected header.
 
 ### `-l` option (PC Client RIM only)
 
-For [TCG PC Client RIMs](../RIMs/tcg-pc-client-rim.md), the `-l` option has the following effects:
+The default behavior for the `verify` command for a [TCG PC Client RIM](../RIMs/tcg-pc-client-rim.md) is to *ignore* the file attribute that specifies the name of the Support RIM file, as well as the hash associated with that file.
 
-- If present with a valid, *non-empty* path specified, Support RIM validation will be enabled. The validation will be performed by searching the specified path for contained Support RIMs (with matching filenames), ignoring absolute paths.
-- If present with an *empty* (`-l ""`) path specified, Support RIM validation will also be enabled. However, the validation will be performed from **absolute** file system paths that are specified in the Base RIM. Ensure that these paths and associated Support RIM files are present on the file system, in this case.
+This parameter is intended to change that behavior, and *enforce* the verification of the hash of the Support RIM file found on the host file system as follows:
 
-If no option is present, no Support RIM validation will be performed. See below [Examples](#examples) section for sample usage of the `-l` option.
+- `-l ""`: uses the `<Directory>` element path (if present) associated with the corresponding `<File>` element to find the Support RIM.
+
+- `-l <path>`: uses the supplied path, along with the file attribute, to find the Support RIM file.
+
+??? info "Further Details"
+    [NISTIR 8060 :fontawesome-solid-external-link:](https://doi.org/10.6028/NIST.IR.8060), section 4.6.1 states:
+    > Files are described using the `<File>` element, and folders are described using the `<Directory>` element.
+
+    When processing a PC Client RIM (with the `-l ""` option), the `RIM-Tool` will assume that the full path to a Support RIM file is a concatenation of the `<Directory>` element text (if present), and the `<File>` element text found in the Base RIM's payload element. 
+
+See below [Examples](#examples) section for sample usage of the `-l` option.
 
 ## Examples
 
