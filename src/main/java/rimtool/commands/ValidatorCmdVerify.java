@@ -24,7 +24,7 @@ public class ValidatorCmdVerify implements IParametersValidator {
     /**
      * True if user provided a public cert; default is false.
      */
-    private boolean publicCertProvided = false;
+//    private boolean publicCertProvided = false;
     /**
      * Human-readable error message if arguments do not validate.
      */
@@ -40,6 +40,7 @@ public class ValidatorCmdVerify implements IParametersValidator {
     public void validate(final Map<String, Object> parameters) throws ParameterException {
 
         String rimType = parameters.get(CommandDefinitions.ARG_RIMTYPE).toString();
+/*
         if (ValidatorCommon.isValueNotNull(parameters, CommandDefinitions.ARG_PUBLICCERTIFICATE)) {
             publicCertProvided = true;
         }
@@ -49,7 +50,7 @@ public class ValidatorCmdVerify implements IParametersValidator {
             errorMessage +=
                     "Error: No certificate was provided, nor was the certificate included in the signature.";
         }
-
+*/
         switch (rimType) {
             case GenericRim.RIMTYPE_PCRIM:
                 checkSupportRimNamesForSeparators(parameters);
