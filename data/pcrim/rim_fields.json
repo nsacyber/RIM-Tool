@@ -29,7 +29,8 @@
 	"Payload": {
 		"Directory": {
 			"supportRimFormat": "TCG_EventLog_Assertion",
-			"name": "Test",
+			"name": "",
+			"location": "data/pcrim/",
 			"File": [ {
 				"version":"01",
 				"supportRimFormat": "TCG_EventLog_Assertion",

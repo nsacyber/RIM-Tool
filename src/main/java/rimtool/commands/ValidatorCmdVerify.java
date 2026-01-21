@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  */
 public class ValidatorCmdVerify implements IParametersValidator {
 
-    /**
+    /*
      * True if user provided a public cert; default is false.
      */
 //    private boolean publicCertProvided = false;
