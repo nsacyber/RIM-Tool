@@ -6,6 +6,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.spotbugs' version '6.0.13'
     id 'com.netflix.nebula.ospackage' version '11.10.0'
+    id 'org.owasp.dependencycheck' version '12.1.9'
 }
 
 subprojects {
@@ -68,7 +69,12 @@ subprojects {
 repositories {
     mavenCentral()
 }
-
+dependencyCheck {
+    nvd {
+        // Read API key from a system property 'nvd.apiKey'
+        apiKey = System.getProperty("nvd.apiKey")
+    }
+}
 dependencies {
     implementation libs.bouncycastle
     implementation libs.jcommander
