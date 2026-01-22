@@ -30,9 +30,9 @@ public class CommandVerify {
             description = CommandDefinitions.PARAM_DESCR_IN)
     private String inFile;
     @Parameter(names = {CommandDefinitions.ARG_RIMEL_SHORT, CommandDefinitions.ARG_RIMEL},
-            validateWith = ValidatorArgFile.class,
+            validateWith = ValidatorArgDirectory.class,
             description = CommandDefinitions.PARAM_DESCR_RIMEL)
-    private String rimEventLog = "";
+    private String rimEventLog = null;
 
     // certificate/ keys
     // both PRIVATEKEY and PUBLICKEY use the short arg '-k' or 'ARG_PRIVATEKEYFILE_SHORT'
