@@ -64,7 +64,7 @@ Verify a [TCG PC Client Base RIM](../RIMs/tcg-pc-client-rim.md), alongside Suppo
 
 === "Linux"
     ```shell
-    rim verify -r pcrim --in pcrim/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem -l "/opt/rimtool/data/"
+    rim verify -r pcrim --in pcrim/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem -l pcrim/
     ```
 
 Verify a signed [CoSWID tag](../RIMs/coswid.md):
