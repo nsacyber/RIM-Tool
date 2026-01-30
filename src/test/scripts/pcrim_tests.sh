@@ -18,51 +18,59 @@ mkdir -p ./tmp
 # Create and Verify Test patterns
 echo "PC Client RIM TEST 1: Create PC Client signed RIM test pattern using specified rimmel file"
 eval $rim create -r pcrim -l pcrim/laptop.default.1.rimel --out tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields.json >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 1: PC RIM Create with -l"
+rim_expected_pass_status $? "PC RIM TEST 1: PC RIM Create with proper support RIM name"
 
-echo "PC Client RIM TEST 2: Verify PC Client signed RIM test pattern with declared support RIM"
-eval $rim verify -r pcrim -l \"\" --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 2: PC RIM Verify with -l \"\" "
+echo "PC Client RIM TEST 2: Create PC Client signed RIM test pattern using rimmel file with file separator"
+eval $rim create -r pcrim -l pcrim/laptop.default.1.rimel --out tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_bad_supportRIM.json >>/dev/null
+rim_expected_fail_status $? "PC RIM TEST 2: PC RIM Create with improper support RIM name"
 
-echo "PC Client RIM TEST 3: Verify PC Client signed RIM test pattern with support RIM override"
+echo "PC Client RIM TEST 3: Verify PC Client signed RIM test pattern with correct support RIM override"
+eval $rim verify -r pcrim -l pcrim/ --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+rim_expected_pass_status $? "PC RIM TEST 3: PC RIM Verify with -l pcrim/"
+
+echo "PC Client RIM TEST 4: Verify PC Client signed RIM test pattern with incorrect support RIM override"
 eval $rim verify -r pcrim -l tcg_comp_rim/ --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_fail_status $? "PC RIM TEST 3: PC RIM Verify with -l tcg_comp_rim/"
+rim_expected_fail_status $? "PC RIM TEST 4: PC RIM Verify with -l tcg_comp_rim/"
 
-echo "PC Client RIM TEST 4: Create PC Client signed RIM test pattern with no specified rimmel file"
+echo "PC Client RIM TEST 5: Create PC Client signed RIM test pattern with no specified rimmel file"
 eval $rim create -r pcrim --out tmp/laptop.default.2.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields.json >>/dev/null
-rim_expected_fail_status $? "PC RIM TEST 4: PC RIM Create"
+rim_expected_fail_status $? "PC RIM TEST 5: PC RIM Create"
 
-echo "PC Client RIM TEST 5: Verify PC Client signed RIM test pattern XML signature only"
+echo "PC Client RIM TEST 6: Verify PC Client signed RIM test pattern XML signature only"
 eval $rim verify -r pcrim --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 5: PC RIM Verify"
+rim_expected_pass_status $? "PC RIM TEST 6: PC RIM Verify"
 
-echo "PC Client RIM TEST 6: Create PC Client signed RIM test pattern with multiple Payload file hashes"
+echo "PC Client RIM TEST 7: Create PC Client signed RIM test pattern with multiple Payload file hashes"
 eval $rim create -r pcrim -l pcrim/laptop.default.1.rimel --out tmp/laptop.default.3.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_multiple_files.json >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 6: PC RIM Create with multiple payload hashes"
+rim_expected_pass_status $? "PC RIM TEST 7: PC RIM Create with multiple payload hashes"
 
-echo "PC Client RIM TEST 7: Verify PC Client signed RIM test pattern with multiple Payload file hashes"
-eval $rim verify -r pcrim -l \"\" --in tmp/laptop.default.3.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 7: PC RIM Verify with multiple payload hashes"
+echo "PC Client RIM TEST 8: Verify PC Client signed RIM test pattern with multiple Payload file hashes"
+eval $rim verify -r pcrim -l pcrim/ --in tmp/laptop.default.3.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+rim_expected_pass_status $? "PC RIM TEST 8: PC RIM Verify with multiple payload hashes"
 
-echo "PC Client RIM TEST 8: Verify PC Client will fail when a signature is invalid"
-eval $rim verify -r pcrim -l pcrim/laptop.default.1.rimel --in pcrim/laptop.default.bad.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_fail_status $? "PC RIM TEST 8: PC RIM Bad signature check"
+echo "PC Client RIM TEST 9: Verify PC Client will fail when a support RIM name has path separators"
+eval $rim verify -r pcrim -l pcrim/ --in pcrim/laptop.default.bad-support-name.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+rim_expected_fail_status $? "PC RIM TEST 9: PC RIM Bad support RIM name"
 
-echo "PC Client RIM TEST 9: Create PC Client signed Patch RIM "
+echo "PC Client RIM TEST 10: Verify PC Client will fail when a signature is invalid"
+eval $rim verify -r pcrim -l pcrim/ --in pcrim/laptop.default.bad-sig.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+rim_expected_fail_status $? "PC RIM TEST 10: PC RIM Bad signature check"
+
+echo "PC Client RIM TEST 11: Create PC Client signed Patch RIM "
 eval $rim create -r pcrim --out tmp/laptop.patch.1.swidtag -l pcrim/laptop.default.1.rimel -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_patch.json >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 9: Create PC Patch RIM"
+rim_expected_pass_status $? "PC RIM TEST 11: Create PC Patch RIM"
 
-echo "PC Client RIM TEST 10: Verify PC Client signed Patch RIM"
+echo "PC Client RIM TEST 12: Verify PC Client signed Patch RIM"
 eval $rim verify -r pcrim --in tmp/laptop.patch.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 10: PC Patch RIM Verify"
+rim_expected_pass_status $? "PC RIM TEST 12: PC Patch RIM Verify"
 
-echo "PC Client RIM TEST 11: Create PC Client signed Supplemental RIM "
+echo "PC Client RIM TEST 13: Create PC Client signed Supplemental RIM "
 eval $rim create -r pcrim --out tmp/laptop.supplemental.1.swidtag -l pcrim/laptop.default.1.rimel -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_supplemental.json >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 11: Create PC Supplemental RIM"
+rim_expected_pass_status $? "PC RIM TEST 13: Create PC Supplemental RIM"
 
-echo "PC Client RIM TEST 12: Verify PC Client signed Supplemental RIM"
+echo "PC Client RIM TEST 14: Verify PC Client signed Supplemental RIM"
 eval $rim verify -r pcrim --in tmp/laptop.supplemental.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
-rim_expected_pass_status $? "PC RIM TEST 12: PC Supplemental RIM Verify"
+rim_expected_pass_status $? "PC RIM TEST 14: PC Supplemental RIM Verify"
 
 rm -rf tmp
 
