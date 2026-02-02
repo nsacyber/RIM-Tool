@@ -2,10 +2,10 @@
 <ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
   <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
   <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
-  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="BadProduct"/>
+  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="Bad_Product"/>
   <ns2:Payload>
     <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Test" xsi:type="ns2:Directory">
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="pcrim/TpmLog.bin" size="7459" xsi:type="ns2:File"/>
+      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="TpmLog.bin" size="7459" xsi:type="ns2:File"/>
     </ns2:Directory>
   </ns2:Payload>
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
@@ -17,14 +17,14 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <DigestValue>cL7IclUTIBhOQXwWj+EByACi1/eJDaHgfWCtDPm3fyA=</DigestValue>
+        <DigestValue>TqJg3fUAc3G+dbKTM6WYGdOyeLv5mURXRG7dUdqScKI=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>JmYFqIugMlsLFT7peKBKdlZeGkac2d5sU74IIZ4oNwDrgRYlUIS4vQ2MFzIYpQKx3BLN6KN88kjF&#13;
-uKlZOdH6zg7LhClobnqDWIGjg6CQPDLv4HGDVXDexDaTdYiBKJrSZr0kDFDCGH6to/mQPYKDiwi3&#13;
-UsUP+EM/QFIQVWV+6Rs+1Z1us+fMLbd1KTVjjz7talUaaopzkbYHJpA/7x7tv7lC6bq2BbUYbIKC&#13;
-RdHFSKJePUi8QF0PRzkDCYa6obpLdgtivtVtTW2I6sbacBme1aypheHek9HQTIHD9aGPnbiLl2Pg&#13;
-t0GZPQuRor8KDnNJfgUjLHxS+4uZSJh2T8Ti5Q==</SignatureValue>
+    <SignatureValue>j6eeaoUkho33St4Ukc9gLUTKjroL1QcWLJoLnH+EbZ2mcXH/j+edh7HhvZYPwS1hGwt3HWPcToM5&#13;
+gVWODTaA7Ud3nyHdPkuOp3MMgushOg0cmb9KmV4JEXMrTAK9CSLf60zbpdVVwbIn57QGDP4aFXmr&#13;
+UDDebquKss6x0IAPAWw79/RAdRuEyu1gkt0nPg/mSH7DehH/pJAVTBVVJuFfjcg7gOx3j92LkOdE&#13;
++z01StGBGtrirlpKPg+yu9cE5SGoYUyCts0Fi0gbLBOgJ9gr9lNO2KZZnwa9nyDmzP3Z5SkUd+ig&#13;
+qARtNfsDEXNCrnTLzTHnp+MyV/BHVQm/CFgEoQ==</SignatureValue>
     <KeyInfo>
       <KeyValue>
         <RSAKeyValue>
