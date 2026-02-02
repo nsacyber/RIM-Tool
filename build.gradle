@@ -82,12 +82,30 @@ dependencies {
     compileOnly libs.lombok
     annotationProcessor libs.lombok
 
-    testImplementation libs.spring.boot.starter.test
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
 
     testCompileOnly libs.lombok
     testAnnotationProcessor libs.lombok
 
     implementation 'org.hirs:HIRS_Utils'
+}
+
+
+
+// Dependency resolutions
+configurations.configureEach {
+    exclude group: 'commons-logging', module: 'commons-logging'
+
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.apache.logging.log4j') {
+            details.useVersion '2.25.3' // Force upgraded log4j version
+        }
+        if (details.requested.group == 'org.apache.httpcomponents' &&
+                details.requested.name == 'httpclient') {
+            details.useVersion '4.5.14'  // Force upgraded httpclient version
+        }
+    }
 }
 
 tasks.register('updateGitSubmodules', Exec) {

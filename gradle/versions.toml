@@ -1,10 +1,10 @@
 [versions]
-bouncyCastleVersion = "1.79"
+bouncyCastleVersion = "1.83"
 jcommanderVersion = "2.0"
-lombokVersion = "1.18.36"
+lombokVersion = "1.18.42"
 
 #test dependencies versions
-springBootVersion = "3.4.1"
+jupiterVersion = "6.0.2"
 
 [libraries]
 bouncycastle = { module = "org.bouncycastle:bcmail-jdk18on", version.ref = "bouncyCastleVersion" }
@@ -12,4 +12,5 @@ jcommander = { module = "org.jcommander:jcommander", version.ref = "jcommanderVe
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombokVersion" }
 
 # test dependencies
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBootVersion" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jupiterVersion" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "jupiterVersion" }
