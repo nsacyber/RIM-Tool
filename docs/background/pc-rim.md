@@ -62,7 +62,7 @@ onto the device or optionally provides a Uniform Resource Identifier (URI) to ac
 ### The Support RIM
 
 A Support RIM contains assertions about the state or configuration of the platform to which 
-the RIM applies. There are two types of support RIMs, but the only one that HIRS currently 
+the RIM applies. There are two types of Support RIMs, but the only one that HIRS currently 
 uses is the TCG Event Log Assertion Support RIM.
 
 ### TCG Event Log Assertion Support RIM 

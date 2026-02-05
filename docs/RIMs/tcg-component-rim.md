@@ -11,7 +11,7 @@ A Component Reference Integrity Manifest[^1], or *Component RIM*, as defined by 
 The TCG Component RIM Binding specification[^2] defines two formats/encoding for Component RIMs: SWID (XML) and [CoSWID](coswid.md) (CBOR). The 
 attributes defined in the binding specification closely mimic those defined by the [TCG PC Client RIM](tcg-pc-client-rim.md) specification.
 
-It also provides extensions which support attestation of the DMTF’s Security Protocols and Data Model Specification[^3] (SPDM).
+It also provides extensions which support attestation of the DMTF's Security Protocols and Data Model (SPDM) specification[^3].
 
 It is further envisioned that this specification can support devices adhering to the TCG DICE[^4] set of specifications which support devices that do not contain a Trusted Platform Module (TPM). DICE also contains definitions for [CoRIMs](corim.md), so ether format may present in the future. 
 
