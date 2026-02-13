@@ -7,7 +7,7 @@ the Apache 2.0 license.
 The following dependencies are also licensed under Apache 2.0: JCommander
 
 This project also bundles HIRS (https://github.com/nsacyber/HIRS), also licensed under Apache 2.0. The NOTICE file for 
-HIRS can be located at the /HIRS path from the RIM-Tool source code.
+HIRS can be located at the /hirs path from the RIM-Tool source code.
 
                                Apache License
                            Version 2.0, January 2004
