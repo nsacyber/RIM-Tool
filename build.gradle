@@ -1,70 +1,66 @@
 import com.github.spotbugs.snom.SpotBugsTask
+import com.github.spotbugs.snom.Effort
+import com.github.spotbugs.snom.Confidence
 import java.util.concurrent.TimeUnit
 
 plugins {
     id 'java'
-    id 'checkstyle'
-    id 'com.github.spotbugs' version '6.0.13'
-    id 'com.netflix.nebula.ospackage' version '11.10.0'
+    id 'com.github.spotbugs' version '6.4.8'
+    id 'com.netflix.nebula.ospackage' version '12.2.0'
     id 'org.owasp.dependencycheck' version '12.1.9'
 }
 
-subprojects {
+apply plugin: "checkstyle"
+apply plugin: "com.github.spotbugs"
 
-    apply plugin: "checkstyle"
-    apply plugin: "com.github.spotbugs"
-
-    checkstyle {
-        toolVersion = '10.20.0'
-        configFile file("${rootDir}/config/checkstyle/checkstyle.xml")
-    }
-
-    checkstyleMain {
-        source = 'src/main/java'
-    }
-    checkstyleTest {
-        source = 'src/test/java'
-    }
-
-    tasks.withType(Checkstyle).configureEach {
-        reports {
-            xml.required = false
-            html.required = true
-        }
-    }
-
-    spotbugs {
-        toolVersion = '4.8.3'
-        effort = 'max'
-        reportLevel = 'low'
-    }
-
-    tasks.withType(SpotBugsTask).configureEach {
-        reports {
-            xml.required = false
-            html.required = true
-        }
-    }
-
-    tasks.register("spotbugsMain", SpotBugsTask) {
-        classes.setFrom(files(layout.buildDirectory.dir("classes/java/main")))
-        source.setFrom(files("src/main/java"))
-        classpath.setFrom(files(layout.buildDirectory.dir("classes/java/main")))
-        reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/main.html"))
-    }
-
-    tasks.register("spotbugsTest", SpotBugsTask) {
-        classes.setFrom(files(layout.buildDirectory.dir("classes/java/test")))
-        source.setFrom(files("src/test/java"))
-        classpath.setFrom(files(
-                layout.buildDirectory.dir("classes/java/test"),
-                configurations.testRuntimeClasspath
-        ))
-        reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/test.html"))
-    }
-
-    check.dependsOn("spotbugsMain", "spotbugsTest")
+checkstyle {
+    toolVersion = '12.3.1'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+tasks.withType(Checkstyle).configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+
+spotbugs {
+    toolVersion = '4.9.8'
+    effort = Effort.valueOf('DEFAULT')
+    reportLevel = Confidence.valueOf('DEFAULT')
+}
+
+tasks.withType(SpotBugsTask).configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+
+tasks.named("spotbugsMain") {
+    dependsOn tasks.named('classes')
+    classDirs.setFrom(files(layout.buildDirectory.dir("classes/java/main")))
+    sourceDirs.setFrom(files("src/main/java"))
+    reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/main.html"))
+}
+
+tasks.named("spotbugsTest") {
+    dependsOn tasks.named('testClasses')
+    classDirs.setFrom(files(layout.buildDirectory.dir("classes/java/test")))
+    sourceDirs.setFrom(files("src/test/java"))
+    auxClassPaths.setFrom(configurations.testRuntimeClasspath)
+    reports.html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/test.html"))
+}
+
+check.dependsOn("spotbugsMain", "spotbugsTest")
 
 repositories {
     mavenCentral()
@@ -91,8 +87,6 @@ dependencies {
     implementation 'org.hirs:HIRS_Utils'
 }
 
-
-
 // Dependency resolutions
 configurations.configureEach {
     exclude group: 'commons-logging', module: 'commons-logging'
@@ -101,9 +95,25 @@ configurations.configureEach {
         if (details.requested.group == 'org.apache.logging.log4j') {
             details.useVersion '2.25.3' // Force upgraded log4j version
         }
+        if (details.requested.group == 'org.apache.commons' &&
+                details.requested.name == 'commons-lang3') {
+            details.useVersion '3.20.0'  // Force upgraded commons-lang3 version
+        }
         if (details.requested.group == 'org.apache.httpcomponents' &&
                 details.requested.name == 'httpclient') {
             details.useVersion '4.5.14'  // Force upgraded httpclient version
+        }
+        if (details.requested.group == 'org.assertj' &&
+                details.requested.name == 'assertj-core') {
+            details.useVersion '3.27.7'  // Force upgraded assertj-core version
+        }
+        if (details.requested.group == 'io.airlift' &&
+                details.requested.name == 'aircompressor') {
+            details.useVersion '3.5'  // Force upgraded aircompressor version
+        }
+        if (details.requested.group == 'org.bouncycastle' &&
+                details.requested.name == 'bcprov-jdk15on') {
+            details.useVersion '1.83'  // Force upgraded bcprov-jdk15on version
         }
     }
 }
