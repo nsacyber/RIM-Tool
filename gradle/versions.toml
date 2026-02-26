@@ -1,10 +1,10 @@
 [versions]
 bouncyCastleVersion = "1.83"
-jcommanderVersion = "2.0"
+jcommanderVersion = "3.0"
 lombokVersion = "1.18.42"
 
 #test dependencies versions
-jupiterVersion = "6.0.2"
+jupiterVersion = "6.0.3"
 
 [libraries]
 bouncycastle = { module = "org.bouncycastle:bcmail-jdk18on", version.ref = "bouncyCastleVersion" }

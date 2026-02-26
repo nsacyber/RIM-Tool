@@ -7,14 +7,14 @@ plugins {
     id 'java'
     id 'com.github.spotbugs' version '6.4.8'
     id 'com.netflix.nebula.ospackage' version '12.2.0'
-    id 'org.owasp.dependencycheck' version '12.1.9'
+    id 'org.owasp.dependencycheck' version '12.2.0'
 }
 
 apply plugin: "checkstyle"
 apply plugin: "com.github.spotbugs"
 
 checkstyle {
-    toolVersion = '12.3.1'
+    toolVersion = '13.2.0'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
@@ -107,14 +107,10 @@ configurations.configureEach {
                 details.requested.name == 'assertj-core') {
             details.useVersion '3.27.7'  // Force upgraded assertj-core version
         }
-        if (details.requested.group == 'io.airlift' &&
-                details.requested.name == 'aircompressor') {
-            details.useVersion '3.5'  // Force upgraded aircompressor version
-        }
-        if (details.requested.group == 'org.bouncycastle' &&
-                details.requested.name == 'bcprov-jdk15on') {
-            details.useVersion '1.83'  // Force upgraded bcprov-jdk15on version
-        }
+    }
+    resolutionStrategy.dependencySubstitution {
+        substitute module('io.airlift:aircompressor') using module('io.airlift:aircompressor-v3:3.5')
+        substitute module('org.bouncycastle:bcprov-jdk15on') using module('org.bouncycastle:bcprov-jdk18on:1.83')
     }
 }
 
@@ -168,11 +164,9 @@ def buildTime = { ->
 
 def gitHash = { ->
     def stdout = new ByteArrayOutputStream()
-    exec {
+    return providers.exec {
         commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
+    }.standardOutput.asText.get().trim()
 }
 
 def projectVersion = rootProject.file('VERSION').text.trim()
