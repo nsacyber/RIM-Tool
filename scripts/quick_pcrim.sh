@@ -62,42 +62,31 @@ check_error () {
 }
 
 help () {
-  echo "  Create a quick test for a PC Client Rim Bundle based upon your local device"
-  echo "  Syntax: sh aca_setup.sh [-h|--help|-l |--rimel]"
+  echo "  Create a quick PC Client Rim Bundle based upon your local device"
+  echo "  Syntax: sh quick_pcrim.sh [-h|--help|-l |--rimel]"
   echo "  options:"
+  echo "     -h  | --help   Print this help"
   echo "     -l  | --rimel  Optional path to the PC Client support RIM file"
   echo "     -v  | --verbose  Verbose output"
-  echo "     -h  | --help   Print this help"
   echo
 }
-
-# Many files and function used require admin access, so check and exit if not provided
-check_admin
-# Make sure RIM Tool and openssl are installed 
-check_prereq
-# Get require data for specific device (requires admin)
-OEM="$(cat /sys/devices/virtual/dmi/id/sys_vendor)";
-OEM_NO_SPACES=$(cat /sys/devices/virtual/dmi/id/sys_vendor| tr -d '[:space:]');
-MODEL="$(cat /sys/devices/virtual/dmi/id/product_name)";
-MODEL_NO_SPACES=$(cat /sys/devices/virtual/dmi/id/product_name| tr -d '[:space:]');
-OEM_URL=$OEM_NO_SPACES.com
-SUPPORT_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.rimel
-BASE_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.swidtag
-
-mkdir -p ${DATA_OUT_DIR}
-chmod 777 ${DATA_OUT_DIR}
 
 ## Process parameters
 # Process parameters Argument handling 
 POSITIONAL_ARGS=()
-ORIGINAL_ARGS=("$@")
+#ORIGINAL_ARGS=("$@")
 while [[ $# -gt 0 ]]; do
   case $1 in
     -l|--rimel)
       USE_RIMEL_FILE=true
-      RIMEL_PATH=$@
       shift # past argument
-      shift # past parameter
+      RIMEL_PATH=$@
+      if [ -z ${RIMEL_PATH} ]; then
+          echo "Error: -l requires a file path";
+          exit 1;
+       else
+          shift # past parameter
+       fi
       ;;
     -v|--verbose)
       VERBOSE=true
@@ -121,21 +110,42 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Many files and function used require admin access, so check and exit if not provided
+check_admin
+# Make sure RIM Tool and openssl are installed 
+check_prereq
+# Get require data for specific device (requires admin)
+OEM="$(cat /sys/devices/virtual/dmi/id/sys_vendor)";
+OEM_NO_SPACES=$(cat /sys/devices/virtual/dmi/id/sys_vendor| tr -d '[:space:]');
+MODEL="$(cat /sys/devices/virtual/dmi/id/product_name)";
+MODEL_NO_SPACES=$(cat /sys/devices/virtual/dmi/id/product_name| tr -d '[:space:]');
+OEM_URL=$OEM_NO_SPACES.com
+SUPPORT_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.rimel
+BASE_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.swidtag
+
+mkdir -p ${DATA_OUT_DIR}
+chmod 777 ${DATA_OUT_DIR}
+
+
 pushd ${DATA_OUT_DIR} > /dev/null
 # Remove existing RIM file if they exist
 rm -f ${BASE_RIM}
 rm -f ${SUPPORT_RIM}
 
 # Step 1 Obtain the Support RIM file...
-if [ -z "${USE_SM_FILE}" ]; then
+if [ -z "${USE_RIMEL_FILE}" ]; then
   echo "Using ${DEFAULT_SRIM} as the Support RIM file..."
   cp ${DEFAULT_SRIM} ${DATA_OUT_DIR}/${SUPPORT_RIM}
-  chmod 777 ${DATA_OUT_DIR}/${SRIM_FILE_NAME}
   else
+    if [ ! -f ${RIMEL_PATH} ]; then
+      echo "Error: file ${RIMEL_PATH} for use with -l parameter does  not exist"
+      exit 1;
+    fi
     echo "Using provided support RIM ${RIMEL_PATH} as the Support RIM file..."
     echo "Storing ${RIMEL_PATH} as ${SUPPORT_RIM} for use as the Support RIM file..."
     cp ${RIMEL_PATH} ${DATA_OUT_DIR}/${SUPPORT_RIM}
 fi
+chmod 777 ${DATA_OUT_DIR}/${SUPPORT_RIM}
 
 # Step 2: Obtain and modify a config file using OS provided parameters
 cp  ${ORIG_CONFIG_FILE} ${DATA_OUT_DIR}/${RIM_CONF}
