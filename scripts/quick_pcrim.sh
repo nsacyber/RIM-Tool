@@ -190,8 +190,8 @@ chmod 777 ${PKI_ROOT}.key ${PKI_ROOT}.pem
 # Step 4 create the new PC Client Base RIM file
 echo "Creating new Base RIM ..... "
 
-echo "rim create -r pcrim -c ${RIM_CONF} -k  ${RIM_SIGNER}.key -p ${RIM_SIGNER}.pem -l ${SUPPORT_RIM} -o ${BASE_RIM}"
-${RIM_EXE} create -r pcrim -c ${RIM_CONF} -k  ${RIM_SIGNER}.key -p ${RIM_SIGNER}.pem  -l ${SUPPORT_RIM} -o ${BASE_RIM}
+echo "rim create -r pcrim -c ${RIM_CONF} -e -k ${RIM_SIGNER}.key -p ${RIM_SIGNER}.pem -l ${SUPPORT_RIM} -o ${BASE_RIM}"
+${RIM_EXE} create -r pcrim -c ${RIM_CONF} -e -k ${RIM_SIGNER}.key -p ${RIM_SIGNER}.pem -l ${SUPPORT_RIM} -o ${BASE_RIM}
 check_error $? "Generating Base RIM File ${BASE_RIM}"
 
 if ${VERBOSE}; then cat ${BASE_RIM}; fi;
