@@ -21,6 +21,8 @@ public class CommandDefinitions {
     public static final String ARG_DETACHED_SHORT = "-d";
     public static final String ARG_EMBEDCERT = "--embed-cert";
     public static final String ARG_EMBEDCERT_SHORT = "-e";
+    public static final String ARG_EXTRACT_TO_BE_SIGNED = "--extract";
+    public static final String ARG_EXTRACT_TO_BE_SIGNED_SHORT = "-x";
     public static final String ARG_HELP = "--help";
     public static final String ARG_HELP_SHORT = "-h";
     public static final String ARG_IGNOREVALIDATORS = "--ignore-validators";
@@ -57,6 +59,8 @@ public class CommandDefinitions {
     public static final String PARAM_DESCR_EMBEDCERT =
             "For DSIG: the provided certificate is embedded into the signed swidtag; for COSE: the "
                     + "provided certificate and the thumbprint are embedded into protected header.";
+    public static final String PARA_DESCR_EXTRACT = "For PCRIM, print the base RIM contents to a "
+            + "separate file without the XML signature block.";
     public static final String PARAM_DESCR_HELP = "Print this help text.";
     public static final String PARAM_DESCR_IGNOREVALIDATORS =
             "Ignores the validator checks for testing purposes.";

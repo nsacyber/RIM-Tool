@@ -22,6 +22,11 @@ public class CommandVerify {
             help = true,
             description = CommandDefinitions.PARAM_DESCR_HELP)
     private boolean help;
+    @Parameter(names = {CommandDefinitions.ARG_EXTRACT_TO_BE_SIGNED_SHORT,
+            CommandDefinitions.ARG_EXTRACT_TO_BE_SIGNED},
+            help = true,
+            description = CommandDefinitions.PARA_DESCR_EXTRACT)
+    private boolean extract = false;
 
     // input files
     @Parameter(names = {CommandDefinitions.ARG_IN_SHORT, CommandDefinitions.ARG_IN},

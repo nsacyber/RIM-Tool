@@ -132,7 +132,7 @@ final class Main {
             case CommandDefinitions.CMD_VERIFY:
                 verify(verifyCom.getRimType(), verifyCom.getInFile(), verifyCom.getRimEventLog(),
                         verifyCom.getPublicKey(), verifyCom.getPublicCertificate(), verifyCom.getTruststore(),
-                        verifyCom.getDetachedSignature(), verifyCom.isEmbedded());
+                        verifyCom.getDetachedSignature(), verifyCom.isEmbedded(), verifyCom.isExtract());
                 break;
             case CommandDefinitions.CMD_PRINT:
                 print(printCom.getRimType(), printCom.getInFile());
@@ -480,7 +480,7 @@ final class Main {
      */
     private static void verify(final String rimType, final String inFile, final String supportRim,
                                final String publicKeyFile, final String certPath, final String trustPath,
-                               final String detachedFile, final boolean embedded) {
+                               final String detachedFile, final boolean embedded, final boolean extract) {
         // Get Cert used for cert verification (need cert ID for signature encoding)
         X509Certificate cert = null;
         boolean verified = false;
@@ -505,6 +505,9 @@ final class Main {
         try {
             if (sigType.compareTo("xmlDsig") == 0) {
                 PcClientRim pcRim = new PcClientRim();
+                if (extract) {
+                    pcRim.extractToBeSigned(inFile);
+                }
                 verified = pcRim.validate(inFile, certPath, supportRim, trustPath);
             } else if (sigType.compareTo("cose") == 0) {
                 // Set up the crypto device used for signing
