@@ -51,6 +51,19 @@ echo "CoRim TEST 6: Verify a signed CoRIM with an embedded cert"
 eval $rim verify -r corim_comid --in $dataDir/tmp/corim-test-embedded-signed1.cose -e >>/dev/null
 rim_expected_pass_status $? "CoRim TEST 6: CoRim verify (embedded)"
 
+# creating a signed CoRIM with CoMID
+echo "CoRim TEST 7: Create an signed CoRIM (with CoMID) from an input configuration file"
+eval $rim create -r corim_comid -c $dataDir/corim/corim_1.json --out \
+  $dataDir/tmp/corim-test-signed2.cbor -p $dataDir/certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem -k \
+  $dataDir/keys/COMP_OEM1_rim_signer_ecc_512_sha384.key >>/dev/null
+rim_expected_pass_status $? "CoRim TEST 7: CoRim create with CoMID (signed)"
+
+# verify signed CoRIM
+echo "CoRim TEST 8: Verify a signed CoRIM"
+eval $rim verify -r corim_comid --in $dataDir/tmp/corim-test-signed2.cbor \
+  -p $dataDir/certs/COMP_OEM1_rim_signer_ecc_512_sha384.pem >>/dev/null
+rim_expected_pass_status $? "CoRim TEST 8: CoRim verify (signed)"
+
 # TODO: Corim with Coswids
 # TODO: Corim with CoTLs
 
