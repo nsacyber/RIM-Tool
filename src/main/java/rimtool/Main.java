@@ -505,8 +505,14 @@ final class Main {
         try {
             if (sigType.compareTo("xmlDsig") == 0) {
                 PcClientRim pcRim = new PcClientRim();
-                verified = pcRim.validate(inFile, certPath, supportRim, trustPath);
-            } else if (sigType.compareTo("cose") == 0) {
+                if (!certPath.isEmpty())
+                    verified = pcRim.validate(inFile, certPath, publicKeyFile, supportRim, trustPath);
+                else if (!publicKeyFile.isEmpty())
+                    verified = pcRim.validate(inFile, certPath, publicKeyFile, supportRim, trustPath);
+                else
+                    System.out.println("Error: verify requires a Certificate or public key for validate");
+            }
+             else if (sigType.compareTo("cose") == 0) {
                 // Set up the crypto device used for signing
                 CryptoEngine cryptoSigner = new DefaultCrypto();
                 if (!certPath.isEmpty()) {
@@ -552,7 +558,7 @@ final class Main {
                 System.out.println("Error: Verify for RIM Type of " + rimType + " is not supported.");
             }
         } catch (IOException | CertificateException | RuntimeException e) {
-            System.out.println("Error processing Cose Signature on " + inFile + ": ");
+            System.out.println("Error processing Signature on " + inFile + ": ");
             System.out.println(e.getMessage());
             System.exit(1);
         } catch (Exception e) {
