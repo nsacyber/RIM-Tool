@@ -4,7 +4,7 @@ RIM-Tool License
 This file contains all the licenses for the dependencies used to create the RIM-Tool project. RIM-Tool is licensed under 
 the Apache 2.0 license.
 
-The following dependencies are also licensed under Apache 2.0: JCommander
+The following dependencies are also licensed under Apache 2.0: JCommander, Authlete
 
 This project also bundles HIRS (https://github.com/nsacyber/HIRS), also licensed under Apache 2.0. The NOTICE file for 
 HIRS can be located at the /hirs path from the RIM-Tool source code.
