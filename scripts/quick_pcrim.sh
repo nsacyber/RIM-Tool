@@ -29,7 +29,6 @@ RIM_SIGNER_DN="/C=US/ST=MD/O=example.com/CN=Test_PC_RIM_SIGNER"
 RIM_SIGNER="RIM_Test_Signer"
 RIM_SIGNER_CERT="BaseRIMTestCA.example.com.pem"
 SIG_ALG="rsa:2048"
-DAYS_VALID="3652"
 SUBJECT_DN="/C=US/O=example.com/OU=PC_RIM_Test"
 RIM_KEY="key.pem"
 
