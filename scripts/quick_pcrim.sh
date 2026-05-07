@@ -15,7 +15,6 @@ TPM_EVENT_LOG="binary_bios_measurements";
 DEFAULT_SRIM="/sys/kernel/security/tpm0/$TPM_EVENT_LOG"
 RIM_CONF="rim_fields.json"
 ORIG_CONFIG_FILE="/opt/rimtool/data/pcrim/rim_fields.json"
-USE_RM_FILE=NO
 RIM_TAG=$(uuidgen)
 RIM_EXE="/usr/local/bin/rim"
 VERBOSE=false
@@ -98,7 +97,7 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       ;;
     -*|--*)
-      echo "aca_setup.sh: Unknown option $1"
+      echo "quick_pcrim.sh: Unknown option $1"
       help
       exit 1
       ;;
