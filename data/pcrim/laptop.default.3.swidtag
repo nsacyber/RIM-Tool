@@ -1,44 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en">
-  <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
-  <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
-  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA"/>
-  <ns2:Payload>
-    <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="" xsi:type="ns2:Directory">
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="pcrim/TpmLog.bin" size="0" xsi:type="ns2:File"/>
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="pcrim/laptop.default.1.rimel" size="0" xsi:type="ns2:File"/>
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="a1704e9cd5727c5429d16bc2829e2890aa358c59b4f3d2e191c3eaa751520ce8" name="pcrim/laptop_varOsInstall_oem.1.rimel" size="0" xsi:type="ns2:File"/>
-    </ns2:Directory>
-  </ns2:Payload>
-  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
-    <SignedInfo>
-      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-      <Reference URI="">
-        <Transforms>
-          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-        </Transforms>
-        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <DigestValue>0J/p2s4Uz/iOPMYYMi3PtzP211b+sSN6fwhbyrFXaiU=</DigestValue>
-      </Reference>
-    </SignedInfo>
-    <SignatureValue>D1j79SHCi+rR8WPqrSW5nXkB0cQcRJEBK6dTJ4bI1QABDnAUtzF3YGV5Jsak0S6YRfyDwHMs0c2g&#13;
-V7RWTMUVzKwPMRMffHWrI/THQfZvkmzISwAOxoPdk/z36Dkf0RYeLHfDl1wOBEVOSHAZSaJ3eUa9&#13;
-crAn/penV0MLJdv5o7WEWAuFuLh83788YPmLIZt+Ujc9fZhA12p0JjlQ2s6uiz3qMspt2wKGIk3g&#13;
-nCiRrio829CADlenDNOp3x8QbE0/OwWSBS3OyfLSFpbrbAy8y9dnt4LrQDs+uyMFpOicc82SzOoh&#13;
-icGeizQbd3+oqExLzkZCQSDJy2K5loZ0TW6pdQ==</SignatureValue>
-    <KeyInfo>
-      <KeyValue>
-        <RSAKeyValue>
-          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="false" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="1" version="0.1" versionScheme="multipartnumeric" xml:lang="en"><ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/><ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/><ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA"/><ns2:Payload><ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" location="" name="" xsi:type="ns2:Directory"><ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="TpmLog.bin" size="0" xsi:type="ns2:File"/><ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="bc120b2d8752bc6eb228b5b433825d766183985cf02d7ab678210901a9730932" name="laptop.default.1.rimel" size="0" xsi:type="ns2:File"/><ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="a1704e9cd5727c5429d16bc2829e2890aa358c59b4f3d2e191c3eaa751520ce8" name="laptop_varOsInstall_oem.1.rimel" size="0" xsi:type="ns2:File"/></ns2:Directory></ns2:Payload><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>cVeAvbtNA6f2DMABwgxv6zqHuIf3e3TqEfUXogi+S8E=</DigestValue></Reference></SignedInfo><SignatureValue>IEVq8c3LyvyDEWnobWvlgxYpnkETA34v4vIRR5AgxPl5rkv6Kyv58taeMwHB9Fy6inGjUmlpHo6o&#13;
+wgMsKP9+T0qRhRXdpsZ/d/WsEBHyexG78OCVUeQ+xAXZXZCXVu+uBmG5j4u65ZjkQmitSUaKhGOp&#13;
+ODmPhoy4Ud4b1ybqZLbxxvDDO8DbpqKGKkzLaA3Ia56MiIFdSb1JVkoTx62SMkiiU2xmHdRC4kl9&#13;
+lBcdWkLSo9qPl5WKX14hb2SnuMkLIL65BHXNbkcHw7P7m0DA/9gAyM75J+riS42QnJt/j7jRJjiZ&#13;
+ipmByL49mEpb8DZMPeISbNOja0Bm1V2DUSPb6g==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
 xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9&#13;
 dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q&#13;
 otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW&#13;
-jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus>
-          <Exponent>AQAB</Exponent>
-        </RSAKeyValue>
-      </KeyValue>
-      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
-    </KeyInfo>
-  </Signature>
-</ns2:SoftwareIdentity>
+jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName></KeyInfo></Signature></ns2:SoftwareIdentity>
