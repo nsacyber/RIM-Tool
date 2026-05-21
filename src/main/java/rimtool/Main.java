@@ -13,6 +13,7 @@ import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -415,6 +416,7 @@ final class Main {
         X509Certificate cert = null;
         byte[] signedRim = null;
         byte[] kid = null;
+        byte[] toBeSigned = null;
         boolean useUnprotectdKid = false;
         //File payloadFile = new File(inFile);
         DefaultCrypto cryptoSigner = new DefaultCrypto();
@@ -443,8 +445,12 @@ final class Main {
                 kid = cryptoSigner.getKid().getBytes(StandardCharsets.UTF_8);
             }
 
-            byte[] toBeSigned = coseSign.createToBeSigned(alg, kid,
-                    payloadData, cert, useUnprotectdKid, embedded, rimType);
+            if (Objects.equals(rimType, GenericRim.RIMTYPE_CORIM_COMID)) {
+                toBeSigned = coseSign.createToBeSigned(payloadData, CoRimBuilder.createProtectedCorimHeader(alg, Objects.requireNonNull(cert), embedded));
+            } else {
+                toBeSigned = coseSign.createToBeSigned(alg, kid,
+                        payloadData, cert, useUnprotectdKid, embedded, rimType);
+            }
             byte[] signature = cryptoSigner.sign(toBeSigned);
 
             coseSign.addSignature(signature);

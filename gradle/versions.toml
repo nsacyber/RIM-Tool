@@ -1,4 +1,5 @@
 [versions]
+authleteCborVersion = "1.21"
 bouncyCastleVersion = "1.83"
 jcommanderVersion = "3.0"
 lombokVersion = "1.18.42"
@@ -7,6 +8,7 @@ lombokVersion = "1.18.42"
 jupiterVersion = "6.0.3"
 
 [libraries]
+authlete-cbor = { module = "com.authlete:cbor", version.ref = "authleteCborVersion" }
 bouncycastle = { module = "org.bouncycastle:bcmail-jdk18on", version.ref = "bouncyCastleVersion" }
 jcommander = { module = "org.jcommander:jcommander", version.ref = "jcommanderVersion" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombokVersion" }
