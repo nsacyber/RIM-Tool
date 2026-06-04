@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import hirs.utils.signature.cose.CoseAlgorithm;
+import hirs.utils.rim.ReferenceManifestValidator;
 import hirs.utils.rim.unsignedRim.GenericRim;
 import hirs.utils.rim.unsignedRim.cbor.ietfCorim.CoRimBuilder;
 import hirs.utils.rim.unsignedRim.xml.pcclientrim.PcClientRim;
@@ -41,6 +42,8 @@ import rimtool.commands.CommandPrint;
 import rimtool.commands.CommandSign;
 import rimtool.commands.CommandVerify;
 import hirs.utils.HexUtils;
+import hirs.utils.swid.SwidTagGateway;
+
 
 /**
  * Command-line application for processing TCG Event Logs.
@@ -229,7 +232,11 @@ final class Main {
                     print += new CoseParser(data).toString("pretty"); break;
                 //RIM types
                 case GenericRim.RIMTYPE_PCRIM:
-                    print = new String(data, StandardCharsets.UTF_8); break;
+                    print = "";
+                    ReferenceManifestValidator validator = new ReferenceManifestValidator();
+                    validator.setRim(data);
+                    SwidTagGateway.writeSwidTagFile(validator.getRim(), "", true);
+                    break;
                 case GenericRim.RIMTYPE_COSWID:
                     print += new CoswidParser(data).toString("pretty"); break;
                 case GenericRim.RIMTYPE_COMP_SWID:

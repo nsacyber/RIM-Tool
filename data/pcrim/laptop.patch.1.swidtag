@@ -1,42 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="true" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="2" version="0.2" xml:lang="en">
-  <ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/>
-  <ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/>
-  <ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA" rim:rimLinkHash="0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd51cc0da"/>
-  <ns2:Payload>
-    <ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Test" xsi:type="ns2:Directory">
-      <ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="pcrim/TpmLog.bin" size="7459" xsi:type="ns2:File"/>
-    </ns2:Directory>
-  </ns2:Payload>
-  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
-    <SignedInfo>
-      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-      <Reference URI="">
-        <Transforms>
-          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-        </Transforms>
-        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <DigestValue>G45esRy6aRiXCn8l1PAhhKKHoQbjEirask+Kl2fOv0M=</DigestValue>
-      </Reference>
-    </SignedInfo>
-    <SignatureValue>IBptb0dyt0KRYzXuLwbFfevvRtlZesHmQhvZj+J6NlYZqC9TUJuqnrT8yBbWAW0U+hzWo+rsDrlG&#13;
-tslb1xf04/YJurCqh24eUk4fr//pSfpZsdDj84mL8j0UYMxlIyqYb3zFAY2zaMDxFTtRt/a5K4P+&#13;
-Jk6rluDvk6rCgOoRxPHTw2uhHsKErCKxfRpRa2Soh1KI9Fl7sHr9nlzj+/c5U4YWfLjK21N+FsT+&#13;
-8aAYlWX7aZKAbMcjeJFSHbYHQ403CrEQLUYvOFvusBkumGstIHQWYawUCHipB/Nl3E3h9Yd78QyS&#13;
-xLTHyVKCRparIZeP0OuM9DIuRQQB5YGpr3as+g==</SignatureValue>
-    <KeyInfo>
-      <KeyValue>
-        <RSAKeyValue>
-          <Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ns2:SoftwareIdentity xmlns:ns2="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" corpus="false" name="TCG RIM example" patch="true" supplemental="false" tagId="ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c" tagVersion="2" version="0.2" xml:lang="en"><ns2:Entity name="HIRS" regid="www.example.com" role="softwareCreator tagCreator"/><ns2:Link href="https://Example.com/support/ProductA/firmware/installfiles" rel="installationmedia"/><ns2:Meta xmlns:rim="https://trustedcomputinggroup.org/wp-content/uploads/TCG_RIM_Model" rim:bindingSpec="IOT RIM" rim:bindingSpecVersion="1.2" rim:platformManufacturerId="00201234" rim:platformManufacturerStr="Example.com" rim:platformModel="ProductA" rim:rimLinkHash="0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd51cc0da"/><ns2:Payload><ns2:Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" location="" name="Test" xsi:type="ns2:Directory"><ns2:File xmlns:SHA256="http://www.w3.org/2001/04/xmlenc#sha256" SHA256:hash="4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848" name="TpmLog.bin" size="7459" xsi:type="ns2:File"/></ns2:Directory></ns2:Payload><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>nim+aYGMZn/jWxfYylV+rPRztbU+bb9ykSiZQvAaEUg=</DigestValue></Reference></SignedInfo><SignatureValue>FwO7B5XihJ2L98Pes0I1Gd3e4K5KLyDSRPikannTIbVZ1R2loMYrGu0zAHh0rslMmgKMu/Vgat2K&#13;
+9qPzoFS4ffDaHXDaB6Gqs+RCxGiv4k7VlQPJGjUOo8vPwyzAEGJ/SqKdqA4Fl7ElNkaGHSDlKdSh&#13;
+IleDRa1NKQTC0e1hnTDqnh7Bm3D4Y7fX+58Yg5jdHvSd8IeVPcatYUac1g/1hROWI+3NQGxxsCmx&#13;
+EaE3FebCqEmetW19FMYA5ZGZOSBQR7JVbdiAy5ydlb5QwGHRsLgB+cikIMAy0jQSMBMbLBE3xI7M&#13;
+iOw5bQXoT5bR7I2yjL4ydDJ8WWLju/HD9Nq0WA==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>p3WVYaRJG7EABjbAdqDYZXFSTV1nHY9Ol9A5+W8t5xwBXBryZCGWxERGr5AryKWPxd+qzjj+cFpx&#13;
 xkM6N18jEhQIx/CEZePEJqpluBO5w2wTEOe7hqtMatqgDDMeDRxUuIpP8LGP00vh1wyDFFew90d9&#13;
 dvT3bcLvFh3a3ap9bTm6aBqPup5CXpzrwIU2wZfgkDytYVBm+8bHkMaUrgpNyM+5BAg2zl/Fqw0q&#13;
 otjaGr7PzbH+urCvaGbKLMPoWkVLIgAE8Qw98HTfoYSFHC7VYQySrzIinaOBFSgViR72kHemH2lW&#13;
-jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus>
-          <Exponent>AQAB</Exponent>
-        </RSAKeyValue>
-      </KeyValue>
-      <KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName>
-    </KeyInfo>
-  </Signature>
-</ns2:SoftwareIdentity>
+jDQeHiY0VIoPik/jVVIpjWe6zzeZ2S66Q/LmjQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><KeyName>2fdeb8e7d030a2209daa01861a964fedecf2bcc1</KeyName></KeyInfo></Signature></ns2:SoftwareIdentity>
