@@ -446,7 +446,10 @@ final class Main {
             }
 
             if (Objects.equals(rimType, GenericRim.RIMTYPE_CORIM_COMID)) {
-                toBeSigned = coseSign.createToBeSigned(payloadData, CoRimBuilder.createProtectedCorimHeader(alg, Objects.requireNonNull(cert), embedded));
+                toBeSigned = coseSign.createToBeSigned(payloadData,
+                        CoRimBuilder.createProtectedCorimHeader(alg,
+                                Objects.requireNonNull(cert),
+                                embedded));
             } else {
                 toBeSigned = coseSign.createToBeSigned(alg, kid,
                         payloadData, cert, useUnprotectdKid, embedded, rimType);
@@ -518,7 +521,11 @@ final class Main {
         try {
             if (sigType.compareTo("xmlDsig") == 0) {
                 PcClientRim pcRim = new PcClientRim();
-                verified = pcRim.validate(inFile, certPath, supportRim, trustPath);
+                if (!publicKeyFile.isEmpty() && certPath.isEmpty() && trustPath.isEmpty()) {
+                    verified = pcRim.validate(inFile, publicKeyFile, supportRim);
+                } else {
+                    verified = pcRim.validate(inFile, certPath, supportRim, trustPath);
+                }
             } else if (sigType.compareTo("cose") == 0) {
                 // Set up the crypto device used for signing
                 CryptoEngine cryptoSigner = new DefaultCrypto();

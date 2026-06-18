@@ -50,7 +50,7 @@ public class CommandVerify {
 //                required = true,
             validateWith = ValidatorArgFile.class,
             description = CommandDefinitions.PARAM_DESCR_TRUSTSTORE)
-    private String truststore;
+    private String truststore = "";
     @Parameter(names = {CommandDefinitions.ARG_DETACHED_SHORT, CommandDefinitions.ARG_DETACHED},
             validateWith = ValidatorArgFile.class,
             description = CommandDefinitions.PARAM_DESCR_DETACHED)
