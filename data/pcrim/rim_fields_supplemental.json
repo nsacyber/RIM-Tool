@@ -24,18 +24,18 @@
 		"platformManufacturerStr": "Example.com",
 		"platformManufacturerId": "00201234",
 		"platformModel": "ProductA",
-		"bindingSpec": "IOT RIM",
-		"bindingSpecVersion": "1.2",
-		"rimLinkHash": "0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd51cc0da"
+		"bindingSpec": "PC Client RIM",
+		"bindingSpecVersion": "1.1",
+		"rimLinkHash": "0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd51cc0da",
+		"payloadType": "Indirect"
 	},
 	"Payload": {
 		"Directory": {
-			"supportRimFormat": "TCG_EventLog_Assertion",
 			"name": "Test",
 			"File": [ {
 				"version":"01",
 				"supportRimFormat": "TCG_EventLog_Assertion",
-				"payloadType": "Indirect",
+				"supportRimType": "Indirect",
 				"name": "TpmLog.bin",
 				"size": "7459",
 				"hash": "4479ca722623f8c47b703996ced3cbd981b06b1ae8a897db70137e0b7c546848"
