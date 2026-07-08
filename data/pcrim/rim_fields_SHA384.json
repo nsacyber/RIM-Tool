@@ -1,0 +1,45 @@
+{
+	"SoftwareIdentity": {
+		"name": "TCG RIM example",
+		"version": "0.1",
+		"tagId": "ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c",
+		"tagVersion": "1",
+		"patch": false
+	},
+	"Entity": {
+		"name": "HIRS",
+		"role": "softwareCreator,tagCreator",
+		"regid": "www.example.com"
+	},
+	"Link": {
+		"href": "https://Example.com/support/ProductA/firmware/installfiles",
+		"rel": "installationmedia"
+	},
+	"Meta": {
+		"colloquialVersion": "",
+		"edition": "",
+		"product": "",
+		"revision": "",
+		"platformManufacturerStr": "Example.com",
+		"platformManufacturerId": "00201234",
+		"platformModel": "ProductA",
+		"bindingSpec": "PC Client RIM",
+		"bindingSpecVersion": "1.1",
+		"payloadType": "Indirect"
+	},
+	"Payload": {
+		"Directory": {
+			"name": "Test",
+			"location": "data/pcrim/",
+			"File": [ {
+				"version":"01",
+				"supportRimFormat": "TCG_EventLog_Assertion",
+				"supportRimType": "Indirect",
+				"name": "TpmLog.bin",
+				"size": "7459",
+				"hash": "75850e7cc6631dcec8a44e5da48ddd1ef5b73ba4e2c386c0d34950fc9acb4acef4af66b3d761412ce24773906a10af62"
+			    }
+				]
+		}
+	}
+}
