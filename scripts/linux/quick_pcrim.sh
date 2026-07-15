@@ -151,6 +151,7 @@ cp  ${ORIG_CONFIG_FILE} ${DATA_OUT_DIR}/${RIM_CONF}
 sed -i "s/Example.com/$OEM/g" ${RIM_CONF};
 sed -i "s/ProductA/$MODEL/g" ${RIM_CONF};
 sed -i "s/ExampleUrl/$OEM_URL/g" ${RIM_CONF};
+sed -i "s/creator.product.version.rimel/$SUPPORT_RIM/g" ${RIM_CONF};
 # Update the tagid so the ACA will not reject the upload if a RIM with the same tag exists 
 jq --arg new_val "${RIM_TAG}" '.SoftwareIdentity.tagId = $new_val' "${RIM_CONF}" > temp.json && mv temp.json "${RIM_CONF}"
 chmod 777 ${RIM_CONF}

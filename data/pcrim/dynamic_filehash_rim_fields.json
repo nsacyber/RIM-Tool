@@ -29,13 +29,13 @@
 	},
 	"Payload": {
 		"Directory": {
-			"name": "Test",
-			"location": "data/pcrim/",
+			"name": "rim",
+			"location": "/boot/efi/EFI/tcg/manifest/",
 			"File": [ {
 				"version":"01",
 				"supportRimFormat": "TCG_EventLog_Assertion",
 				"supportRimType": "Indirect",
-				"name": "TpmLog.bin"
+				"name": "creator.product.version.rimel"
 			    }
 				]
 		}
