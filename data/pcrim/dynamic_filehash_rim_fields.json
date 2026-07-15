@@ -16,10 +16,6 @@
 		"rel": "installationmedia"
 	},
 	"Meta": {
-		"colloquialVersion": "",
-		"edition": "",
-		"product": "",
-		"revision": "",
 		"platformManufacturerStr": "Example.com",
 		"platformManufacturerId": "00201234",
 		"platformModel": "ProductA",
