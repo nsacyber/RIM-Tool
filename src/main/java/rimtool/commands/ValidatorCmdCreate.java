@@ -121,7 +121,7 @@ public class ValidatorCmdCreate implements IParametersValidator {
             Iterator itr = supportRims.iterator();
             while (itr.hasNext()) {
                 JsonObject supportRim = (JsonObject) itr.next();
-                String supportRimName = supportRim.getString(SwidTagConstants.NAME);
+                String supportRimName = supportRim.getString(SwidTagConstants.NAME, "");
                 if (supportRimName.contains(File.separator)) {
                     errorMessage += String.format("Support RIM %s has file separator "
                             + "characters in its name, please remove and retry", supportRimName);
