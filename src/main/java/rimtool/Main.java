@@ -284,7 +284,7 @@ final class Main {
                 switch (rimType) {
                     case GenericRim.RIMTYPE_PCRIM:
                         PcClientRim pcRim = new PcClientRim();
-                        pcRim.create(configFile, eventLog, certPath, keyFile, false, outFile);
+                        pcRim.create(configFile, eventLog, algorithm, certPath, keyFile, false, outFile);
                         break;
                     case GenericRim.RIMTYPE_COSWID:
                         CoswidConfig sconf = new CoswidConfig(configFile);
@@ -322,7 +322,7 @@ final class Main {
                 switch (rimType) {
                     case GenericRim.RIMTYPE_PCRIM:
                         PcClientRim pcRim = new PcClientRim();
-                        pcRim.create(configFile, eventLog, certPath, keyFile, false, outFile);
+                        pcRim.create(configFile, eventLog, algorithm, certPath, keyFile, false, outFile);
                         break;
                     case GenericRim.RIMTYPE_COSWID:
                         CoswidConfig sconf = new CoswidConfig(configFile);
