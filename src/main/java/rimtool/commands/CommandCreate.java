@@ -46,7 +46,7 @@ public class CommandCreate {
     private String publicCertificate = "";
     @Parameter(names = {CommandDefinitions.ARG_ALGORITHM_SHORT, CommandDefinitions.ARG_ALGORITHM},
             description = CommandDefinitions.PARAM_DESCR_ALGORITHM)
-    private String algorithm = "";
+    private String algorithm = "SHA256"; //Default to SHA256 if omitted
     @Parameter(names = {CommandDefinitions.ARG_DETACHED_SHORT, CommandDefinitions.ARG_DETACHED},
             //validateWith = ValidatorArgFile.class,
             description = CommandDefinitions.PARAM_DESCR_DETACHED)
