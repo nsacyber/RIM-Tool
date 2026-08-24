@@ -11,11 +11,11 @@ Can optionally sign as well as create. Please see the [Sign](sign.md) command pa
 
 === "Unsigned"
     ```shell
-    rim create -r <string> -a <file> -u -o <file> [-l <file>]
+    rim create -r <string> -c <file> -u -o <file> [-l <file>]
     ```
 === "Signed"
     ```shell
-    rim create -r <string> -a <file> -k <file> -p <file> -o <file> [-l <file>] [-al <string>] [-d] [-e] [-pk <file>] [-uk <file>]
+    rim create -r <string> -c <file> -k <file> -p <file> -o <file> [-l <file>] [-al <string>] [-d] [-e] [-pk <file>] [-uk <file>]
     ```
 
 ## Parameters
@@ -26,6 +26,7 @@ Can optionally sign as well as create. Please see the [Sign](sign.md) command pa
     | `-r`, `--rim-type`           | Specifies the [RIM type](../RIMs/index.md).                             | Yes         | String |
     | `-c`, `--config`             | Specifies the [configuration file](../configuration-files.md) for building the RIM.   | Yes    | File   |
     | `-l`, `--rimel`              | Support RIM (PC Client RIM only).                                       | No[^1]      | File   |
+    | `-a`, `--algorithm`          | The algorithm used[^3], SHA256 by default.                              | No[^1]      | String |
     | `-u`, `--unsigned`           | Specifies that the RIM is unsigned.                                     | Yes         |        |
     | `-o`, `--out`                | The path of the file to write the RIM to.                               | Yes         | File   |
 === "Signed"
@@ -36,14 +37,14 @@ Can optionally sign as well as create. Please see the [Sign](sign.md) command pa
     | `-l`, `--rimel`              | Support RIM (PC Client RIM only).                                       | No[^1]      | File   |
     | `-k`, `--private-key-file`   | The private key used to sign the Base RIM created by this tool.         | Yes         | File   |
     | `-p`, `--public-certificate` | The public key certificate to be used to verify the RIM.                | Yes[^2]     | File   |
-    | `-al`, `--algorithm`         | The algorithm used[^3]. By default, uses the certificate algorithm.     | No          | String |
+    | `-a`, `--algorithm`          | The algorithm used[^3], SHA256 by default.                              | No[^1]      | String |
     | `-d`, `--detached`           | Uses a detached signature file. By default, embeds the signature.       | No          | File   |
     | `-e`, `--embed-cert`         | Embeds a certificate, depending on output type.[^4]                     | No          |        |
     | `-pk`, `--protected-kid`     | A hexadecimal string that represents the key identifier to place in the COSE protected header.[^5]  | No          | String |
     | `-uk`, `--unprotected-kid`   | A hexadecimal string that represents the key identifier to place in the COSE unprotected header.[^5]| No          | String |
     | `-o`, `--out`                | The path of the file to write the RIM to.                               | Yes         | File   |
 
-[^1]: A Support RIM file is only used for a [TCG PC Client RIM :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-PC-Client-Reference-Integrity-Manifest-Specification-Version-1.1-Revision-11_pub.pdf). If this type is used, this option is required.
+[^1]: [TCG PC Client RIM :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-PC-Client-Reference-Integrity-Manifest-Specification-Version-1.1-Revision-11_pub.pdf] requires either a file hash declared in the JSON config file, or both a support RIM and a hash algorithm.
 [^2]: Some key files may include a certificate, in which case this option may not be needed.
 [^3]: Must be an [IANA-registered COSE algorithm :fontawesome-solid-external-link:](https://www.iana.org/assignments/cose/cose.xhtml).
 [^4]:
