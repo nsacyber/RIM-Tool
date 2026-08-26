@@ -17,7 +17,7 @@ mkdir -p ./tmp
 
 # Create and Verify Test patterns
 echo "PC Client RIM TEST 1: Create PC Client signed RIM test pattern using specified rimmel file"
-eval $rim create -r pcrim -l pcrim/laptop.default.1.rimel --out tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields.json >>/dev/null
+eval $rim create -r pcrim -l pcrim/TpmLog.bin --out tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields.json >>/dev/null
 rim_expected_pass_status $? "PC RIM TEST 1: PC RIM Create with proper support RIM name"
 
 echo "PC Client RIM TEST 2: Create PC Client signed RIM test pattern using rimmel file with file separator"
@@ -25,7 +25,7 @@ eval $rim create -r pcrim -l pcrim/laptop.default.1.rimel --out tmp/laptop.defau
 rim_expected_fail_status $? "PC RIM TEST 2: PC RIM Create with improper support RIM name"
 
 echo "PC Client RIM TEST 3: Verify PC Client signed RIM test pattern with correct support RIM override"
-eval $rim verify -r pcrim -l pcrim/ --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+eval $rim verify -r pcrim -l pcrim/ --in tmp/laptop.default.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  #>>/dev/null
 rim_expected_pass_status $? "PC RIM TEST 3: PC RIM Verify with -l pcrim/"
 
 echo "PC Client RIM TEST 4: Verify PC Client signed RIM test pattern with incorrect support RIM override"

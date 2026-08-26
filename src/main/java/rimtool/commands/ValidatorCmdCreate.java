@@ -5,6 +5,7 @@ import com.beust.jcommander.ParameterException;
 import hirs.utils.rim.unsignedRim.GenericRim;
 import hirs.utils.swid.SwidTagConstants;
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
@@ -114,17 +115,25 @@ public class ValidatorCmdCreate implements IParametersValidator {
         }
 
         if (configFileContents != null) {
-            List<JsonObject> supportRims = configFileContents.getJsonObject(SwidTagConstants.PAYLOAD)
-                    .getJsonObject(SwidTagConstants.DIRECTORY)
-                    .getJsonArray(SwidTagConstants.FILE)
-                    .getValuesAs(JsonObject.class);
-            Iterator itr = supportRims.iterator();
-            while (itr.hasNext()) {
-                JsonObject supportRim = (JsonObject) itr.next();
-                String supportRimName = supportRim.getString(SwidTagConstants.NAME, "");
-                if (supportRimName.contains(File.separator)) {
-                    errorMessage += String.format("Support RIM %s has file separator "
-                            + "characters in its name, please remove and retry", supportRimName);
+            JsonArray payloadFiles = null;
+            try {
+                payloadFiles = configFileContents.getJsonObject(SwidTagConstants.PAYLOAD)
+                        .getJsonObject(SwidTagConstants.DIRECTORY)
+                        .getJsonArray(SwidTagConstants.FILE);
+            } catch (ClassCastException e) {
+                errorMessage += String.format("Please verify that %s contains a File "
+                                + "whose value is an [array]", configFile);
+            }
+            if (payloadFiles != null) {
+                List<JsonObject> supportRims = payloadFiles.getValuesAs(JsonObject.class);
+                Iterator itr = supportRims.iterator();
+                while (itr.hasNext()) {
+                    JsonObject supportRim = (JsonObject) itr.next();
+                    String supportRimName = supportRim.getString(SwidTagConstants.NAME, "");
+                    if (supportRimName.contains(File.separator)) {
+                        errorMessage += String.format("Support RIM %s has file separator "
+                                + "characters in its name, please remove and retry", supportRimName);
+                    }
                 }
             }
         }
