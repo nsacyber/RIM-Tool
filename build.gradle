@@ -14,7 +14,7 @@ apply plugin: "checkstyle"
 apply plugin: "com.github.spotbugs"
 
 checkstyle {
-    toolVersion = '13.2.0'
+    toolVersion = '14.1.0'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
