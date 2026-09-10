@@ -19,5 +19,4 @@ dependencyResolutionManagement {
         mavenCentral() // Fallback to maven
         gradlePluginPortal()  // default gradle plugin repo 
     }
- }
 }
