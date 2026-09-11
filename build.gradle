@@ -62,9 +62,6 @@ tasks.named("spotbugsTest") {
 
 check.dependsOn("spotbugsMain", "spotbugsTest")
 
-repositories {
-    mavenCentral()
-}
 dependencyCheck {
     nvd {
         // Read API key from a system property 'nvd.apiKey'
