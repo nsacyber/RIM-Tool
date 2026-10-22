@@ -4,74 +4,67 @@ title: Getting Started
 
 # Getting Started
 
-To get started using the `RIM-Tool`, please follow the below instructions. The tool can be either installed from a package or built from source.
+This tutorial walks you through creating a test PC Client RIM bundle for a Linux device using the `quick_pcrim.sh` helper. The bundle can also be used with HIRS for testing firmware validation.
 
-## Installation
+The script captures a TPM event log, fills in the device's manufacturer and model, generates test signing certificates, and creates and verifies the bundle.
+
+## Before you start
+
+- [Install the RIM-Tool Linux package](setup.md#installation).
+- Have Bash and OpenSSL available.
+- Run on a Linux device with readable manufacturer/model information.
+
+The script requires root privileges to read device information and write its output under `/opt/rimtool/data/local/`.
+
+## Create the test bundle
+
+Run the following to create the test bundle:
+
+=== "Linux"
+    ```bash
+    sudo bash /opt/rimtool/scripts/linux/quick_pcrim.sh
+    ```
 
 !!! info
 
-    Currently, installation from a package is only supported on Linux.
+    If your installed package predates these instructions, use the updated helper from this repository's root instead: `sudo bash scripts/linux/quick_pcrim.sh`. The tool and sample data must still be installed.
 
-Packages for this tool can be found on the [GitHub release page :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool/releases). 
+To use an existing event log instead of capturing the current device's log, supply its absolute path:
 
-Only `.rpm` (Red Hat Enterpise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) packages are currently supported.
-
-### Linux
-
-To install from a package, download from the above link, then run the following *(replace the asterisk with the full name of the downloaded package)*:
-
-=== "RHEL 9/Rocky 9"
-    ``` shell
-    sudo dnf install rim-tool*.rpm
-    ```
-=== "Debian/Ubuntu"
-    ``` shell
-    sudo apt-get install rim-tool*.deb 
+=== "Linux"
+    ```bash
+    sudo bash /opt/rimtool/scripts/linux/quick_pcrim.sh -l /absolute/path/to/event-log.bin
     ```
 
-After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See [Commands](commands/index.md) for further details.
+The script still uses the current device's manufacturer and model. Use `--help` for options or `-v` for more output.
 
-## Building
-The `RIM-Tool` is written using Java, and requires JDK 17 to be installed.
+On success, verification reports a confirmed Support RIM hash and finishes with:
 
-The following sections also assume the `RIM-Tool` [source code :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool) has been cloned (using Git) to a local directory.
-
-!!! note
-    Please clone using `git clone --recursive` to initialize any submodules.
-
-Upon successful build, a `rim-tool-X.X.jar` file will be placed in either the `/build/libs/tools/` (Linux) or `\build\libs\tools\` (Windows) folders. This can 
-then be run using:
-``` shell
-java -jar <build directory>/rim-tool-X.X.jar
+```text
+Overall base RIM validation passed.
+Signature verified :-)
 ```
 
-### Linux
-To build this tool, navigate to the source directory and use the following command:
-``` shell
-./gradlew clean build
-```
+## Results
 
-### Windows
-Several options exist for building on Windows 11. In either case, first navigate to the source directory, then run the following:
-=== "Command Prompt"
-    ``` shell
-    gradlew.bat clean build
-    ```
-=== "PowerShell"
-    ``` powershell
-    ./gradlew clean build
-    ```
-!!! note
-    The PowerShell option requires Windows Subsystem for Linux (WSL) to be enabled.
+The script prints the generated filenames. Its output directory, `/opt/rimtool/data/local/`, contains:
 
-## Packaging
-To create a Linux installation package for the `RIM-Tool`, run the following command in the source directory:
-=== "RHEL 9/Rocky 9"
-    ``` shell
-    ./gradlew buildRpm
-    ```
-=== "Debian/Ubuntu"
-    ``` shell
-    ./gradlew buildDeb
-    ```
-The output package can be found under the `/build/distributions/` folder.
+| File | Purpose |
+|---|---|
+| `<manufacturer>.<model>.1.swidtag` | Signed Base RIM describing the reference data. |
+| `<manufacturer>.<model>.1.rimel` | Support RIM containing the copied event log. |
+| `rim_fields.json` | Configuration populated for the device. |
+| `RIM_Test_RSA_Root.pem` | Test root CA certificate. |
+| `RIM_Test_Signer.pem` | Test signer certificate embedded in the Base RIM. |
+
+!!! warning "Running Again"
+
+    The directory also contains private keys used to create the test certificates. Repeating the command replaces the bundle and configuration while reusing existing certificates and keys; save any earlier results you need first.
+
+## HIRS Support
+
+You can use the Base RIM, Support RIM, and test certificate chain with [HIRS :fontawesome-solid-external-link:](https://github.com/nsacyber/HIRS) firmware validation. Follow the HIRS documentation's [Getting Started :fontawesome-solid-external-link:](https://nsacyber.github.io/HIRS/started/) instructions to configure validation and provide the files.
+
+This bundle records the selected event log as a test baseline. Successful bundle verification checks its signature, certificate chain, and referenced file hash. Note that this remains a test, which does not establish device trustworthiness.
+
+For custom metadata or other RIM formats, see [configuration files](configuration-files.md) and the [`create` command](commands/create.md).

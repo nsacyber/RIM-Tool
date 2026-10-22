@@ -6,6 +6,8 @@ title: Print
 
 Print the contents of a RIM, CoRIM, or CoSWID tag to the command line.
 
+For a signed COSE object, use `-r cose` to inspect its signature envelope. To inspect a CoSWID payload, first extract it with [`get`](get.md), then use `-r coswid`. The `corim_comid` print mode also displays the COSE envelope.
+
 ## Usage
 
 ```shell
@@ -22,7 +24,7 @@ rim print -r <string> -i <file>
 ## Examples
 
 !!! example "Before Starting"
-    Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
+    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../setup.md#installation)):
     === "Linux"
         ```shell
         cd /opt/rimtool/data

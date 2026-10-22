@@ -9,8 +9,8 @@ testing of Reference Integrity Manifests[^1] (RIMs), including creation, printin
 
 [^1]: Defined in the Trusted Computing Group [specification :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-reference-integrity-manifest-rim-information-model/).
 
-Please see the [Getting Started](getting-started.md) page for setup and installation details, or the [Commands](commands/index.md) page 
-for the list of available commands.
+Follow [Getting Started](getting-started.md) to create a test PC Client RIM bundle with the Linux helper script.
+See [Setup](setup.md#installation) for installation instructions, or [Commands](commands/index.md) for command reference.
 
 !!! note
 
@@ -19,8 +19,8 @@ for the list of available commands.
 
 ## Compatibility
 
-RIMs produced by this tool are compatible with the [Host Integrity at Runtime and Startup :fontawesome-solid-external-link:](https://github.com/nsacyber/hirs) (HIRS) project. 
-Currently, HIRS only processes [TCG-defined PC Client RIMs](./RIMs/tcg-pc-client-rim.md), but future versions should be able to process all RIMs produced by this tool.
+The [Host Integrity at Runtime and Startup :fontawesome-solid-external-link:](https://github.com/nsacyber/hirs) (HIRS) project uses
+[TCG PC Client RIMs](./RIMs/tcg-pc-client-rim.md) for firmware validation. Support for other RIM formats depends on the HIRS version; consult its documentation before choosing a format for use with HIRS.
 
 ## About
 The source code can be found on [GitHub :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool).

@@ -23,7 +23,7 @@ at the minimum (48 PCRs minimum). PCR values are computed via a series of one-wa
 each measurement hash is appended to the current PCR value, and then the combination is hashed 
 and becomes the new PCR value (referred to as “extending the PCR”).
 
-![test](../images/background_pc-rim_TpmMeasurementsSecureBootChecks.JPG "Title")
+![Secure Boot checks and TPM measurements across UEFI boot phases](../images/background_pc-rim_TpmMeasurementsSecureBootChecks.JPG "Secure Boot checks and TPM measurements")
 **Figure 1.** The interaction of Secure Boot and TPM with UEFI boot phases
 <!-- Hide for now
 -->
@@ -45,8 +45,8 @@ is designated by the TCG as the “RIM Bundle”.
 
 ### The Base RIM
 
-The PC Client RIM defines the Base Rim as an 
-[ISO 197770-2 Software Identity :fontawesome-solid-external-link:](https://www.iso.org/standard/65666.html) 
+The PC Client RIM defines the Base RIM as an
+[ISO/IEC 19770-2 Software Identification :fontawesome-solid-external-link:](https://www.iso.org/standard/65666.html)
 (SWID) standard compatible file. The Base RIM provides a verifiable identity of the RIM creator and also 
 integrity information of Support RIMs. The Base RIM contains:
 
@@ -91,9 +91,8 @@ Log Assertion Support RIM is used during the Reference values check:
 1. **Real-time values check**: When the computer boots, UEFI creates the TPM Event Log (the UEFI “audit” log)
 which captures the firmware events and their corresponding digests. The Provisioner collects this Event
 Log and sends it to the ACA. The ACA uses the digest values within the Event Log to calculate a composite 
-hash, which the ACA compares against the composite hash value in the TPM Quote. Should TPM Quote 
-verification pass, this proves that the ACA has received the correct TPM Event Log and nothing 
-has been altered in the TPM Event Log since it was created during boot. (The Quote has already 
+hash, which the ACA compares against the composite hash value in the TPM Quote. If the Quote is valid
+and the reconstructed PCR values match, the log digests are consistent with the quoted PCR state. (The Quote has already
 been validated based on the signature and nonce; refer to the HIRS User Guide for more information 
 on this.) Should TPM Quote verification fail, the TPM Event Log file is needed to provide details 
 on the individual hashes within each PCR. Basically, this first check verifies that our measured 
@@ -137,25 +136,23 @@ RIM is adding reference measurements.
 
 ## Timestamps
 
-A RIM signer may include a PC Client RIM which optionally supports a simple timestamp or a 
-countersignature timestamp. Time stamp services are typically provided by a commercial Time Stamp 
-Authority (TSA). Most TSAs support the RFC 3161 Time-Stamp Protocol but the time stamp itself may 
+A PC Client RIM may include a simple timestamp or a countersignature timestamp. The 
+`RIM-Tool` does not currently add these timestamps. Timestamp services are typically provided by a commercial Time Stamp
+Authority (TSA). Most TSAs support the RFC 3161 Time-Stamp Protocol but the timestamp itself may 
 be encoded using a number of methods. 
 
-### RFC3339 Timestamps
+### RFC 3339 Timestamps
 
-The `RIM-Tool` will support the creation of a RFC3339 based timestamp. The format of the time 
-is:  
+An RFC 3339 timestamp uses a date and time format such as:
 
 ```shell
-yyyy-MM-ddThh:mm:ssZ
+2026-01-01T12:00:00Z
 ```
 
-### RFC3852 Timestamps
+### RFC 3852 Timestamps
 
-The RFC3852 includes support for a countersignature. The `RIM-Tool` does not directly support 
-the creation of a countersignature but will accept a countersignature file created by a third-party 
-application and insert it into a timestamp field within the Base RIM.
+RFC 3852 includes support for a countersignature. Creating or importing these countersignatures
+is not currently supported by the `RIM-Tool`.
 
 ## Layered Endorsements (detached signatures)
 
@@ -166,8 +163,7 @@ RIM. The initial Base RIM uses the enveloped signature provided by the tagCreato
 signature will be a sibling element of the BaseRIMs SoftwareIdentity element. The secondary signature 
 uses the Base RIM’s tagId as the SignedInfo Reference.
 
-The `RIM-Tool` does not directly support the creation of a secondary signature but will accept a secondary 
-signature file created by a third-party application and insert it into a timestamp field within the Base RIM.
+The `RIM-Tool` does not currently support secondary XML signatures for layered endorsements.
 
 ## Reference Integrity Manifest Specifications for a PC
 

@@ -10,16 +10,20 @@ Functionality provided by this tool includes the following:
 
 Please see the [documentation](https://nsacyber.github.io/RIM-Tool/) for detailed installation and usage.
 
+Follow [Getting Started](docs/getting-started.md) to create a test PC Client RIM bundle with the Linux helper script.
+
 ## Building
 
 In order to build from source, please first clone the project using `git clone --recursive`. This will properly initialize any submodules.
+
+The current source build requires JDK 25.
 
 ### Linux 
 To build this tool, navigate to the `RIM-Tool` directory cloned earlier and use the following command: 
 ```
 ./gradlew clean build
 ```
-The `rim-tool-X.X.jar` file should have been placed in the `/build/libs/tools/` (Linux) folder. 
+The `rim-tool-X.X.jar` file should have been placed in the `build/libs/` folder relative to the repository root.
 ### Windows
 Several options exist for building on Windows 11.
 
@@ -27,12 +31,12 @@ Several options exist for building on Windows 11.
 ~~~
 gradlew.bat clean build 
 ~~~
-*Windows PowerShell with Windows Subsystem for Linux (WSL) enabled:* Navigate to the `RIM-Tool` folder and run the Linux Gradle wrapper: 
+*Windows PowerShell:* Navigate to the `RIM-Tool` folder and run the Windows Gradle wrapper:
 ~~~
-./gradlew clean build 
+.\gradlew.bat clean build
 ~~~
 
-In both cases, the `rim-tool-X.X.jar` file should have been placed in the `\build\libs\tools\` folder.  
+In both cases, the `rim-tool-X.X.jar` file should have been placed in the `build\libs\` folder relative to the repository root. When building inside WSL, follow the Linux instructions.
 
 ## Packaging 
 
@@ -58,16 +62,16 @@ sudo dnf install build/distributions/rim-tool*.rpm
 ~~~
 or for a Debian or Ubuntu Linux distro: 
 ~~~
-sudo apt-get install build/distributions/rim-tool*.deb 
+sudo apt-get install ./build/distributions/rim-tool*.deb
 ~~~
 ## Usage 
-The RIM Tool RPM will create a `rim` command line shortcut. This can be invoked from a command line: 
+The RIM Tool Linux packages create a `rim` command line shortcut. This can be invoked from a command line:
 ~~~
 rim -h 
 ~~~
 The RIM Tool also can be invoked using Java from a build directory (if following the [Building](#building) section earlier):
 ~~~
-java -jar build/libs/tools/rim-tool-X.X.jar -h 
+java -jar build/libs/rim-tool-X.X.jar -h
 ~~~
 Current options for the tool can be found using the `-h` option. 
 
@@ -89,7 +93,7 @@ For details on RIM Tool commands, please refer to the [documentation](https://ns
 * [Host Integrity at Runtime and Startup (HIRS)](https://github.com/nsacyber/HIRS) uses RIMs for firmware validation. Compatible with PC Client RIMs created by this tool. 
 * [Trusted Computing Group PC Client RIM specification](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/)
 * [CoSWID Specification (RFC 9393)](https://www.rfc-editor.org/rfc/rfc9393.html)
-* [IETF CoRIM Specification (draft-rats-ietf-corim)](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/08/)
+* [IETF CoRIM Specification (draft-ietf-rats-corim)](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/)
 * [CBOR Playground (useful for viewing/parsing/debugging CBOR data) ](https://cbor.nemo157.com/)
 * [COSE Working Group test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)
 * [Gluecose test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)

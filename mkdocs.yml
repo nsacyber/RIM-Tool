@@ -5,7 +5,7 @@ repo_name: nsacyber/rim-tool
 nav:
   - Home:
       - index.md
-      - getting-started.md
+      - setup.md
       - Commands:
           - commands/index.md
           - Create: commands/create.md
@@ -21,6 +21,7 @@ nav:
           - CoRIM: RIMs/corim.md
       - Appendix:
           - configuration-files.md
+  - Getting Started: getting-started.md
   - Background:
       - background/index.md
       - background/pc-rim.md
@@ -64,7 +65,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - footnotes
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - attr_list

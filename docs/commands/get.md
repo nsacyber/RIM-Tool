@@ -27,7 +27,7 @@ rim get -r <string> -i <file> -o <file>
 ## Examples
 
 !!! example "Before Starting"
-    Before running these examples, please ensure that you change into the `data` directory (requires [install](../getting-started.md/#installation)):
+    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../setup.md#installation)):
     === "Linux"
         ```shell
         cd /opt/rimtool/data

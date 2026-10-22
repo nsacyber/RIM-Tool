@@ -13,7 +13,12 @@ The `RIM-Tool` supports the following RIM types as options when using various [c
 | [`comp_coswid`](tcg-component-rim.md)  | TCG Component RIM (CoSWID option) | CBOR     | TCG Component RIM, RFC 9393[^4], RFC 9052[^5], RFC 9360[^6] | COSE      |
 | [`coswid`](coswid.md)                  | CoSWID tag                        | CBOR     | RFC 9393, RFC 9052, RFC 9360                                | COSE      |
 | [`corim_comid`](corim.md)              | CoRIM with CoMID tag(s)           | CBOR     | draft-rats-ietf-corim[^7], RFC 9052, RFC 9360               | COSE      |
-| [`corim_coswid`](corim.md)             | CoRIM with CoSWID tag(s)          | CBOR     | draft-rats-ietf-corim, RFC 9393, RFC 9052, RFC 9360         | COSE      |
+
+!!! info
+
+    Currently, `comp_swid` creation requires signing, and `--unsigned` is not currently implemented for that type.
+
+    Creation of CoRIMs containing CoSWID tags is not implmented at this time; use `corim_comid` for the supported CoRIM workflow.
 
 [^1]: See TCG PC Client RIM specification [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/).
 [^2]: See TCG Component RIM Binding (for SWID/CoSWID) specification [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-Revision-22_9October24.pdf).
