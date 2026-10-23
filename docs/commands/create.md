@@ -62,6 +62,10 @@ Can optionally sign as well as create. Please see the [Sign](sign.md) command pa
         cd /opt/rimtool/data
         ```
 
+!!! note "Adapting the Examples"
+
+    The files in the example `data` directory are illustrative, and you may need to update their metadata and file references for your intended use. For PC Client RIMs, also update or remove any populated Support RIM hash; supplying `-l` does not replace an existing hash. See [PC Client RIM payload hashes](../configuration-files.md#pc-client-rim-payload-hashes).
+
 Create a signed [TCG PC Client Base RIM](../RIMs/tcg-pc-client-rim.md):
 
 === "Linux"

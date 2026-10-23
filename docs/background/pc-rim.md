@@ -154,7 +154,7 @@ An RFC 3339 timestamp uses a date and time format such as:
 RFC 3852 includes support for a countersignature. Creating or importing these countersignatures
 is not currently supported by the `RIM-Tool`.
 
-## Layered Endorsements (detached signatures)
+## Layered Endorsements (Detached Signatures)
 
 In some cases, there may be a need for an entity that is not the tag creator to provide a secondary 
 signature for the RIM (e.g., a layered endorsement). The PC Client RIM utilizes the W3C-defined 

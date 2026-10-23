@@ -8,7 +8,7 @@ This tutorial walks you through creating a test PC Client RIM bundle for a Linux
 
 The script captures a TPM event log, fills in the device's manufacturer and model, generates test signing certificates, and creates and verifies the bundle.
 
-## Before you start
+## Before Starting
 
 - [Install the RIM-Tool Linux package](setup.md#installation).
 - Have Bash and OpenSSL available.
@@ -16,7 +16,7 @@ The script captures a TPM event log, fills in the device's manufacturer and mode
 
 The script requires root privileges to read device information and write its output under `/opt/rimtool/data/local/`.
 
-## Create the test bundle
+## Create the Test Bundle
 
 Run the following to create the test bundle:
 

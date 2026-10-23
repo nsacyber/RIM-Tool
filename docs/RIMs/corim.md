@@ -12,7 +12,7 @@ A CoRIM comprises metadata that establishes information about the CoRIM itself a
 
 As shown in a diagram[^3] of a CoRIM produced by the RATS WG, a CoRIM tag list can contain one or more CoSWID, Concise Module Identifier (CoMID), or Concise Tag List (CoTL) tags. For the RIM Tool's [`create`](../commands/create.md) command, use `--rim-type corim_comid` for the supported CoMID workflow.
 
-!!! Note
+!!! note
 
     Creation of CoRIMs containing CoSWID or CoTL tags is not currently supported.
 

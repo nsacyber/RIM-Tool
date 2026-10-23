@@ -6,7 +6,7 @@ title: Get
 
 Retrieves the payload from a signed object and saves the contents to a file.
 
-!!! Note
+!!! note
 
     `get` is only compatible with signed COSE objects at present. See [RIM Types](../RIMs/index.md) for details.
 
