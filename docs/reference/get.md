@@ -6,6 +6,8 @@ title: Get
 
 Retrieves the payload from a signed object and saves the contents to a file.
 
+This command extracts the payload without verifying its signature. Use [`verify`](verify.md) to check the signature.
+
 !!! note
 
     `get` is only compatible with signed COSE objects at present. See [RIM Types](../RIMs/index.md) for details.
@@ -27,7 +29,7 @@ rim get -r <string> -i <file> -o <file>
 ## Examples
 
 !!! example "Before Starting"
-    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../setup.md#installation)):
+    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../getting-started/setup.md#installation)):
     === "Linux"
         ```shell
         cd /opt/rimtool/data

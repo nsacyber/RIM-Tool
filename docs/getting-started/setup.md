@@ -14,7 +14,9 @@ Install `RIM-Tool` from a Linux package or build it from source using the instru
 
 Packages for this tool can be found on the [GitHub release page :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool/releases). 
 
-Only `.rpm` (Red Hat Enterprise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) packages are currently supported.
+Only x86-64 Linux packages in `.rpm` (Red Hat Enterprise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) formats are currently supported.
+
+Install the Java runtime required by your release and ensure `java` is available on `PATH`. Packages built from the current source require Java 25; check the release requirements when installing an older package.
 
 ### Linux
 
@@ -29,12 +31,12 @@ To install from a package, download from the above link, then run the following 
     sudo apt-get install ./rim-tool*.deb
     ```
 
-After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See [Commands](commands/index.md) for further details.
+After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See the [command reference](../reference/index.md) for further details.
 
-Continue to [Getting Started](getting-started.md) to create a test PC Client RIM bundle using the Linux helper script.
+Return to [Getting Started](index.md#before-starting) to create a test PC Client RIM bundle using the Linux helper script.
 
 ## Building
-The current `RIM-Tool` source build requires JDK 25, matching the HIRS dependency's toolchain.
+The `RIM-Tool` is written using Java, and requires JDK 25 to be installed.
 
 The following sections also assume the `RIM-Tool` [source code :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool) has been cloned (using Git) to a local directory.
 

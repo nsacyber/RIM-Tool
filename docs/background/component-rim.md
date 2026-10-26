@@ -10,28 +10,25 @@ The `RIM-Tool` supports the [CoSWID Tag](../RIMs/coswid.md), the [TCG Component 
 ## CoSWID
 
 CoSWID is defined by [RFC 9393 :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc9393).
-It is based on the SWID spec (ISO/IEC 19770-2:2015). NIST created 
+It is based on the SWID specification (ISO/IEC 19770-2:2015).
 [NIST IR 8060 :fontawesome-solid-external-link:](https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8060.pdf) 
-as an open stand-in for the spec, which defines a few extra meta fields that are contained within CoSWID (edition, 
-colloquial-version, product, etc.). A couple of items about the structure of CoSWID:
+provides public guidance for creating interoperable SWID tags. CoSWID includes metadata such as
+edition, colloquial-version, and product. Key aspects of its structure are:
 
 1. Encoding: CoSWID drops the XML encoding specified in SWID in favor of CBOR -
 [RFC 8949 :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc8949).
 
 2. Structure: The CoSWID spec uses Concise Data Definition Language (CDDL) - 
 [RFC 8610 :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc8610). CDDL uses
-both arrays and maps to define data structures (a map type of array limited to key/value pairs). Most 
+both arrays and maps (which hold key value/pairs) to define data structures. Most
 CoSWID items are optional.
 
-3. Signature: CoSWID objects are signed using the COSE signature envelope. RFC 9393 defines a context attribute of
+3. Signature: CoSWID objects can be signed using the COSE signature envelope. RFC 9393 defines a COSE content type of
 “application/swid+cbor” to provide a hint to the parser that the payload is a CoSWID object.
-
-While there are technically few implementations of systems requiring CoSWID, it is making its way into 
-other specifications listed on this page.
 
 ## TCG Component RIM Binding for SWID/CoSWID
 
-The [TCG Component RIM Binding for SWID/CoSWID :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-RC-2_16April25.pdf) 
+The [TCG Component RIM Binding for SWID/CoSWID :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-component-rim-binding-for-swid-and-coswid/)
 defines two formats and encodings for component RIMs: SWID (XML) and CoSWID (CBOR). It provides extensions
 that support attestation of the DMTF’s
 [Security Protocols and Data Model Specification :fontawesome-solid-external-link:](https://www.dmtf.org/standards/spdm). 
@@ -56,7 +53,7 @@ that currently CoSWID and CoTL options with CoRIM creation are unsupported.
 
 CoRIMs are digitally signed using 
 [COSE :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/rfc9052/) 
-with extra requirements placed upon the protected header.  Of interest is the context parameter defined 
+with extra requirements placed upon the protected header. Of interest is the content type defined
 as “application/rim+cbor” for CoRIM as opposed to “application/swid+cbor” when signing a CoSWID object. 
 This helps the parser determine the type of data found in the payload.
 
@@ -66,6 +63,6 @@ This helps the parser determine the type of data found in the payload.
 [TCG Component Reference Integrity Manifest Information Model :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-component-reference-integrity-manifest-information-model/)
 complements the RIM Information Model by defining a Component Reference Integrity Manifest (RIM)
 Information Model (IM) for components of a platform, e.g., a PC Client or Server platform.
-* The [TCG Component RIM Binding for SWID/CoSWID :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-Revision-22_9October24.pdf)
+* The [TCG Component RIM Binding for SWID/CoSWID :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-component-rim-binding-for-swid-and-coswid/)
 complies with the TCG Component RIM Information Model Specification and provides additional requirements
 for a SWID/CoSWID RIM file.

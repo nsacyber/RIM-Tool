@@ -3,14 +3,14 @@ A Reference Integrity Manifest (RIM) contains structures that a Verifier uses to
 
 Functionality provided by this tool includes the following:
 * Creates, formats, and digitally signs [TCG PC Client Base RIMs](https://trustedcomputinggroup.org/resource/tcg-pc-client-reference-integrity-manifest-specification/) 
-* Creates, formats, and digitally signs [TCG Component RIMs](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-RC-2_16April25.pdf) (both SWID and CoSWID variants) 
+* Creates, formats, and digitally signs [TCG Component RIMs](https://trustedcomputinggroup.org/resource/tcg-component-rim-binding-for-swid-and-coswid/) (both SWID and CoSWID variants)
 * Creates, formats, and digitally signs [IETF CoRIMs](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/) 
 * Validates the digital signature of RIMs using X.509 public key certificates 
 * Prints human readable contents of RIMs
 
 Please see the [documentation](https://nsacyber.github.io/RIM-Tool/) for detailed installation and usage.
 
-Follow [Getting Started](docs/getting-started.md) to create a test PC Client RIM bundle with the Linux helper script.
+Follow [Getting Started](docs/getting-started/index.md) to create a test PC Client RIM bundle with the Linux helper script.
 
 ## Building
 
@@ -51,7 +51,7 @@ or for a Debian or Ubuntu Linux distro:
 ~~~
 ./gradlew buildDeb 
 ~~~
-The RIM Tool package can be found under the `/build/distributions/` folder.
+The RIM Tool package can be found under `build/distributions/`, relative to the repository root.
 
 ## Installing
 Currently, only install packages for Linux are supported. 
@@ -86,7 +86,7 @@ The RIM Tool provides the following commands and options. *Note that clustering 
 * **print**: Provide a human readable representation of a supported RIM object 
 * **get**: Retrieves the payload from a signed object and saves it to a file
 
-For details on RIM Tool commands, please refer to the [documentation](https://nsacyber.github.io/RIM-Tool/commands/).
+For details on RIM Tool commands, please refer to the [documentation](https://nsacyber.github.io/RIM-Tool/reference/).
 
 ## Quick Links 
 
@@ -96,6 +96,6 @@ For details on RIM Tool commands, please refer to the [documentation](https://ns
 * [IETF CoRIM Specification (draft-ietf-rats-corim)](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/)
 * [CBOR Playground (useful for viewing/parsing/debugging CBOR data) ](https://cbor.nemo157.com/)
 * [COSE Working Group test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)
-* [Gluecose test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/cose-wg/Examples/tree/master/sign1-tests)
+* [GlueCOSE test patterns that validate with this tool (COSE_Sign1 only)](https://github.com/gluecose/test-vectors)
 * [Microsoft's COSE Tool](https://github.com/microsoft/CoseSignTool/blob/main/docs/CoseSignTool.md) (useful for testing detached signatures and embedded certificates) 
 * [EDK2's Trusted Boot Chain Overview](https://tianocore-docs.github.io/edk2-TrustedBootChain/release-1.00/2_Overview.html)

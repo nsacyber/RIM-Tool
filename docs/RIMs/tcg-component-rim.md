@@ -18,6 +18,6 @@ The `comp_swid` creation workflow produces signed XML; `--unsigned` is not curre
 It is further envisioned that this specification can support devices adhering to the TCG DICE[^4] set of specifications which support devices that do not contain a Trusted Platform Module (TPM). DICE also contains definitions for [CoRIMs](corim.md), so either format may be present.
 
 [^1]: See the TCG Component Reference Integrity Manifest Information Model specification [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-Reference-Integrity-Manifest-Information-Model-Version-1.0_pub.pdf).
-[^2]: See the TCG Component RIM Binding (for SWID/CoSWID) specification [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/wp-content/uploads/TCG-Component-RIM-Binding-for-SWID-and-CoSWID-Version-1.0-RC-2_16April25.pdf).
+[^2]: See the TCG Component RIM Binding (for SWID/CoSWID) specification [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-component-rim-binding-for-swid-and-coswid/).
 [^3]: See details about SPDM [here :fontawesome-solid-external-link:](https://www.dmtf.org/standards/spdm).
 [^4]: See details about TCG DICE [here :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/work-groups/dice-architectures/).

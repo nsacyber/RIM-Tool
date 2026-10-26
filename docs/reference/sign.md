@@ -27,17 +27,17 @@ rim sign -r <string> -i <file> -k <file> -o <file> [-p <file>] [-a <string>] [-d
 | `-i`, `--in`                 | Specifies the input file to sign.                                                                    | Yes      | File   |
 | `-k`, `--private-key-file`   | The private key used to sign the specified file.                                                     | Yes      | File   |
 | `-p`, `--public-certificate` | The public key certificate to be used during the signing process.                                    | Yes[^1]  | File   |
-| `-a`, `--algorithm`          | The algorithm used[^2]. By default, uses the certificate or JSON Web Key algorithm.                  | No       | String |
+| `-a`, `--algorithm`          | Signing algorithm used when no certificate or JSON Web Key supplies one; supplied credentials take precedence.[^2] | No | String |
 | `-d`, `--detached`           | Produces a COSE signature envelope with no payload; supply the input payload path here.              | No       | File   |
 | `-e`, `--embed-cert`         | Embeds a certificate, depending on output type.[^3]                                                  | No       |        |
 | `-pk`, `--protected-kid`     | A hexadecimal string that represents the key identifier to place in the COSE protected header.[^4]   | No       | String |
 | `-uk`, `--unprotected-kid`   | A hexadecimal string that represents the key identifier to place in the COSE unprotected header.[^4] | No       | String |
 | `-o`, `--out`                | The path of the file to write the signed file to.                                                    | Yes      | File   |
 
-[^1]: Required for CoRIMs. For CoSWIDs, it can be omitted when the JSON Web Key or `-a` supplies the signing algorithm.
+[^1]: Required for CoRIMs. For CoSWIDs, omit the certificate with a JSON Web Key containing `alg` and `kid`, or with `-a` plus `-pk`/`-uk` for a PEM key.
 [^2]: Must be an [IANA-registered COSE algorithm :fontawesome-solid-external-link:](https://www.iana.org/assignments/cose/cose.xhtml).
 [^3]:
-    For [COSE :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/html/rfc8152): the provided certificate and its thumbprint are embedded into the protected header.
+    For [COSE :fontawesome-solid-external-link:](https://www.rfc-editor.org/rfc/rfc9052.html): the provided certificate and its thumbprint are embedded into the protected header.
 [^4]: Used for CoSWID COSE headers. If both are supplied, the protected KID takes precedence.
 
 For detached signing, retain the input payload and pass it to [`verify`](verify.md) with `-d`.
@@ -45,7 +45,7 @@ For detached signing, retain the input payload and pass it to [`verify`](verify.
 ## Examples
 
 !!! example "Before Starting"
-    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../setup.md#installation)):
+    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../getting-started/setup.md#installation)):
     === "Linux"
         ```shell
         cd /opt/rimtool/data

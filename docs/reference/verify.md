@@ -34,24 +34,28 @@ rim verify -r <string> -i <file> [-p <file>] [-k <file>] [-l <path>] [-t <file>]
 
 The default behavior for the `verify` command for a [TCG PC Client RIM](../RIMs/tcg-pc-client-rim.md) is to *ignore* the file attribute that specifies the name of the Support RIM file, as well as the hash associated with that file.
 
-This parameter is intended to change that behavior, and *enforce* the verification of the hash of the Support RIM file found on the host file system as follows:
+When verifying with a certificate (`-p`), this parameter enables verification of the Support RIM file's hash as follows:
 
 - `-l ""`: uses the `<Directory>` element path (if present) associated with the corresponding `<File>` element to find the Support RIM.
 
 - `-l <path>`: uses the supplied path, along with the file attribute, to find the Support RIM file.
 
+PC Client verification with a public key alone (`-k`) checks only the XML signature; it does not check Support RIM hashes, even if `-l` is supplied.
+
+Support RIM hash verification currently supports SHA-256 only.
+
 ??? info "Further Details"
     [NISTIR 8060 :fontawesome-solid-external-link:](https://doi.org/10.6028/NIST.IR.8060), section 4.6.1 states:
     > Files are described using the `<File>` element, and folders are described using the `<Directory>` element.
 
-    When processing a PC Client RIM (with the `-l ""` option), the `RIM-Tool` will assume that the full path to a Support RIM file is a concatenation of the `<Directory>` element text (if present), and the `<File>` element text found in the Base RIM's payload element. 
+    When processing a PC Client RIM with a certificate and `-l ""`, the `RIM-Tool` combines the `<Directory>` element's `location` attribute (if present) with the `<File>` element's `name` attribute in the Base RIM's payload to locate the Support RIM.
 
 See below [Examples](#examples) section for sample usage of the `-l` option.
 
 ## Examples
 
 !!! example "Before Starting"
-    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../setup.md#installation)):
+    Before running these examples, please ensure that you change into the `data` directory (requires [installation](../getting-started/setup.md#installation)):
     === "Linux"
         ```shell
         cd /opt/rimtool/data

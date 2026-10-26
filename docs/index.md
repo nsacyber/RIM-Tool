@@ -1,5 +1,7 @@
 ---
 title: Welcome
+hide:
+  - toc
 ---
 
 # Welcome to `RIM-Tool`
@@ -9,21 +11,45 @@ testing of Reference Integrity Manifests[^1] (RIMs), including creation, printin
 
 [^1]: Defined in the Trusted Computing Group [specification :fontawesome-solid-external-link:](https://trustedcomputinggroup.org/resource/tcg-reference-integrity-manifest-rim-information-model/).
 
-Follow [Getting Started](getting-started.md) to create a test PC Client RIM bundle with the Linux helper script.
-See [Setup](setup.md#installation) for installation instructions, or [Commands](commands/index.md) for command reference.
+<div class="grid cards" markdown>
+
+-   :material-file-plus-outline:{ .lg .middle } **Create Your First RIM Bundle**
+
+    ---
+
+    Create and verify a test PC Client RIM bundle on Linux.
+
+    [:octicons-arrow-right-24: Getting Started](getting-started/index.md)
+
+-   :material-download:{ .lg .middle } **Set Up the Tool**
+
+    ---
+
+    Install a Linux package or build from source.
+
+    [:octicons-arrow-right-24: Setup](getting-started/setup.md)
+
+-   :material-console:{ .lg .middle } **Look Up a Command**
+
+    ---
+
+    Find command options and usage examples.
+
+    [:octicons-arrow-right-24: Command reference](reference/index.md)
+
+-   :material-file-document-outline:{ .lg .middle } **Choose a RIM Format**
+
+    ---
+
+    Compare supported formats and prepare their JSON configuration files.
+
+    [:octicons-arrow-right-24: RIM Formats](RIMs/index.md)
+
+</div>
 
 !!! note
 
     In addition to TCG PC Client RIMs, the tool supports TCG Component RIMs, Concise Software Identification (CoSWID) tags,
-    and Concise Reference Integrity Manifests (CoRIMs). See the [Supported RIM Types](./RIMs/index.md) page for details.
+    and Concise Reference Integrity Manifests (CoRIMs). See [RIM Formats](./RIMs/index.md) for details.
 
-## Compatibility
-
-The [Host Integrity at Runtime and Startup :fontawesome-solid-external-link:](https://github.com/nsacyber/hirs) (HIRS) project uses
-[TCG PC Client RIMs](./RIMs/tcg-pc-client-rim.md) for firmware validation. Support for other RIM formats depends on the HIRS version; consult its documentation before choosing a format for use with HIRS.
-
-## About
-The source code can be found on [GitHub :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool).
-
-### License
-`RIM-Tool` is distributed under the [Apache 2.0 :fontawesome-solid-external-link:](https://www.apache.org/licenses/LICENSE-2.0) license.
+For an introduction to firmware validation and how RIMs fit together, see [Background](background/index.md). For license and compatibility, see [About](./about.md).

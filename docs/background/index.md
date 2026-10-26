@@ -4,7 +4,7 @@ title: Background
 
 # Background
 
-Firmware validation complements the hardware validation for Supply Chain acceptance testing by providing an
+In HIRS, firmware validation complements hardware validation for supply chain acceptance testing by providing an
 automated means to verify the firmware and boot software for the platform and its components before an 
 Attestation Certificate will be issued. While the hardware validation uses a Platform Certificate, 
 the firmware validation uses a RIM.

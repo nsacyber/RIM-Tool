@@ -17,9 +17,10 @@ firmware, expansion component firmware configurations, and the bootloader. TPM-a
 can continue logging hashes to describe the kernel, initial file system, and any modules. Kernels, 
 applications, and drivers can also log runtime hashes to the TPM.
 
-Hashes are stored in the TPM’s Platform Configuration Registers (PCRs) in accordance with 
-Figure 1. Most TPMs have 24 PCRs per supported hash algorithm. TPM 2.0 supports SHA-1 and SHA-256 
-at the minimum (48 PCRs minimum). PCR values are computed via a series of one-way hashes where 
+Measurements are extended into the TPM’s Platform Configuration Registers (PCRs), as shown in
+Figure 1. PCRs are grouped into banks, each associated with a hash algorithm. PC Client TPMs provide
+24 PCR indices per bank; the supported algorithms and active banks depend on the TPM and platform
+configuration. PCR values are computed via a series of one-way hashes where
 each measurement hash is appended to the current PCR value, and then the combination is hashed 
 and becomes the new PCR value (referred to as “extending the PCR”).
 
@@ -31,12 +32,12 @@ and becomes the new PCR value (referred to as “extending the PCR”).
 UEFI also records measurement hashes, along with information about these hashes, in the TPM Event 
 Log. The TPM Event Log is an audit log that can be used for verification later, after the system boots.  
 
-Linux has support for reading the TPM Event Log and writing it to the security fs partition for TPM. 
-You will need a Linux kernel of 4.18 or higher to see the log at 
+On Linux systems with TPM Event Log support enabled and `securityfs` mounted, the log is commonly available at
 `/sys/kernel/security/tpm0/binary_bios_measurements`.
 
-Windows 10 will possibly store (depending upon specific version and group policy) the binary form 
-of the TPM Event Log with a numeric name and a .log extension at `C:\Windows\Logs\MeasuredBoot\`.
+On Windows 11, Measured Boot logs are stored as binary `.log` files under
+`%SystemRoot%\Logs\MeasuredBoot\` (typically `C:\Windows\Logs\MeasuredBoot\`) when log archival is enabled.
+See Microsoft's [guidance  :fontawesome-solid-external-link:](https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/decode-measured-boot-logs-to-track-pcr-changes) for details.
 
 ## PC RIM Bundles
 A Verifier will take these UEFI measurements and compare them to a set of expected values in the RIM. 
@@ -61,15 +62,13 @@ onto the device or optionally provides a Uniform Resource Identifier (URI) to ac
 
 ### The Support RIM
 
-A Support RIM contains assertions about the state or configuration of the platform to which 
-the RIM applies. There are two types of Support RIMs, but the only one that HIRS currently 
-uses is the TCG Event Log Assertion Support RIM.
+A Support RIM contains assertions about the state or configuration of the platform to which
+the RIM applies. There are three types of Support RIMs at the time of writing, but this page describes the TCG Event Log Assertion Support RIM workflow used by HIRS.
 
 ### TCG Event Log Assertion Support RIM 
 
-The TCG Event Log Assertion Support RIM is a required Support RIM file for PC Client Base Rim. It 
-is a binary file that contains a list of all the hashes that get extended into the PCRs during 
-the boot cycle, as well as details about each hash and each hash's corresponding event. Some 
+The TCG Event Log Assertion Support RIM is a binary file containing reference measurements for
+the boot cycle, including expected PCR measurement hashes and their associated event details. Some
 examples of events are POST_CODE, VARIABLE_DRIVER_CONFIG, EV_IPL, etc. 
 
 !!! note
@@ -81,8 +80,8 @@ examples of events are POST_CODE, VARIABLE_DRIVER_CONFIG, EV_IPL, etc.
 When an OEM reaches the end of the production process for a PC, it captures a hash of the TCG 
 Event Log Assertion Support RIM and inserts that hash into the Base RIM before the Base RIM is 
 signed. Later, a Verifier can use that hash to verify that the TCG Event Log Assertion Support 
-RIM has not been altered at any point. (The integrity of the Base RIM itself is verified via the 
-Base RIM certificate chain.)
+RIM has not been altered at any point. The Base RIM's signature and certificate chain are
+verified separately.
 
 The HIRS ACA uses the TCG Event Log Assertion Support RIM during its validation process if the 
 Firmware Validation Policy option is selected. During the HIRS validation process, the TCG Event 
@@ -118,13 +117,15 @@ undefined and not supported by this tool.
 
 ### Primary Base RIM
 
-Primary Base RIM should include all necessary reference measurements needed to verify the firmware 
-(PCR 0 -7). The Primary Base RIM is expected to be part of an initial RIM Bundle. 
+A Primary Base RIM belongs to the initial RIM Bundle. For TCG Event Log Assertions, the referenced Support RIM must cover at least PCRs 0–7.
 
 ### Patch Base RIM
 
 Patch Base RIM is intended to accompany firmware updates and include any reference measurements 
 necessary to cover the changes provided by the firmware update. 
+
+The patch links to the preceding Base RIM using a `Link` with `rel="patches"` and
+`href="swid:<previous-tagId>"`. The `rimLinkHash` metadata records the digest of that preceding Base RIM.
 
 ### Supplemental Base RIM
 
