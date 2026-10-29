@@ -61,11 +61,11 @@ eval $rim verify -r pcrim -l pcrim/ --in pcrim/laptop.default.bad-sig.swidtag -p
 rim_expected_fail_status $? "PC RIM TEST 11: PC RIM Bad signature check"
 
 echo "PC Client RIM TEST 12: Create PC Client signed Patch RIM "
-eval $rim create -r pcrim --out tmp/laptop.patch.1.swidtag -l pcrim/laptop.default.1.rimel -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_patch.json >>/dev/null
+eval $rim create -r pcrim --out tmp/laptop.patch.1.swidtag -l pcrim/TpmLog.bin -p pcrim/RimSignCert.pem -k pcrim/rimKey.pem -c pcrim/rim_fields_patch.json >>/dev/null
 rim_expected_pass_status $? "PC RIM TEST 12: Create PC Patch RIM"
 
 echo "PC Client RIM TEST 13: Verify PC Client signed Patch RIM"
-eval $rim verify -r pcrim --in tmp/laptop.patch.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem  >>/dev/null
+eval $rim verify -r pcrim --in tmp/laptop.patch.1.swidtag -p pcrim/RimSignCert.pem -t pcrim/RIMCaCert.pem -l pcrim/ >>/dev/null
 rim_expected_pass_status $? "PC RIM TEST 13: PC Patch RIM Verify"
 
 echo "PC Client RIM TEST 14: Create PC Client signed Supplemental RIM "

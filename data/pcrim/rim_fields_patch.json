@@ -12,8 +12,8 @@
 		"regid": "www.example.com"
 	},
 	"Link": {
-		"href": "https://Example.com/support/ProductA/firmware/installfiles",
-		"rel": "installationmedia"
+		"href": "swid:ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c",
+		"rel": "patches"
 	},
 	"Meta": {
 		"colloquialVersion": "",
@@ -25,7 +25,7 @@
 		"platformModel": "ProductA",
 		"bindingSpec": "PC Client RIM",
 		"bindingSpecVersion": "1.1",
-		"rimLinkHash": "0b4308b37a110537ac8c48c443e34bcd303c75a3860e6b0daf8a7cbcd51cc0da",
+		"rimLinkHash": "314fd744cc8715427f2522f2160f70f4109f9b7dd929b1f27022c5cfbc0918b9",
 		"payloadType": "Indirect"
 	},
 	"Payload": {
@@ -36,7 +36,7 @@
 				"supportRimFormat": "TCG_EventLog_Assertion",
 				"supportRimType": "Indirect",
 				"name": "TpmLog.bin",
-				"size": "7459"
+				"size": "7549"
 			    }
 				]
 		}

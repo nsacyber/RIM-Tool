@@ -1,8 +1,9 @@
 ---
-title: Commands
+title: Reference
 ---
 
-# Commands
+# Reference
+
 The `RIM-Tool` provides the following main commands.
 
 | Command               | Description                                                                            |
@@ -23,7 +24,23 @@ for more information on usage and examples.
 ## Special Parameters
 
 ### Help
-At any time, a help parameter (`-h`) can be used for information about available commands:
+Use `-h` or `--help` for information about available commands:
 ```shell
 rim -h
 ```
+
+For a specific command's options, place help after the command:
+
+```shell
+rim create --help
+```
+
+### Version
+
+Use `--version` to print the tool's version:
+
+```shell
+rim --version
+```
+
+The version is recorded from the repository's `VERSION` file when the JAR is built.

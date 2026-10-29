@@ -17,13 +17,14 @@ firmware, expansion component firmware configurations, and the bootloader. TPM-a
 can continue logging hashes to describe the kernel, initial file system, and any modules. Kernels, 
 applications, and drivers can also log runtime hashes to the TPM.
 
-Hashes are stored in the TPM’s Platform Configuration Registers (PCRs) in accordance with 
-Figure 1. Most TPMs have 24 PCRs per supported hash algorithm. TPM 2.0 supports SHA-1 and SHA-256 
-at the minimum (48 PCRs minimum). PCR values are computed via a series of one-way hashes where 
+Measurements are extended into the TPM’s Platform Configuration Registers (PCRs), as shown in
+Figure 1. PCRs are grouped into banks, each associated with a hash algorithm. PC Client TPMs provide
+24 PCR indices per bank; the supported algorithms and active banks depend on the TPM and platform
+configuration. PCR values are computed via a series of one-way hashes where
 each measurement hash is appended to the current PCR value, and then the combination is hashed 
 and becomes the new PCR value (referred to as “extending the PCR”).
 
-![test](../images/background_pc-rim_TpmMeasurementsSecureBootChecks.JPG "Title")
+![Secure Boot checks and TPM measurements across UEFI boot phases](../images/background_pc-rim_TpmMeasurementsSecureBootChecks.JPG "Secure Boot checks and TPM measurements")
 **Figure 1.** The interaction of Secure Boot and TPM with UEFI boot phases
 <!-- Hide for now
 -->
@@ -31,12 +32,12 @@ and becomes the new PCR value (referred to as “extending the PCR”).
 UEFI also records measurement hashes, along with information about these hashes, in the TPM Event 
 Log. The TPM Event Log is an audit log that can be used for verification later, after the system boots.  
 
-Linux has support for reading the TPM Event Log and writing it to the security fs partition for TPM. 
-You will need a Linux kernel of 4.18 or higher to see the log at 
+On Linux systems with TPM Event Log support enabled and `securityfs` mounted, the log is commonly available at
 `/sys/kernel/security/tpm0/binary_bios_measurements`.
 
-Windows 10 will possibly store (depending upon specific version and group policy) the binary form 
-of the TPM Event Log with a numeric name and a .log extension at `C:\Windows\Logs\MeasuredBoot\`.
+On Windows 11, Measured Boot logs are stored as binary `.log` files under
+`%SystemRoot%\Logs\MeasuredBoot\` (typically `C:\Windows\Logs\MeasuredBoot\`) when log archival is enabled.
+See Microsoft's [guidance  :fontawesome-solid-external-link:](https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/decode-measured-boot-logs-to-track-pcr-changes) for details.
 
 ## PC RIM Bundles
 A Verifier will take these UEFI measurements and compare them to a set of expected values in the RIM. 
@@ -45,8 +46,8 @@ is designated by the TCG as the “RIM Bundle”.
 
 ### The Base RIM
 
-The PC Client RIM defines the Base Rim as an 
-[ISO 197770-2 Software Identity :fontawesome-solid-external-link:](https://www.iso.org/standard/65666.html) 
+The PC Client RIM defines the Base RIM as an
+[ISO/IEC 19770-2 Software Identification :fontawesome-solid-external-link:](https://www.iso.org/standard/65666.html)
 (SWID) standard compatible file. The Base RIM provides a verifiable identity of the RIM creator and also 
 integrity information of Support RIMs. The Base RIM contains:
 
@@ -61,15 +62,13 @@ onto the device or optionally provides a Uniform Resource Identifier (URI) to ac
 
 ### The Support RIM
 
-A Support RIM contains assertions about the state or configuration of the platform to which 
-the RIM applies. There are two types of Support RIMs, but the only one that HIRS currently 
-uses is the TCG Event Log Assertion Support RIM.
+A Support RIM contains assertions about the state or configuration of the platform to which
+the RIM applies. There are three types of Support RIMs at the time of writing, but this page describes the TCG Event Log Assertion Support RIM workflow used by HIRS.
 
 ### TCG Event Log Assertion Support RIM 
 
-The TCG Event Log Assertion Support RIM is a required Support RIM file for PC Client Base Rim. It 
-is a binary file that contains a list of all the hashes that get extended into the PCRs during 
-the boot cycle, as well as details about each hash and each hash's corresponding event. Some 
+The TCG Event Log Assertion Support RIM is a binary file containing reference measurements for
+the boot cycle, including expected PCR measurement hashes and their associated event details. Some
 examples of events are POST_CODE, VARIABLE_DRIVER_CONFIG, EV_IPL, etc. 
 
 !!! note
@@ -81,8 +80,8 @@ examples of events are POST_CODE, VARIABLE_DRIVER_CONFIG, EV_IPL, etc.
 When an OEM reaches the end of the production process for a PC, it captures a hash of the TCG 
 Event Log Assertion Support RIM and inserts that hash into the Base RIM before the Base RIM is 
 signed. Later, a Verifier can use that hash to verify that the TCG Event Log Assertion Support 
-RIM has not been altered at any point. (The integrity of the Base RIM itself is verified via the 
-Base RIM certificate chain.)
+RIM has not been altered at any point. The Base RIM's signature and certificate chain are
+verified separately.
 
 The HIRS ACA uses the TCG Event Log Assertion Support RIM during its validation process if the 
 Firmware Validation Policy option is selected. During the HIRS validation process, the TCG Event 
@@ -91,9 +90,8 @@ Log Assertion Support RIM is used during the Reference values check:
 1. **Real-time values check**: When the computer boots, UEFI creates the TPM Event Log (the UEFI “audit” log)
 which captures the firmware events and their corresponding digests. The Provisioner collects this Event
 Log and sends it to the ACA. The ACA uses the digest values within the Event Log to calculate a composite 
-hash, which the ACA compares against the composite hash value in the TPM Quote. Should TPM Quote 
-verification pass, this proves that the ACA has received the correct TPM Event Log and nothing 
-has been altered in the TPM Event Log since it was created during boot. (The Quote has already 
+hash, which the ACA compares against the composite hash value in the TPM Quote. If the Quote is valid
+and the reconstructed PCR values match, the log digests are consistent with the quoted PCR state. (The Quote has already
 been validated based on the signature and nonce; refer to the HIRS User Guide for more information 
 on this.) Should TPM Quote verification fail, the TPM Event Log file is needed to provide details 
 on the individual hashes within each PCR. Basically, this first check verifies that our measured 
@@ -119,13 +117,15 @@ undefined and not supported by this tool.
 
 ### Primary Base RIM
 
-Primary Base RIM should include all necessary reference measurements needed to verify the firmware 
-(PCR 0 -7). The Primary Base RIM is expected to be part of an initial RIM Bundle. 
+A Primary Base RIM belongs to the initial RIM Bundle. For TCG Event Log Assertions, the referenced Support RIM must cover at least PCRs 0–7.
 
 ### Patch Base RIM
 
 Patch Base RIM is intended to accompany firmware updates and include any reference measurements 
 necessary to cover the changes provided by the firmware update. 
+
+The patch links to the preceding Base RIM using a `Link` with `rel="patches"` and
+`href="swid:<previous-tagId>"`. The `rimLinkHash` metadata records the digest of that preceding Base RIM.
 
 ### Supplemental Base RIM
 
@@ -137,27 +137,25 @@ RIM is adding reference measurements.
 
 ## Timestamps
 
-A RIM signer may include a PC Client RIM which optionally supports a simple timestamp or a 
-countersignature timestamp. Time stamp services are typically provided by a commercial Time Stamp 
-Authority (TSA). Most TSAs support the RFC 3161 Time-Stamp Protocol but the time stamp itself may 
+A PC Client RIM may include a simple timestamp or a countersignature timestamp. The 
+`RIM-Tool` does not currently add these timestamps. Timestamp services are typically provided by a commercial Time Stamp
+Authority (TSA). Most TSAs support the RFC 3161 Time-Stamp Protocol but the timestamp itself may 
 be encoded using a number of methods. 
 
-### RFC3339 Timestamps
+### RFC 3339 Timestamps
 
-The `RIM-Tool` will support the creation of a RFC3339 based timestamp. The format of the time 
-is:  
+An RFC 3339 timestamp uses a date and time format such as:
 
 ```shell
-yyyy-MM-ddThh:mm:ssZ
+2026-01-01T12:00:00Z
 ```
 
-### RFC3852 Timestamps
+### RFC 3852 Timestamps
 
-The RFC3852 includes support for a countersignature. The `RIM-Tool` does not directly support 
-the creation of a countersignature but will accept a countersignature file created by a third-party 
-application and insert it into a timestamp field within the Base RIM.
+RFC 3852 includes support for a countersignature. Creating or importing these countersignatures
+is not currently supported by the `RIM-Tool`.
 
-## Layered Endorsements (detached signatures)
+## Layered Endorsements (Detached Signatures)
 
 In some cases, there may be a need for an entity that is not the tag creator to provide a secondary 
 signature for the RIM (e.g., a layered endorsement). The PC Client RIM utilizes the W3C-defined 
@@ -166,8 +164,7 @@ RIM. The initial Base RIM uses the enveloped signature provided by the tagCreato
 signature will be a sibling element of the BaseRIMs SoftwareIdentity element. The secondary signature 
 uses the Base RIM’s tagId as the SignedInfo Reference.
 
-The `RIM-Tool` does not directly support the creation of a secondary signature but will accept a secondary 
-signature file created by a third-party application and insert it into a timestamp field within the Base RIM.
+The `RIM-Tool` does not currently support secondary XML signatures for layered endorsements.
 
 ## Reference Integrity Manifest Specifications for a PC
 

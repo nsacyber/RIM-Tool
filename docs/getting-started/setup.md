@@ -1,10 +1,10 @@
 ---
-title: Getting Started
+title: Setup
 ---
 
-# Getting Started
+# Setup
 
-To get started using the `RIM-Tool`, please follow the below instructions. The tool can be either installed from a package or built from source.
+Install `RIM-Tool` from a Linux package or build it from source using the instructions below.
 
 ## Installation
 
@@ -14,7 +14,9 @@ To get started using the `RIM-Tool`, please follow the below instructions. The t
 
 Packages for this tool can be found on the [GitHub release page :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool/releases). 
 
-Only `.rpm` (Red Hat Enterpise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) packages are currently supported.
+Only x86-64 Linux packages in `.rpm` (Red Hat Enterprise Linux 9, Rocky Linux 9) and `.deb` (Debian, Ubuntu) formats are currently supported.
+
+Install the Java runtime required by your release and ensure `java` is available on `PATH`. Packages built from the current source require Java 25; check the release requirements when installing an older package.
 
 ### Linux
 
@@ -22,27 +24,28 @@ To install from a package, download from the above link, then run the following 
 
 === "RHEL 9/Rocky 9"
     ``` shell
-    sudo dnf install rim-tool*.rpm
+    sudo dnf install ./rim-tool*.rpm
     ```
 === "Debian/Ubuntu"
     ``` shell
-    sudo apt-get install rim-tool*.deb 
+    sudo apt-get install ./rim-tool*.deb
     ```
 
-After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See [Commands](commands/index.md) for further details.
+After installation, the package will create a command-line shortcut. This can be invoked using the `rim` command. See the [command reference](../reference/index.md) for further details.
+
+Return to [Getting Started](index.md#before-starting) to create a test PC Client RIM bundle using the Linux helper script.
 
 ## Building
-The `RIM-Tool` is written using Java, and requires JDK 17 to be installed.
+The `RIM-Tool` is written using Java, and requires JDK 25 to be installed.
 
 The following sections also assume the `RIM-Tool` [source code :fontawesome-solid-external-link:](https://github.com/nsacyber/rim-tool) has been cloned (using Git) to a local directory.
 
 !!! note
     Please clone using `git clone --recursive` to initialize any submodules.
 
-Upon successful build, a `rim-tool-X.X.jar` file will be placed in either the `/build/libs/tools/` (Linux) or `\build\libs\tools\` (Windows) folders. This can 
-then be run using:
+Upon successful build, a `rim-tool-X.X.jar` file will be placed in `build/libs/` (`build\libs\` on Windows), relative to the repository root. Run it from the repository root using:
 ``` shell
-java -jar <build directory>/rim-tool-X.X.jar
+java -jar build/libs/rim-tool-X.X.jar -h
 ```
 
 ### Linux
@@ -59,10 +62,10 @@ Several options exist for building on Windows 11. In either case, first navigate
     ```
 === "PowerShell"
     ``` powershell
-    ./gradlew clean build
+    .\gradlew.bat clean build
     ```
 !!! note
-    The PowerShell option requires Windows Subsystem for Linux (WSL) to be enabled.
+    When building inside Windows Subsystem for Linux (WSL), follow the Linux instructions.
 
 ## Packaging
 To create a Linux installation package for the `RIM-Tool`, run the following command in the source directory:
@@ -74,4 +77,4 @@ To create a Linux installation package for the `RIM-Tool`, run the following com
     ``` shell
     ./gradlew buildDeb
     ```
-The output package can be found under the `/build/distributions/` folder.
+The output package can be found under the `build/distributions/` folder relative to the repository root.

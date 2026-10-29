@@ -1,33 +1,37 @@
 site_name: RIM-Tool Docs
-site_url: https://nsacyber.github.io/rim-tool
+site_description: Create, sign, and verify Reference Integrity Manifests using the RIM-Tool.
+site_url: https://nsacyber.github.io/RIM-Tool/
 repo_url: https://github.com/nsacyber/rim-tool
 repo_name: nsacyber/rim-tool
 nav:
   - Home:
-      - index.md
-      - getting-started.md
-      - Commands:
-          - commands/index.md
-          - Create: commands/create.md
-          - Verify: commands/verify.md
-          - Print: commands/print.md
-          - Sign: commands/sign.md
-          - Get: commands/get.md
-      - RIM Types:
-          - RIMs/index.md
-          - TCG PC Client RIM: RIMs/tcg-pc-client-rim.md
-          - TCG Component RIM: RIMs/tcg-component-rim.md
-          - CoSWID Tag: RIMs/coswid.md
-          - CoRIM: RIMs/corim.md
-      - Appendix:
-          - configuration-files.md
+      - Home: index.md
+      - About: about.md
+  - Getting Started:
+      - Getting Started: getting-started/index.md
+      - Setup: getting-started/setup.md
+  - Reference:
+      - reference/index.md
+      - Create: reference/create.md
+      - Verify: reference/verify.md
+      - Print: reference/print.md
+      - Sign: reference/sign.md
+      - Get: reference/get.md
+  - RIM Formats:
+      - RIMs/index.md
+      - TCG PC Client RIM: RIMs/tcg-pc-client-rim.md
+      - TCG Component RIM: RIMs/tcg-component-rim.md
+      - CoSWID Tag: RIMs/coswid.md
+      - CoRIM: RIMs/corim.md
+      - Configuration:
+        - RIMs/configuration-files.md
   - Background:
       - background/index.md
-      - background/pc-rim.md
-      - background/component-rim.md
-      - background/composite-rim.md
+      - PC Firmware Validation: background/pc-rim.md
+      - Component Firmware Validation: background/component-rim.md
+      - Composite RIMs: background/composite-rim.md
 theme:
-  name: material
+  variant: classic
   icon:
     logo: material/wrench
   palette:
@@ -53,8 +57,13 @@ theme:
     - content.footnote.tooltips
     - navigation.indexes
     - navigation.expand
+    - navigation.footer
     - navigation.sections
     - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+    - toc.follow
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -64,7 +73,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - footnotes
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - attr_list
@@ -77,5 +90,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:zensical.extensions.emoji.twemoji
+      emoji_generator: !!python/name:zensical.extensions.emoji.to_svg
