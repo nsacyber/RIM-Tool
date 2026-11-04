@@ -14,8 +14,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import hirs.utils.signature.cose.CoseAlgorithm;
 import hirs.utils.rim.ReferenceManifestValidator;
@@ -104,7 +102,8 @@ final class Main {
         }
 
         if (mainCom.isVersion()) {
-            parseVersionFromJar();
+            printVersion();
+            return;
         } else if (mainCom.isVerbose()) {
             System.out.println("Rimtool in verbose mode.");
         }
@@ -587,19 +586,10 @@ final class Main {
     }
 
     /**
-     * This method parses the version number from the jar filename in the absence of
-     * the VERSION file expected with an rpm installation.
+     * Prints the version recorded in the JAR manifest at build time.
      */
-    private static void parseVersionFromJar() {
-        System.out.println("Installation file VERSION not found.");
-        String filename = new File(Main.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath()).getName();
-        Pattern pattern = Pattern.compile("(?<=rim-tool-)[0-9]\\.[0-9]\\.[0-9]");
-        Matcher matcher = pattern.matcher(filename);
-        if (matcher.find()) {
-            System.out.println("TCG rimtool version: " + matcher.group());
-        }
+    private static void printVersion() {
+        String version = Main.class.getPackage().getImplementationVersion();
+        System.out.println("TCG rimtool version: " + (version == null ? "unknown" : version));
     }
 }

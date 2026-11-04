@@ -16,3 +16,8 @@ build/
 
 # Log Files #
 *.log
+
+# Documentation #
+.venv/
+.cache/
+site/

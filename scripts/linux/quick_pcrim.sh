@@ -1,5 +1,7 @@
 #!/bin/bash
 
+umask 077
+
 ##############################################################################################
 #
 # quick_pcrim.sh 
@@ -15,7 +17,7 @@ TPM_EVENT_LOG="binary_bios_measurements";
 DEFAULT_SRIM="/sys/kernel/security/tpm0/$TPM_EVENT_LOG"
 RIM_CONF="rim_fields.json"
 ORIG_CONFIG_FILE="/opt/rimtool/data/pcrim/rim_fields_dynamic_filehash.json"
-RIM_TAG=$(uuidgen)
+RIM_TAG=""
 RIM_EXE="/usr/local/bin/rim"
 VERBOSE=false
 DAYS=365
@@ -34,7 +36,7 @@ RIM_KEY="key.pem"
 
 check_admin () {
 	if [ "$EUID" -ne 0 ]; then
-     echo "Error: quick_prcrim.sh requires root privileges.  Please run as root" 
+     echo "Error: quick_pcrim.sh requires root privileges.  Please run as root"
      exit 1
 fi
 }
@@ -45,10 +47,12 @@ check_prereq () {
      echo "Please install the RIM_Tool and try again." 
      exit 1	
 	fi
-    if [ ! command -v openssl &> /dev/null ]; then 
-     echo "OpenSSL is not installed."
-     exit 1;
-    fi
+    for dependency in openssl jq uuidgen; do
+        if ! command -v "$dependency" > /dev/null 2>&1; then
+            echo "$dependency is not installed."
+            exit 1
+        fi
+    done
 }
 
 check_error () {
@@ -61,7 +65,7 @@ check_error () {
 
 help () {
   echo "  Create a quick PC Client Rim Bundle based upon your local device"
-  echo "  Syntax: sh quick_pcrim.sh [-h|--help|-l |--rimel]"
+  echo "  Syntax: bash quick_pcrim.sh [-h|--help] [-v|--verbose] [-l|--rimel <file>]"
   echo "  options:"
   echo "     -h  | --help   Print this help"
   echo "     -l  | --rimel  Optional path to the PC Client support RIM file"
@@ -78,8 +82,8 @@ while [[ $# -gt 0 ]]; do
     -l|--rimel)
       USE_RIMEL_FILE=true
       shift # past argument
-      RIMEL_PATH=$@
-      if [ -z ${RIMEL_PATH} ]; then
+      RIMEL_PATH=${1:-}
+      if [ -z "$RIMEL_PATH" ]; then
           echo "Error: -l requires a file path";
           exit 1;
        else
@@ -112,6 +116,7 @@ done
 check_admin
 # Make sure RIM Tool and openssl are installed 
 check_prereq
+RIM_TAG=$(uuidgen)
 # Get require data for specific device (requires admin)
 OEM="$(cat /sys/devices/virtual/dmi/id/sys_vendor)";
 OEM_NO_SPACES=$(cat /sys/devices/virtual/dmi/id/sys_vendor| tr -d '[:space:]');
@@ -122,7 +127,7 @@ SUPPORT_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.rimel
 BASE_RIM=$OEM_NO_SPACES.$MODEL_NO_SPACES.1.swidtag
 
 mkdir -p ${DATA_OUT_DIR}
-chmod 777 ${DATA_OUT_DIR}
+chmod 755 "${DATA_OUT_DIR}"
 
 
 pushd ${DATA_OUT_DIR} > /dev/null
@@ -135,15 +140,15 @@ if [ -z "${USE_RIMEL_FILE}" ]; then
   echo "Using ${DEFAULT_SRIM} as the Support RIM file..."
   cp ${DEFAULT_SRIM} ${DATA_OUT_DIR}/${SUPPORT_RIM}
   else
-    if [ ! -f ${RIMEL_PATH} ]; then
+    if [ ! -f "${RIMEL_PATH}" ]; then
       echo "Error: file ${RIMEL_PATH} for use with -l parameter does  not exist"
       exit 1;
     fi
     echo "Using provided support RIM ${RIMEL_PATH} as the Support RIM file..."
     echo "Storing ${RIMEL_PATH} as ${SUPPORT_RIM} for use as the Support RIM file..."
-    cp ${RIMEL_PATH} ${DATA_OUT_DIR}/${SUPPORT_RIM}
+    cp "${RIMEL_PATH}" "${DATA_OUT_DIR}/${SUPPORT_RIM}"
 fi
-chmod 777 ${DATA_OUT_DIR}/${SUPPORT_RIM}
+chmod 644 "${DATA_OUT_DIR}/${SUPPORT_RIM}"
 
 # Step 2: Obtain and modify a config file using OS provided parameters
 cp  ${ORIG_CONFIG_FILE} ${DATA_OUT_DIR}/${RIM_CONF}
@@ -154,7 +159,7 @@ sed -i "s/ExampleUrl/$OEM_URL/g" ${RIM_CONF};
 sed -i "s/creator.product.version.rimel/$SUPPORT_RIM/g" ${RIM_CONF};
 # Update the tagid so the ACA will not reject the upload if a RIM with the same tag exists 
 jq --arg new_val "${RIM_TAG}" '.SoftwareIdentity.tagId = $new_val' "${RIM_CONF}" > temp.json && mv temp.json "${RIM_CONF}"
-chmod 777 ${RIM_CONF}
+chmod 644 "${RIM_CONF}"
 
 # Step 3, set up the keys/certs needed for Base RIM Creation
 
@@ -184,7 +189,8 @@ fi
 
 if ${VERBOSE}; then openssl x509 -in ${RIM_SIGNER}.pem -noout -text; fi;
 
-chmod 777 ${PKI_ROOT}.key ${PKI_ROOT}.pem
+chmod 600 "${PKI_ROOT}.key" "${RIM_SIGNER}.key"
+chmod 644 "${PKI_ROOT}.pem" "${RIM_SIGNER}.pem"
 
 # Step 4 create the new PC Client Base RIM file
 echo "Creating new Base RIM ..... "
@@ -195,10 +201,10 @@ check_error $? "Generating Base RIM File ${BASE_RIM}"
 
 if ${VERBOSE}; then cat ${BASE_RIM}; fi;
 
-chmod 777 ${BASE_RIM}
+chmod 644 "${BASE_RIM}"
 # Step 5 Verify the RIM
 
-${RIM_EXE} verify -r pcrim -p ${RIM_SIGNER}.pem   --in ${BASE_RIM}
+${RIM_EXE} verify -r pcrim -p "${RIM_SIGNER}.pem" -t "${PKI_ROOT}.pem" -l "${DATA_OUT_DIR}/" --in "${BASE_RIM}"
 check_error $? "Verifying Base RIM File ${BASE_RIM}"
 
 if [[ $? -eq 0 ]]; then
