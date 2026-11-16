@@ -76,6 +76,9 @@ dependencies {
     compileOnly libs.lombok
     annotationProcessor libs.lombok
 
+    implementation libs.jakartaJson
+    runtimeOnly libs.parsson
+
     testImplementation libs.junit.jupiter
     testRuntimeOnly libs.junit.platform.launcher
 
@@ -96,12 +99,22 @@ dependencies {
 
 // Dependency resolutions
 configurations.configureEach {
+
     exclude group: 'commons-logging', module: 'commons-logging'
+    exclude group: 'log4j'
+    exclude group: 'org.apache.logging.log4j'
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-log4j2'
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j' 
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12' 
 
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group == 'org.apache.logging.log4j') {
-            details.useVersion '2.26.1' // Keep Log4j modules aligned on an updated version
+       
+        if (details.requested.group in ['log4j', 'org.apache.logging.log4j']) {
+            throw new GradleException("Blocked prohibited dependency: ${details.requested}")
         }
+
         if (details.requested.group == 'org.apache.commons' &&
                 details.requested.name == 'commons-lang3') {
             details.useVersion '3.20.0'  // Force upgraded commons-lang3 version

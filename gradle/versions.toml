@@ -3,6 +3,8 @@ authleteCborVersion = "1.21"
 bouncyCastleVersion = "1.86"
 jcommanderVersion = "3.0"
 lombokVersion = "1.18.42"
+jakartaJsonVersion = "2.1.3"
+eclipseParsonVersion = "1.1.9"
 
 #test dependencies versions
 jupiterVersion = "6.0.3"
@@ -12,6 +14,8 @@ authlete-cbor = { module = "com.authlete:cbor", version.ref = "authleteCborVersi
 bouncycastle = { module = "org.bouncycastle:bcmail-jdk18on", version.ref = "bouncyCastleVersion" }
 jcommander = { module = "org.jcommander:jcommander", version.ref = "jcommanderVersion" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombokVersion" }
+jakartaJson = {  module = "jakarta.json:jakarta.json-api", version.ref = "jakartaJsonVersion" }
+parsson = { module = "org.eclipse.parsson:parsson", version.ref = "eclipseParsonVersion" }
 
 # test dependencies
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jupiterVersion" }
