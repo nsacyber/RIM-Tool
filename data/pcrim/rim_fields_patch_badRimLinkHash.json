@@ -12,8 +12,8 @@
 		"regid": "www.example.com"
 	},
 	"Link": {
-		"href": "https://Example.com/support/ProductA/firmware/installfiles",
-		"rel": "installationmedia"
+		"href": "swid:ca366cd7-b1a6-4afa-a5b1-2d7ebd8d9c",
+		"rel": "patches"
 	},
 	"Meta": {
 		"colloquialVersion": "",
@@ -36,7 +36,7 @@
 				"supportRimFormat": "TCG_EventLog_Assertion",
 				"supportRimType": "Indirect",
 				"name": "TpmLog.bin",
-				"size": "7459"
+				"size": "7549"
 			    }
 				]
 		}

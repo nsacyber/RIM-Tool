@@ -83,6 +83,15 @@ dependencies {
     testAnnotationProcessor libs.lombok
 
     implementation 'org.hirs:HIRS_Utils'
+
+    implementation(platform('com.fasterxml.jackson:jackson-bom:2.22.3')) {
+        because 'Keep Jackson modules aligned on a version with fixes'
+    }
+    constraints {
+        implementation('com.google.guava:guava:33.7.2-jre') {
+            because 'Use an updated Guava version with fixes'
+        }
+    }
 }
 
 // Dependency resolutions
@@ -91,7 +100,7 @@ configurations.configureEach {
 
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.group == 'org.apache.logging.log4j') {
-            details.useVersion '2.26.1' // Force upgraded log4j version
+            details.useVersion '2.26.1' // Keep Log4j modules aligned on an updated version
         }
         if (details.requested.group == 'org.apache.commons' &&
                 details.requested.name == 'commons-lang3') {
@@ -108,7 +117,8 @@ configurations.configureEach {
     }
     resolutionStrategy.dependencySubstitution {
         substitute module('io.airlift:aircompressor') using module('io.airlift:aircompressor-v3:3.5')
-        substitute module('org.bouncycastle:bcprov-jdk15on') using module('org.bouncycastle:bcprov-jdk18on:1.83')
+        substitute module('org.bouncycastle:bcprov-jdk15on') using module(
+                "org.bouncycastle:bcprov-jdk18on:${libs.versions.bouncyCastleVersion.get()}")
     }
 }
 
@@ -178,6 +188,7 @@ jar {
     manifest {
         attributes(
                 "Main-Class": "rimtool.Main",
+                'Implementation-Version': projectVersion,
                 'Class-Path':configurations.runtimeClasspath.files.collect { it.getName() }.join(' ')
         )
     }

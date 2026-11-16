@@ -10,17 +10,17 @@ IETF sponsors the Remote ATtestation ProcedureS (RATS) Working Group[^1] which s
 
 A CoRIM comprises metadata that establishes information about the CoRIM itself and various attributes (including creator, signer, etc.), in addition to a list of tags.
 
-As shown in a diagram[^3] of a CoRIM produced by the RATS WG, a CoRIM tag list can contain one or more CoSWID, Concise Module Identifier (CoMID), or Concise Tag List (CoTL) tags. For the RIM Tool's [`create`](../commands/create.md) command, the use of the `--rim-type` parameter is used to denote which CoRIM tag option is used.
+As shown in a diagram[^3] of a CoRIM produced by the RATS WG, a CoRIM tag list can contain one or more CoSWID, Concise Module Identifier (CoMID), or Concise Tag List (CoTL) tags. For the RIM Tool's [`create`](../reference/create.md) command, use `--rim-type corim_comid` for the supported CoMID workflow.
 
-!!! Note
+!!! note
 
-    Currently, the RIM Tool only supports CoSWID (`corim_coswid`) and CoMID (`corim_comid`) options for CoRIMs.
+    Creation of CoRIMs containing CoSWID or CoTL tags is not currently supported.
 
 ### Signing
 
 CoRIMs are signed using COSE[^4] digital signatures, requiring specific fields in the COSE protected header. 
 
-Of interest is the context parameter, which is defined as `"application/rim+cbor"` for CoRIMs (as opposed to `"application/swid+cbor"` when signing a standalone CoSWID tag). This helps the parser determine the type of data found in the payload.
+The COSE protected header's content type is `"application/rim+cbor"` for CoRIMs (as opposed to `"application/swid+cbor"` when signing a standalone CoSWID tag). This identifies the type of data found in the payload.
 
 [^1]: See IETF RATS WG charter [here :fontawesome-solid-external-link:](https://datatracker.ietf.org/group/rats/about/).
 [^2]: See IETF CoRIM specification [here :fontawesome-solid-external-link:](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/).

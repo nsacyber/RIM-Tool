@@ -70,10 +70,10 @@ rim_expected_pass_status $? "CoRim TEST 8: CoRim verify (signed)"
 rm -rf $dataDir/tmp
 
 if  [ $failCount -eq 0 ]; then
-  echo "All COSE tests passed."
+  echo "All CoRIM tests passed."
     exit 0
  else
-    echo "$failCount COSE Tests failed."
+    echo "$failCount CoRIM Tests failed."
     exit 1
 fi
 popd > /dev/null

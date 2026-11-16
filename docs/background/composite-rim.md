@@ -18,16 +18,22 @@ in its own RIM without corrupting the original component RIM’s signature. The 
 want its own signature on the RIM to include coverage of all the Component RIMs. The inclusion of 
 Component RIM reference within a PC manufacturers RIM is illustrated in the following:
 
-PC_BaseRIM   
-&emsp;&emsp;&emsp;|-------> PC_Support RIM   
-&emsp;&emsp;&emsp;|-------> Component1_BaseRIM   
-&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|-------->Component1_Support RIM   
-&emsp;&emsp;&emsp;|-------> Component2_BaseRIM    
-&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|-------->Component2_Support RIM   
-&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|-------->SubComponentA_BaseRIM   
-&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|-------->SubComponentA_Support RIM End  
-&emsp;Done
+```mermaid
+flowchart TD
+    accTitle: Composite RIM reference hierarchy
+    accDescr: A PC Base RIM references its Support RIM and two component Base RIMs. Each component Base RIM references its own Support RIM. Component 2 also references Subcomponent A's Base RIM, which references its own Support RIM.
 
+    pc["PC<br/>Base RIM"] -->|references| pc_support("PC<br/>Support RIM")
+    pc -->|references| component1["Component 1<br/>Base RIM"]
+    pc -->|references| component2["Component 2<br/>Base RIM"]
+    component1 -->|references| component1_support("Component 1<br/>Support RIM")
+    component2 -->|references| component2_support("Component 2<br/>Support RIM")
+    component2 -->|references| subcomponent["Subcomponent A<br/>Base RIM"]
+    subcomponent -->|references| subcomponent_support("Subcomponent A<br/>Support RIM")
+```
 
-Note that the `RIM-Tool` processes one Base RIM at a time. Each PC Base RIM or Component RIM must be 
-created or verified one at a time. 
+Rectangles represent Base RIMs; rounded nodes represent Support RIMs. Arrows show references, including the reference from Component 2's Base RIM to Subcomponent A's Base RIM.
+
+!!! note
+
+    The `RIM-Tool` processes one Base RIM at a time. Each PC Base RIM or Component RIM must be created or verified one at a time.

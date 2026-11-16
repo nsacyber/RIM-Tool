@@ -1,6 +1,6 @@
 [versions]
 authleteCborVersion = "1.21"
-bouncyCastleVersion = "1.83"
+bouncyCastleVersion = "1.86"
 jcommanderVersion = "3.0"
 lombokVersion = "1.18.42"
 
