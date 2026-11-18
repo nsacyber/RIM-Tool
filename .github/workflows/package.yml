@@ -10,7 +10,7 @@ on:
       - 'mkdocs.yml'    # Ignores the MkDocs config
   workflow_dispatch:
 
-  jobs:
+jobs:
   # run the package script for RIM_tool
   Package_linux:
     runs-on: ubuntu-latest
