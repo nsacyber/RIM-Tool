@@ -68,7 +68,7 @@ jobs:
 
   # install the rim-tool packages on clean OS images and check that it runs
   Package_install:
-    needs: Package_linux
+    needs: Package
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
