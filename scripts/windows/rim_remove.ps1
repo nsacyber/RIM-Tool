@@ -1,5 +1,16 @@
-# Capture the current working directory and desktop shortcut path
+# Capture the current working directory and the directory where the script resides
 $currentDir = (Get-Location).Path
+$scriptDir = $PSScriptRoot
+
+# Verify the script is being called from the directory it is stored in
+if ($currentDir -ne $scriptDir) {
+    Write-Host "Deletion canceled: This script must be run from the directory to be deleted." -ForegroundColor Red
+    Write-Host "Please run the following command first, then try again:" -ForegroundColor Yellow
+    Write-Host "cd `"$scriptDir`"" -ForegroundColor Cyan
+    exit
+}
+
+# Define the desktop shortcut path
 $desktopPath = [Environment]::GetFolderPath("Desktop")
 $shortcutPath = Join-Path -Path $desktopPath -ChildPath "rim-tool.lnk"
 
