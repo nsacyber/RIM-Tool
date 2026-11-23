@@ -13,7 +13,7 @@ build/
 
 # Install Testing
 scripts/windows/data
-scripts/rim-tool*.jar
+scripts/windows/rim-tool*.jar
 
 # MAC OSX Finder Files #
 .DS_Store
