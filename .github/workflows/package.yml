@@ -79,7 +79,7 @@ jobs:
           path: artifacts/deb/*.deb
           if-no-files-found: error
 
-       name: Archive Zip files
+      - name: Archive Zip files
         uses: actions/upload-artifact@v7
         with:
           name: ZIP_Files
