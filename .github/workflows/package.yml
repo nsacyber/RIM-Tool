@@ -33,7 +33,7 @@ jobs:
           mkdir -p artifacts/jar
           mkdir -p artifacts/rpm
           mkdir -p artifacts/deb
-          mkdir -p artifacts/win
+          mkdir -p artifacts/zip
       
       - name: install dependencies
         run: |
@@ -62,6 +62,8 @@ jobs:
           cp build/distributions/*.rpm artifacts/rpm/.
           ./gradlew :clean :buildDeb 
           cp build/distributions/*.deb artifacts/deb/.
+          ./gradlew :clean :buildZip
+          cp build/distributions/*.zip artifacts/zip/.
 
       - name: Archive RPM files
         uses: actions/upload-artifact@v7
@@ -76,6 +78,13 @@ jobs:
           name: DEB_Files
           path: artifacts/deb/*.deb
           if-no-files-found: error
+
+       name: Archive Zip files
+        uses: actions/upload-artifact@v7
+        with:
+          name: ZIP_Files
+          path: artifacts/zip/*.zip
+          if-no-files-found: error    
 
       - name: JAR_Files
         uses: actions/upload-artifact@v7

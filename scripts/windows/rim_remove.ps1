@@ -22,14 +22,18 @@ Write-Host "Shortcut to delete  : $shortcutPath"
 $confirmation = Read-Host "Are you sure you want to proceed? (Y/N)"
 
 if ($confirmation -match '^[Yy]$') {
-    # Step out of the current directory so Windows does not lock it during deletion
-    Set-Location -Path (Split-Path -Path $currentDir -Parent)
+  $targetDir = (Get-Location).Path
+  Set-Location ..
+  [Environment]::CurrentDirectory = (Get-Location).Path
+   Start-Sleep -Milliseconds 200
+  Remove-Item -Path $targetDir -Recurse -Force
 
-    # Delete the directory and all its contents
-    if (Test-Path -LiteralPath $currentDir) {
-        Remove-Item -LiteralPath $currentDir -Recurse -Force
-        Write-Host "Deleted directory: $currentDir" -ForegroundColor Green
-    }
+  # Verify removal
+  if (-not (Test-Path -Path $targetDir)) {
+    Write-Host "Successfully removed: $targetDir" -ForegroundColor Green
+  } else {
+     Write-Warning "Failed to completely remove $targetDir. Check for open files or permissions."
+  }
 
     # Delete the desktop shortcut if it exists
     if (Test-Path -LiteralPath $shortcutPath) {
@@ -41,3 +45,6 @@ if ($confirmation -match '^[Yy]$') {
 } else {
     Write-Host "Deletion canceled." -ForegroundColor Cyan
 }
+Write-Host "Press any key to continue..." -NoNewline
+$null = [System.Console]::ReadKey($true)
+Write-Host ""
