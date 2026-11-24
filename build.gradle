@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 plugins {
     id 'java'
     id 'com.github.spotbugs' version '6.4.8'
-    id 'com.netflix.nebula.ospackage' version '12.2.0'
+    id 'com.netflix.nebula.ospackage' version '14.0.2'
     id 'org.owasp.dependencycheck' version '12.2.0'
 }
 
@@ -201,7 +201,7 @@ jar {
         )
     }
     from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
     into('lib') {
         from 'libs'
@@ -261,4 +261,27 @@ buildRpm {
 
 buildDeb {
     arch = 'amd64'
+}
+
+tasks.register('buildZip', Zip) {
+    // Ensures the JAR is built before zipping
+    dependsOn tasks.named('build')
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // Automatically outputs: <projectName>-<version>+<gitHash>.zip
+    archiveBaseName.set(project.name)
+    archiveVersion.set("$packageVersion")
+    destinationDirectory.set(layout.buildDirectory.dir('distributions'))
+
+    // Include all files from scripts/windows at the root of the zip
+    from('scripts/windows') {
+        into('/RIM-Tool/') // places scripts the main folder in the zip
+    }
+
+    // Include the JAR file from build/libs (or directly from the jar task output)
+    from(tasks.named('jar')) {
+        into('/RIM-Tool/') // places jar the main folder in the zip
+    }
+    from('data') {
+        into('/RIM-Tool/data') // places data folder under the main folder in the zip
+    }
 }
